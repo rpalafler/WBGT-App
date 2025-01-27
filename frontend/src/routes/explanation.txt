@@ -1,0 +1,30 @@
+************************************
+FOLDER: routes
+************************************
+DESCRIPTION:
+This folder manages the app's navigation by defining 
+routes for different views or pages. It centralizes 
+navigation logic.
+
+EXAMPLES:
+- AppRoutes.jsx
+  Defines paths like:
+  - Home: `/`
+  - Weather Details: `/weather`
+************************************
+
+
+************************************
+FOLDER: routes
+************************************
+DESCRIPTION:
+This folder manages the app's navigation by defining 
+routes for different views or pages. It centralizes 
+navigation logic.
+
+EXAMPLES:
+- AppRoutes.jsx
+  Defines paths like:
+  - Home: `/`
+  - Weather Details: `/weather`
+************************************

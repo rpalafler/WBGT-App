@@ -1,0 +1,41 @@
+************************************
+FOLDER: components
+************************************
+DESCRIPTION:
+This folder contains reusable, generic components 
+that are not tied to any specific feature. They are 
+modular and can be used across multiple parts of the app.
+
+EXAMPLES:
+- Button/
+  A button that can be reused throughout the app.
+  Example: Button.jsx, Button.module.css
+- Header/
+  The app's main header with a navigation menu.
+  Example: Header.jsx, Header.module.css
+- Footer/
+  The footer that displays copyright or app info.
+  Example: Footer.jsx, Footer.module.css
+************************************
+
+************************************
+CARPETA: components
+************************************
+DESCRIPCIÓN:
+Esta carpeta contiene componentes reutilizables y 
+genéricos que no están vinculados a una funcionalidad 
+específica. Son modulares y se pueden usar en varias 
+partes de la app.
+
+EJEMPLOS:
+- Button/
+  Un botón que se puede reutilizar en toda la app.
+  Ejemplo: Button.jsx, Button.module.css
+- Header/
+  El encabezado principal de la app con un menú de navegación.
+  Ejemplo: Header.jsx, Header.module.css
+- Footer/
+  El pie de página que muestra derechos de autor o 
+información de la app.
+  Ejemplo: Footer.jsx, Footer.module.css
+************************************

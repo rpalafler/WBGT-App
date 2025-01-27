@@ -1,0 +1,30 @@
+************************************
+FOLDER: services
+************************************
+DESCRIPTION:
+This folder contains functions that interact with 
+external APIs or services. It helps separate data-fetching 
+logic from the UI.
+
+EXAMPLES:
+- weatherAPI.js
+  Handles weather data retrieval.
+- authService.js
+  Manages user login and registration.
+************************************
+
+
+************************************
+CARPETA: services
+************************************
+DESCRIPCIÓN:
+Esta carpeta contiene funciones que interactúan con APIs 
+o servicios externos. Ayuda a separar la lógica de 
+obtención de datos de la interfaz de usuario.
+
+EJEMPLOS:
+- weatherAPI.js
+  Maneja la obtención de datos meteorológicos.
+- authService.js
+  Administra el inicio de sesión y registro de usuarios.
+************************************

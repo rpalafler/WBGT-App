@@ -1,0 +1,10 @@
+# Ignorar todos los archivos PDF
+*.pdf
+
+# Ignorar archivos temporales de sistema
+*.log
+.DS_Store
+
+# Ignorar la carpeta `node_modules` (si usas Node.js)
+# /frontend/node_modules/
+# /backend/node_modules/

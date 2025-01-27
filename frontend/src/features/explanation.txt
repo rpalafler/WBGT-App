@@ -1,0 +1,34 @@
+************************************
+FOLDER: features
+************************************
+DESCRIPTION:
+This folder organizes major functionalities or views 
+into separate modules. Each feature contains its own 
+components, styles, and utilities.
+
+EXAMPLES:
+- MapView/
+  Displays an interactive map.
+  Includes: MapView.jsx, MapMarker.jsx, mapHelper.js
+- WeatherDetails/
+  Displays detailed weather information.
+  Includes: WeatherDetails.jsx, weatherDataFormatter.js
+************************************
+
+
+************************************
+CARPETA: features
+************************************
+DESCRIPCIÓN:
+Esta carpeta organiza funcionalidades principales o 
+vistas en módulos separados. Cada funcionalidad contiene 
+sus propios componentes, estilos y utilidades.
+
+EJEMPLOS:
+- MapView/
+  Muestra un mapa interactivo.
+  Incluye: MapView.jsx, MapMarker.jsx, mapHelper.js
+- WeatherDetails/
+  Muestra información detallada sobre el clima.
+  Incluye: WeatherDetails.jsx, weatherDataFormatter.js
+************************************

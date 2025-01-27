@@ -1,0 +1,29 @@
+************************************
+FOLDER: hooks
+************************************
+DESCRIPTION:
+This folder contains custom React hooks to encapsulate 
+reusable logic, such as managing state, effects, or 
+interactions used across the app.
+
+EXAMPLES:
+- useFetchWeather.js
+  Fetches weather data from an API.
+- useToggle.js
+  Manages "on/off" states like toggling modals or menus.
+************************************
+
+************************************
+CARPETA: hooks
+************************************
+DESCRIPCIÓN:
+Esta carpeta contiene hooks personalizados de React para 
+encapsular lógica reutilizable, como manejar estados, 
+efectos o interacciones utilizadas en toda la app.
+
+EJEMPLOS:
+- useFetchWeather.js
+  Obtiene datos meteorológicos de una API.
+- useToggle.js
+  Maneja estados de "on/off", como alternar modales o menús.
+************************************

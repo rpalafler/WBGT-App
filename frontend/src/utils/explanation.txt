@@ -1,0 +1,29 @@
+************************************
+CARPETA: services
+************************************
+DESCRIPCIÓN:
+Esta carpeta contiene funciones que interactúan con APIs 
+o servicios externos. Ayuda a separar la lógica de 
+obtención de datos de la interfaz de usuario.
+
+EJEMPLOS:
+- weatherAPI.js
+  Maneja la obtención de datos meteorológicos.
+- authService.js
+  Administra el inicio de sesión y registro de usuarios.
+************************************
+
+
+************************************
+CARPETA: utils
+************************************
+DESCRIPCIÓN:
+Esta carpeta contiene funciones auxiliares generales y 
+constantes que se pueden reutilizar en toda la app.
+
+EJEMPLOS:
+- constants.js
+  Almacena valores de configuración como claves API o URLs base.
+- formatDate.js
+  Formatea fechas de manera consistente en toda la app.
+************************************

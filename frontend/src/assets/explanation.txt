@@ -1,0 +1,42 @@
+************************************
+FOLDER: assets
+************************************
+DESCRIPTION:
+This folder stores static files used throughout the app, 
+such as images, icons, and global styles. These files 
+are not dynamic and are shared across components and 
+features.
+
+EXAMPLES:
+- images/
+  For visual elements like backgrounds or logos.
+  Example: background.jpg, logo.png
+- icons/
+  For icons used in buttons or navigation.
+  Example: weather-icon.svg, menu-icon.svg
+- styles/
+  For global or shared CSS files.
+  Example: variables.css, global.css
+************************************
+
+
+************************************
+CARPETA: assets
+************************************
+DESCRIPCIÓN:
+Esta carpeta almacena archivos estáticos utilizados en 
+toda la app, como imágenes, íconos y estilos globales. 
+Estos archivos no son dinámicos y se comparten entre 
+componentes y funcionalidades.
+
+EJEMPLOS:
+- images/
+  Para elementos visuales como fondos o logotipos.
+  Ejemplo: background.jpg, logo.png
+- icons/
+  Para íconos utilizados en botones o navegación.
+  Ejemplo: weather-icon.svg, menu-icon.svg
+- styles/
+  Para archivos CSS globales o compartidos.
+  Ejemplo: variables.css, global.css
+************************************
