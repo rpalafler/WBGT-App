@@ -1,12 +1,11 @@
 // src/App.jsx
-
 import React from "react";
-import MapView from "./features/MapView/MapView"; // Importamos el mapa
+import AppRoutes from "./routes/AppRoutes"; // Importamos las rutas
 
 function App() {
   return (
-    <div>
-      <MapView /> {/* Renderizamos el mapa */}
+    <div style={{ width: "100%", height: "100%" }}>
+      <AppRoutes /> {/* Renderizamos las rutas */}
     </div>
   );
 }
