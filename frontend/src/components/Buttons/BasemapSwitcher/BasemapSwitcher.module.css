@@ -1,6 +1,8 @@
 .container {
   position: relative;
   display: flex;
+  bottom: 0px;
+  right: 0px;
   flex-direction: column; /* Asegura que los elementos dentro estén en una columna */
   z-index: 1000;
   transition: height 0.3s ease; /* Suave transición de altura */
@@ -34,6 +36,7 @@
 .button:hover {
   background-color: #0056b3;
   transform: translateY(-2px); /* Efecto de elevación */
+  border-radius: 25px;
 }
 
 .option {

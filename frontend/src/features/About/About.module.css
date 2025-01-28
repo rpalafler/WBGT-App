@@ -1,49 +1,84 @@
 .container {
-  position: relative;
-  padding: 20px;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  background-color: #f7fafc; /* Fondo claro */
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 .title {
-  font-size: 2rem;
-  color: #2d3748; /* Gris oscuro */
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
   text-align: center;
+  margin-bottom: 30px;
+  color: #333;
 }
 
-.description {
-  font-size: 1rem;
-  color: #4a5568; /* Gris intermedio */
-  line-height: 1.6;
-  margin-bottom: 20px;
-  text-align: justify;
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
+.column {
+  flex: 1;
+  min-width: 300px;
+  background-color: rgba(
+    211,
+    211,
+    211,
+    0.3
+  ); /* Fondo gris claro transparente */
+  border-radius: 8px;
+  padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #007bff; /* Azul para destacar */
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.devName {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.link {
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .button {
   display: inline-block;
+  margin: 30px auto 0;
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  text-align: center;
   border: none;
   border-radius: 5px;
-  font-weight: 500;
-  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {

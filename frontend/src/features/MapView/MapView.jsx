@@ -4,6 +4,7 @@ import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer } from "@deck.gl/layers";
 import BasemapSwitcher from "../../components/Buttons/BasemapSwitcher/BasemapSwitcher";
 import Button from "../../components/Buttons/Button/Button"; // Importación correcta del botón
+import styles from "./MapView.module.css"; // Importamos los estilos
 
 const MapView = () => {
   const INITIAL_VIEW_STATE = {
@@ -49,19 +50,9 @@ const MapView = () => {
   });
 
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div className={styles.mapContainer}>
       {/* Basemap Switcher y Botón */}
-      <div
-        style={{
-          position: "absolute",
-          top: 10,
-          left: 10,
-          zIndex: 1000,
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
+      <div className={styles.controlPanel}>
         <BasemapSwitcher basemaps={basemaps} onBasemapChange={setBasemapUrl} />
         <Button label="Learn more About the Project!" to="/about" />
       </div>
