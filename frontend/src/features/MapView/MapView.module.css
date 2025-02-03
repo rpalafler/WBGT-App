@@ -23,3 +23,17 @@
   border-radius: 8px; /* Bordes redondeados para un diseño más suave */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
 }
+
+.controlPanel {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Asegura espacio entre los elementos */
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
