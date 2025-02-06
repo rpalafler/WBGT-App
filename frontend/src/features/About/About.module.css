@@ -1,22 +1,22 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding: var(--padding);
+  font-family: var(--font-family); /* Fuente global */
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: var(--font-size-title); /* Tamaño de título global */
   font-weight: bold;
   text-align: center;
   margin-bottom: 30px;
-  color: #333;
+  color: var(--text-color); /* Color de texto global */
 }
 
 .columns {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: var(--gap); /* Espaciado global entre columnas */
 }
 
 .column {
@@ -27,9 +27,9 @@
     211,
     211,
     0.3
-  ); /* Fondo gris claro transparente */
-  border-radius: 8px;
-  padding: 20px;
+  ); /* Puedes definir --light-bg si se usa frecuentemente */
+  border-radius: var(--border-radius); /* Bordes redondeados globales */
+  padding: var(--padding);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -37,13 +37,13 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 15px;
-  color: #007bff; /* Azul para destacar */
+  color: var(--primary-color); /* Azul destacado global */
 }
 
 .text {
-  font-size: 1rem;
+  font-size: var(--font-size-text); /* Tamaño de texto global */
   line-height: 1.6;
-  color: #555;
+  color: #555; /* Si este color se usa mucho, podrías definir --secondary-text */
   margin-bottom: 15px;
 }
 
@@ -51,12 +51,12 @@
   font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 5px;
-  color: #333;
+  color: var(--text-color); /* Color de texto global */
 }
 
 .link {
-  font-size: 1rem;
-  color: #007bff;
+  font-size: var(--font-size-text); /* Tamaño de texto global */
+  color: var(--primary-color); /* Azul global para enlaces */
   text-decoration: none;
   font-weight: 500;
 }
@@ -68,13 +68,13 @@
 .button {
   display: inline-block;
   margin: 30px auto 0;
-  padding: 10px 20px;
-  background-color: #007bff;
+  padding: var(--padding) 20px; /* Padding global con ajuste lateral */
+  background-color: var(--primary-color); /* Color primario global */
   color: white;
   text-align: center;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: var(--border-radius); /* Bordes redondeados globales */
+  font-size: var(--font-size-text); /* Tamaño de fuente global */
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
@@ -82,5 +82,5 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-hover); /* Color hover global */
 }

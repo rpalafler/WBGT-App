@@ -1,15 +1,19 @@
 .locateButton {
-  background-color: #007bff;
+  background-color: var(--primary-color); /* Color primario global */
   color: white;
+  padding: var(--padding) 20px; /* Usamos padding global */
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-text); /* Tamaño de fuente global */
+  font-weight: 500;
   cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .locateButton:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-hover); /* Color hover global */
+  transform: translateY(-2px);
+  border-radius: var(
+    --border-radius-button
+  ); /* Puedes agregar esto como variable si lo usarás en más lugares */
 }

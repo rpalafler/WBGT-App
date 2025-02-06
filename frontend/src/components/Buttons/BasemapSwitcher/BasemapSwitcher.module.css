@@ -3,50 +3,50 @@
   display: flex;
   bottom: 0px;
   right: 0px;
-  flex-direction: column; /* Asegura que los elementos dentro estén en una columna */
-  z-index: 1000;
-  transition: height 0.3s ease; /* Suave transición de altura */
+  flex-direction: column;
+  z-index: var(--z-index-controls); /* Variable para z-index */
+  transition: height 0.3s ease;
 }
 
 .container.open {
-  height: auto; /* Deja que el contenedor ajuste automáticamente su altura */
+  height: auto;
 }
 
 .dropdown {
-  position: relative; /* Cambiamos de absolute a relative para que afecte el flujo */
+  position: relative;
   margin-top: 5px;
-  background-color: #2d3748; /* Gris oscuro */
-  border: 1px solid #4a5568; /* Gris intermedio */
-  border-radius: 5px;
+  background-color: var(--secondary-color); /* Gris oscuro global */
+  border: 1px solid #4a5568; /* Puedes crear una variable si usas este gris frecuentemente */
+  border-radius: var(--border-radius); /* Usamos el borde redondeado global */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .button {
-  background-color: #007bff;
+  background-color: var(--primary-color); /* Color primario global */
   color: white;
-  padding: 10px 20px;
+  padding: var(--padding) 20px; /* Usamos padding global */
   border: none;
-  border-radius: 5px;
-  font-size: 1rem; /* Tamaño de fuente consistente */
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-text); /* Tamaño de fuente global */
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Suave transición */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px); /* Efecto de elevación */
-  border-radius: 25px;
+  background-color: var(--primary-hover); /* Color hover global */
+  transform: translateY(-2px);
+  border-radius: var(--border-radius-button);
 }
 
 .option {
-  padding: 10px 20px;
-  font-size: 1rem; /* Tamaño de fuente consistente */
+  padding: var(--padding) 20px;
+  font-size: var(--font-size-text);
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .option:hover {
-  background-color: #4a5568; /* Gris intermedio */
+  background-color: #4a5568; /* Podríamos definir esto como --hover-grey si se usa frecuentemente */
 }

@@ -1,29 +1,31 @@
 .searchContainer {
   display: flex;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 8px;
-  border-radius: 8px;
+  gap: var(--gap); /* 📏 Espaciado uniforme usando la variable global */
+  background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+  padding: var(--padding); /* 📏 Padding global */
+  border-radius: var(--border-radius); /* 📏 Bordes redondeados globales */
   align-items: center;
 }
 
 .searchInput {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: var(--padding); /* 📏 Padding global */
+  border: 1px solid var(--secondary-color); /* 🎨 Color secundario para el borde */
+  border-radius: var(--border-radius); /* 📏 Bordes redondeados globales */
   flex-grow: 1;
+  font-size: var(--font-size-text); /* 🖋️ Tamaño de fuente global */
 }
 
 .searchButton {
-  background-color: #007bff;
+  background-color: var(--primary-color); /* 🎨 Color primario global */
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+  padding: var(--padding) 12px; /* 📏 Padding global con ajuste lateral */
+  border-radius: var(--border-radius); /* 📏 Bordes redondeados globales */
   cursor: pointer;
-  font-weight: bold;
+  font-size: var(--font-size-text); /* 🖋️ Tamaño de fuente global */
+  transition: background-color 0.3s ease;
 }
 
 .searchButton:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-hover); /* 🎨 Color de hover global */
 }

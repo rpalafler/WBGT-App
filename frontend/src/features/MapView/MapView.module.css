@@ -1,39 +1,42 @@
 .mapContainer {
-  width: 100vw; /* 100% del ancho del viewport */
-  height: 100vh; /* 100% de la altura del viewport */
-  overflow: hidden; /* Evita que aparezcan scrollbars innecesarias */
-  position: relative; /* Asegura que los elementos hijos absolutos estén posicionados correctamente */
-}
-
-.controlPanel {
-  position: absolute; /* Posición relativa al contenedor del mapa */
-  top: 90px;
-  left: 10px;
-  z-index: 1000; /* Asegura que los controles estén sobre el mapa */
-  display: flex; /* Usamos flexbox para alinear los elementos */
-  flex-direction: column; /* Alineamos los botones en una columna */
-  gap: 20px; /* Espacio entre los botones */
-  background-color: rgba(
-    243,
-    216,
-    216,
-    0.5
-  ); /* Gris claro con 50% de transparencia */
-  padding: 10px; /* Espacio interno para que los botones no toquen los bordes */
-  border-radius: 8px; /* Bordes redondeados para un diseño más suave */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 .controlPanel {
   position: absolute;
   top: 50px;
   left: 10px;
-  z-index: 1000;
+  z-index: var(--z-index-controls); /* Z-index global para los controles */
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Asegura espacio entre los elementos */
-  background: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-radius: 8px;
+  gap: var(--gap); /* Espacio global entre los botones */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Puedes definir como --control-bg si se usa frecuentemente */
+  padding: var(--padding); /* Padding global */
+  border-radius: var(--border-radius); /* Bordes redondeados globales */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-title); /* Tamaño de fuente global para títulos */
+  font-weight: bold;
+  color: #ffffff;
+  background: var(
+    --title-background
+  ); /* Fondo semitransparente global para el título */
+  padding: var(--padding) 20px; /* Padding global con ajuste lateral */
+  border-radius: var(--border-radius); /* Bordes redondeados globales */
+  z-index: var(--z-index-title); /* Z-index global para el título */
+  box-shadow: 0 4px 6px rgba(83, 82, 82, 0.3);
 }
