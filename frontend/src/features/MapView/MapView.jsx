@@ -114,7 +114,10 @@ const MapView = () => {
   return (
     <div className={styles.mapContainer}>
       {/* 📍 Título visible en la parte superior */}
-      <div className={styles.title}>RHI Alarm</div>
+      <div className={styles.titleContainer}>
+        <h1 className={styles.title}>RHI Alarm</h1>
+        <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2>
+      </div>
 
       <div className={styles.controlPanel}>
         <BasemapSwitcher basemaps={basemaps} onBasemapChange={setBasemapUrl} />

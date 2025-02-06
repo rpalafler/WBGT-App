@@ -24,19 +24,29 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-  position: absolute;
+.titleContainer {
+  position: absolute; /* Solo el contenedor se posiciona en la parte superior */
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: var(--font-size-title); /* Tamaño de fuente global para títulos */
-  font-weight: bold;
-  color: #ffffff;
-  background: var(
-    --title-background
-  ); /* Fondo semitransparente global para el título */
-  padding: var(--padding) 20px; /* Padding global con ajuste lateral */
-  border-radius: var(--border-radius); /* Bordes redondeados globales */
-  z-index: var(--z-index-title); /* Z-index global para el título */
+  text-align: center; /* Centra el contenido horizontalmente */
+  background: var(--title-background);
+  padding: var(--padding) 20px;
+  border-radius: var(--border-radius);
+  z-index: var(--z-index-title);
   box-shadow: 0 4px 6px rgba(83, 82, 82, 0.3);
+}
+
+/* 🎨 Título Principal */
+.title {
+  font-size: var(--font-size-title);
+  color: #ffffff;
+  margin: 0; /* Elimina márgenes para un ajuste más preciso */
+}
+
+/* 🎨 Subtítulo */
+.subtitle {
+  font-size: var(--font-size-subtitle);
+  color: #ffffff;
+  margin: 5px 0 0 0; /* Espacio entre el título y el subtítulo */
 }
