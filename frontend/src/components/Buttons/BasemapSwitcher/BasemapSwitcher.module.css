@@ -23,7 +23,7 @@
 
 .button {
   background-color: var(--primary-color); /* Color primario global */
-  color: white;
+  color: var(--button_font_color);
   padding: var(--padding) 20px; /* Usamos padding global */
   border: none;
   border-radius: var(--border-radius);

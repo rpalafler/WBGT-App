@@ -17,7 +17,7 @@
 
 .searchButton {
   background-color: var(--primary-color); /* 🎨 Color primario global */
-  color: white;
+  color: var(--button_font_color);
   border: none;
   padding: var(--padding) 12px; /* 📏 Padding global con ajuste lateral */
   border-radius: var(--border-radius); /* 📏 Bordes redondeados globales */
