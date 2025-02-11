@@ -8,13 +8,16 @@ export const AppContext = createContext();
 // cambiarse por cualquier otro nombre, y el importante es AppContext, que es el que actua como el 'Provider' de las variables
 // globales que estamos definiendo aqui
 export const AppProvider = ({ children }) => {
-  //______________________________________________________
-  // ESTE ES UN EJEMPLO QUE HICE PARA ENTENDER EL COMPORTAMIENTO DE 'CREATECONTEXT'
-  const [example, setExample] = useState("Hello, Context!");
-  //______________________________________________________
+  const [viewState, setViewState] = useState({
+    longitude: -115.4,
+    latitude: 33.1,
+    zoom: 8.8,
+    pitch: 0,
+    bearing: 0,
+  });
 
   return (
-    <AppContext.Provider value={{ example, setExample }}>
+    <AppContext.Provider value={{ viewState, setViewState }}>
       {children}
     </AppContext.Provider>
   );

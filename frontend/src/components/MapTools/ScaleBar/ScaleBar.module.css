@@ -1,0 +1,27 @@
+.scaleBar {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  background: rgba(255, 255, 255, 0.8);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* La barra que representa la escala */
+.scaleLine {
+  height: 4px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease; /* Suave transición cuando cambia la longitud */
+}
+
+/* El texto que muestra la distancia */
+.scaleText {
+  font-size: var(--font-size-text);
+  color: var(--text-color);
+  min-width: 50px;
+  text-align: right;
+}

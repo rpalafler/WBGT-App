@@ -1,0 +1,64 @@
+.menuContainer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: var(--z-index-controls); /* Asegura que el menú esté sobre el mapa */
+}
+
+.hamburgerButton {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el icono y el texto */
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-text);
+  transition: background-color 0.3s ease;
+}
+
+.hamburgerButton:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Menú Desplegable */
+.dropdownMenu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* Evita clics cuando está cerrado */
+}
+
+/* Mostrar el Menú */
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Estilo de las Opciones del Menú */
+.dropdownMenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdownMenu li {
+  padding: var(--padding);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdownMenu li:hover {
+  background-color: var(--light-grey);
+}

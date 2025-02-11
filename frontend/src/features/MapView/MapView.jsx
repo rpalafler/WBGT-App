@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import DeckGL from "@deck.gl/react";
 import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers"; // 📍 Importamos ScatterplotLayer
@@ -7,15 +7,12 @@ import SearchButton from "../../components/Buttons/SearchButton/SearchButton";
 import LocateButton from "../../components/Buttons/LocateButton/LocateButton";
 import Button from "../../components/Buttons/Button/Button";
 import styles from "./MapView.module.css";
+import HamburgerMenu from "../../components/Buttons/HamburgerMenu/HamburgerMenu";
+import { AppContext } from "../../Context"; // Importamos el Context
+import ScaleBar from "../../components/MapTools/ScaleBar/ScaleBar";
 
 const MapView = () => {
-  const [viewState, setViewState] = useState({
-    longitude: -115.4, // Imperial Valley
-    latitude: 33.1,
-    zoom: 8.8,
-    pitch: 0,
-    bearing: 0,
-  });
+  const { viewState, setViewState } = useContext(AppContext); // Usamos el contexto
 
   const [userLocation, setUserLocation] = useState(null); // 📍 Estado para guardar la ubicación del usuario
 
@@ -113,19 +110,19 @@ const MapView = () => {
 
   return (
     <div className={styles.mapContainer}>
+      {/* Menú Hamburguesa */}
+      <HamburgerMenu />
       {/* 📍 Título visible en la parte superior */}
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>RHI Alarm</h1>
         <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2>
       </div>
-
       <div className={styles.controlPanel}>
         <BasemapSwitcher basemaps={basemaps} onBasemapChange={setBasemapUrl} />
         <SearchButton onLocationSelect={handleLocationSelect} />
         <LocateButton onLocate={handleLocate} />
         <Button label="Learn more About the Project!" to="/about" />
       </div>
-
       <DeckGL
         viewState={viewState}
         controller={true}
@@ -138,6 +135,7 @@ const MapView = () => {
           )}, Longitude: ${coordinate[0].toFixed(2)}`
         }
       />
+      <ScaleBar /> {/* Añadimos la barra de escala */}
     </div>
   );
 };
