@@ -1,6 +1,6 @@
 .mapContainer {
-  width: 100vw;
-  height: 100vh;
+  width: 100%; /* Se adapta mejor a la pantalla */
+  min-height: 100vh; /* Permite crecimiento dinámico sin problemas en móviles */
   overflow: hidden;
   position: relative;
 }
@@ -27,11 +27,9 @@
 .titleContainer {
   position: absolute; /* Solo el contenedor se posiciona en la parte superior */
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
   text-align: center; /* Centra el contenido horizontalmente */
   background: var(--title-background);
-  padding: var(--padding) 20px;
+  padding: var(--padding);
   border-radius: var(--border-radius);
   z-index: var(--z-index-title);
   box-shadow: 0 4px 6px rgba(83, 82, 82, 0.3);
@@ -49,4 +47,23 @@
   font-size: var(--font-size-subtitle);
   color: #ffffff;
   margin: 5px 0 0 0; /* Espacio entre el título y el subtítulo */
+}
+
+/* 🌍 📌 RESPONSIVE DESIGN */
+/* 🎯 📱 Para pantallas pequeñas (< 768px) */
+@media (max-width: 768px) {
+  .titleContainer {
+    left: 50px;
+  }
+  .subtitle {
+    display: none;
+  }
+}
+
+/* 🎯 💻 Para pantallas grandes (> 768px) */
+@media (min-width: 769px) {
+  .titleContainer {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
