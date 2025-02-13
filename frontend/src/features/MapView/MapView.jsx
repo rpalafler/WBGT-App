@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import DeckGL from "@deck.gl/react";
 import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers"; // 📍 Importamos ScatterplotLayer
 import BasemapSwitcher from "../../components/Buttons/BasemapSwitcher/BasemapSwitcher";
 import SearchButton from "../../components/Buttons/SearchButton/SearchButton";
 import LocateButton from "../../components/Buttons/LocateButton/LocateButton";
-import Button from "../../components/Buttons/Button/Button";
+import MoreInfoButton from "../../components/Buttons/MoreInfoButton/MoreInfoButton";
 import styles from "./MapView.module.css";
 import HamburgerMenu from "../../components/Buttons/HamburgerMenu/HamburgerMenu";
 import { AppContext } from "../../Context"; // Importamos el Context
@@ -13,17 +13,39 @@ import ScaleBar from "../../components/MapTools/ScaleBar/ScaleBar";
 
 const MapView = () => {
   const { viewState, setViewState } = useContext(AppContext); // Usamos el contexto
+  const { windowWidth, setWindowWidth } = useContext(AppContext); // Usamos el contexto
 
   const [userLocation, setUserLocation] = useState(null); // 📍 Estado para guardar la ubicación del usuario
+
+  // 📌 Actualiza windowWidth dinámicamente al cambiar el tamaño
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // 🧹 Cleanup: elimina el listener al desmontar
+    return () => window.removeEventListener("resize", handleResize);
+  });
 
   const [basemapUrl, setBasemapUrl] = useState(
     "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
   );
 
   const basemaps = {
-    OpenStreetMap: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-    GoogleXYZ: "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
-    GoogleTopography: "http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}",
+    OpenStreetMap: {
+      url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      label: windowWidth < 768 ? "OSM" : "OpenStreetMap",
+    },
+    GoogleXYZ: {
+      url: "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+      label: windowWidth < 768 ? "GGL" : "GoogleXYZ",
+    },
+    GoogleTopography: {
+      url: "http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}",
+      label: windowWidth < 768 ? "Topo" : "GoogleTopography",
+    },
   };
 
   const tileLayer = new TileLayer({
@@ -118,10 +140,17 @@ const MapView = () => {
         <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2>
       </div>
       <div className={styles.controlPanel}>
-        <BasemapSwitcher basemaps={basemaps} onBasemapChange={setBasemapUrl} />
-        <SearchButton onLocationSelect={handleLocationSelect} />
-        <LocateButton onLocate={handleLocate} />
-        <Button label="Learn more About the Project!" to="/about" />
+        <BasemapSwitcher
+          className={styles.panelButton}
+          basemaps={basemaps}
+          onBasemapChange={setBasemapUrl}
+        />
+        <SearchButton
+          className={styles.panelButton}
+          onLocationSelect={handleLocationSelect}
+        />
+        <LocateButton className={styles.panelButton} onLocate={handleLocate} />
+        <MoreInfoButton className={styles.panelButton} to="/about" />
       </div>
       <DeckGL
         viewState={viewState}

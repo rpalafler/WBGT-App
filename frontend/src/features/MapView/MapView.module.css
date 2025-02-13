@@ -7,23 +7,18 @@
 
 .controlPanel {
   position: absolute;
-  top: 50px;
+  top: 140px;
   left: 10px;
-  z-index: var(--z-index-controls); /* Z-index global para los controles */
+  z-index: var(--z-index-controls);
   display: flex;
   flex-direction: column;
-  gap: var(--gap); /* Espacio global entre los botones */
-  background: rgba(
-    255,
-    255,
-    255,
-    0.8
-  ); /* Puedes definir como --control-bg si se usa frecuentemente */
-  padding: var(--padding); /* Padding global */
-  border-radius: var(--border-radius); /* Bordes redondeados globales */
+  gap: var(--gap);
+  background: rgba(255, 255, 255, 0.8);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
-
 .titleContainer {
   position: absolute; /* Solo el contenedor se posiciona en la parte superior */
   top: 20px;
@@ -52,8 +47,41 @@
 /* 🌍 📌 RESPONSIVE DESIGN */
 /* 🎯 📱 Para pantallas pequeñas (< 768px) */
 @media (max-width: 768px) {
+  .controlPanel {
+    position: fixed;
+    left: 10px;
+    top: 100px;
+    /* bottom: 100px; */
+    width: 75px;
+    height: auto;
+    flex-direction: column; /* Vertical */
+    gap: 15px;
+    padding: 20px 5px;
+    border-radius: 30px;
+    background: var(--title-background);
+    justify-content: center;
+    align-items: center;
+  }
+  /* 🟠 Estilo Compacto de los Botones */
+  .panelButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    color: white;
+    transition: background-color 0.3s ease;
+    background-color: var(--primary-color);
+  }
+
+  .panelButton:hover {
+    background-color: var(--primary-hover);
+  }
   .titleContainer {
-    left: 50px;
+    left: 15px;
   }
   .subtitle {
     display: none;
@@ -62,6 +90,13 @@
 
 /* 🎯 💻 Para pantallas grandes (> 768px) */
 @media (min-width: 769px) {
+  .controlPanel {
+    flex-direction: column;
+    width: auto;
+  }
+  .panelButton {
+    border-radius: var(--border-radius);
+  }
   .titleContainer {
     left: 50%;
     transform: translateX(-50%);

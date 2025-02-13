@@ -1,0 +1,53 @@
+.button {
+  background-color: var(--primary-color);
+  color: var(--button_font_color);
+  padding: var(--padding) 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-text);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover y Active */
+.button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  background-color: var(--primary-color);
+  transform: translateY(1px);
+}
+
+/* ✅ Estilo para Pantallas Pequeñas: Botón Circular */
+.iconButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Ícono Ajustado */
+.icon {
+  font-size: 1.5rem;
+  color: var(--button_font_color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .button {
+    font-size: 1rem;
+    padding: 8px;
+  }
+}

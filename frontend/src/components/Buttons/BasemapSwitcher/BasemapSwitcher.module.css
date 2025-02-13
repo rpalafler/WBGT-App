@@ -2,9 +2,9 @@
   position: relative;
   display: flex;
   bottom: 0px;
-  right: 0px;
   flex-direction: column;
-  z-index: var(--z-index-controls); /* Variable para z-index */
+  right: 0px;
+  z-index: var(--z-index-controls);
   transition: height 0.3s ease;
 }
 
@@ -15,26 +15,50 @@
 .dropdown {
   position: relative;
   margin-top: 5px;
-  background-color: var(--secondary-color); /* Gris oscuro global */
-  border: 1px solid #4a5568; /* Puedes crear una variable si usas este gris frecuentemente */
-  border-radius: var(--border-radius); /* Usamos el borde redondeado global */
+  background-color: var(--secondary-color);
+  border: 1px solid #4a5568;
+  border-radius: var(--border-radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* 📌 Estilos del Botón */
 .button {
-  background-color: var(--primary-color); /* Color primario global */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background-color: var(--primary-color);
   color: var(--button_font_color);
-  padding: var(--padding) 20px; /* Usamos padding global */
+  padding: var(--padding) 20px;
   border: none;
   border-radius: var(--border-radius);
-  font-size: var(--font-size-text); /* Tamaño de fuente global */
+  font-size: var(--font-size-text);
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* 🎨 Estilo del Icono */
+.buttonIcon {
+  font-size: 1.2rem;
+  display: none; /* Oculto en pantallas grandes */
+}
+
+/* 🎨 Estilo del Texto */
+.buttonText {
+  font-size: 1rem;
+  display: inline; /* Visible en pantallas grandes */
+}
+
+/* 🚀 Efecto Hover */
 .button:hover {
-  background-color: var(--primary-hover); /* Color hover global */
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.button:hover {
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
   border-radius: var(--border-radius-button);
 }
@@ -48,5 +72,61 @@
 }
 
 .option:hover {
-  background-color: #4a5568; /* Podríamos definir esto como --hover-grey si se usa frecuentemente */
+  background-color: #4a5568;
+}
+
+/* 📌 RESPONSIVE DESIGN */
+
+/* 🌍 📱 Pantallas Pequeñas (<768px): Menú Horizontal con Botones Circulares */
+@media (max-width: 768px) {
+  .button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Botón redondo */
+    font-size: 1.2rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+  }
+  .buttonText {
+    display: none; /* Ocultamos el texto */
+  }
+  .buttonIcon {
+    display: inline-block; /* Mostramos el ícono */
+  }
+  .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+
+  .dropdown {
+    position: absolute;
+    border: 0px solid #4a5568;
+    left: 125%;
+    top: -7px;
+    display: flex;
+    gap: 10px;
+    background-color: transparent;
+  }
+
+  .option {
+    width: auto;
+    height: auto;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .option:hover {
+    background-color: var(--primary-hover);
+  }
 }

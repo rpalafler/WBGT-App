@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faSearch,
-  faMapMarkerAlt,
-  faLayerGroup,
+  faGear,
   faBars,
+  faHouse,
+  faCircleInfo,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom"; // Mantiene la navegación
+import { Link, useNavigate } from "react-router-dom"; // Mantiene la navegación
 import styles from "./HamburgerMenu.module.css";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -29,24 +30,40 @@ const HamburgerMenu = () => {
         {/* Opciones en Pantallas Grandes */}
         <ul className={styles.desktopMenu}>
           <li>
-            <Link to="/">🏠 Home</Link>
+            <Link to="/">
+              <FontAwesomeIcon icon={faHouse} /> &nbsp;Home
+            </Link>
           </li>
           <li>
-            <Link to="/about">ℹ️ About</Link>
+            <Link to="/about">
+              <FontAwesomeIcon icon={faCircleInfo} />
+              &nbsp; About
+            </Link>
           </li>
-          <li>⚙️ Settings</li>
+          <li>
+            <FontAwesomeIcon icon={faGear} /> &nbsp;&nbsp;Settings
+          </li>
         </ul>
 
         {/* Opciones en Pantallas Pequeñas → Botones Redondos con Iconos */}
         <div className={styles.mobileMenu}>
-          <button className={styles.menuItem} title="Buscar">
-            <FontAwesomeIcon icon={faSearch} />
+          <button
+            className={styles.menuItem}
+            title="Home"
+            onClick={() => navigate("/")}
+          >
+            <FontAwesomeIcon icon={faHouse} />
           </button>
-          <button className={styles.menuItem} title="Ubicación">
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
+          <button
+            className={styles.menuItem}
+            title="About"
+            onClick={() => navigate("/about")}
+          >
+            <FontAwesomeIcon icon={faCircleInfo} />
           </button>
-          <button className={styles.menuItem} title="Capas">
-            <FontAwesomeIcon icon={faLayerGroup} />
+          {/* LO QUE VIENE AHORA ES UN EJEMPLO PERO NO TIENE FUNCIONALIDAD */}
+          <button className={styles.menuItem} title="Settings">
+            <FontAwesomeIcon icon={faGear} />
           </button>
         </div>
       </div>

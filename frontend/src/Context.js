@@ -15,9 +15,12 @@ export const AppProvider = ({ children }) => {
     pitch: 0,
     bearing: 0,
   });
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   return (
-    <AppContext.Provider value={{ viewState, setViewState }}>
+    <AppContext.Provider
+      value={{ viewState, setViewState, windowWidth, setWindowWidth }}
+    >
       {children}
     </AppContext.Provider>
   );

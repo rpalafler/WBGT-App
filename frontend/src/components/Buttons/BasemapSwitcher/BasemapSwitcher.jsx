@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./BasemapSwitcher.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 
 const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,9 +29,10 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
       {/* Botón principal */}
       <button
         className={styles.button}
-        onClick={() => setIsOpen((prev) => !prev)} // Abre o cierra el menú al hacer clic
+        onClick={() => setIsOpen((prev) => !prev)}
       >
-        Basemap Options
+        <FontAwesomeIcon icon={faLayerGroup} className={styles.icon} />
+        <span className={styles.buttonText}>Basemap Options</span>
       </button>
 
       {/* Menú desplegable */}
@@ -40,11 +43,11 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
               key={key}
               className={styles.option}
               onClick={() => {
-                onBasemapChange(basemaps[key]); // Cambia el basemap
+                onBasemapChange(basemaps[key].url); // Cambia el basemap
                 setIsOpen(false); // Cierra el menú
               }}
             >
-              {key}
+              {typeof basemaps[key] === "object" ? basemaps[key].label : key}
             </div>
           ))}
         </div>

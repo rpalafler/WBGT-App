@@ -1,19 +1,41 @@
 .locateButton {
-  background-color: var(--primary-color); /* Color primario global */
+  background-color: var(--primary-color);
   color: var(--button_font_color);
-  padding: var(--padding) 20px; /* Usamos padding global */
+  padding: var(--padding) 20px;
   border: none;
   border-radius: var(--border-radius);
-  font-size: var(--font-size-text); /* Tamaño de fuente global */
+  font-size: var(--font-size-text);
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .locateButton:hover {
-  background-color: var(--primary-hover); /* Color hover global */
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
-  border-radius: var(
-    --border-radius-button
-  ); /* Puedes agregar esto como variable si lo usarás en más lugares */
+  border-radius: var(--border-radius-button);
+}
+
+/* 📌 RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .locateButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Botón redondo */
+    font-size: 1.2rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+  }
+  .locateButton::after {
+    font-size: 1.5rem;
+  }
+  .locateButton span {
+    display: none; /* Oculta el texto en pantallas pequeñas */
+  }
 }

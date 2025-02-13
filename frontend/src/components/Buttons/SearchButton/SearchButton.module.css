@@ -1,31 +1,75 @@
+/* Contenedor principal */
 .searchContainer {
   display: flex;
-  gap: var(--gap); /* 📏 Espaciado uniforme usando la variable global */
-  background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
-  padding: var(--padding); /* 📏 Padding global */
-  border-radius: var(--border-radius); /* 📏 Bordes redondeados globales */
   align-items: center;
+  gap: var(--gap);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease-in-out;
 }
 
+/* Input normal (pantallas grandes) */
 .searchInput {
-  padding: var(--padding); /* 📏 Padding global */
-  border: 1px solid var(--secondary-color); /* 🎨 Color secundario para el borde */
-  border-radius: var(--border-radius); /* 📏 Bordes redondeados globales */
   flex-grow: 1;
-  font-size: var(--font-size-text); /* 🖋️ Tamaño de fuente global */
+  padding: var(--padding);
+  font-size: var(--font-size-text);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--secondary-color);
 }
 
+/* Botón de búsqueda normal (pantallas grandes) */
 .searchButton {
-  background-color: var(--primary-color); /* 🎨 Color primario global */
+  padding: var(--padding) 15px;
+  font-size: var(--font-size-text);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
   color: var(--button_font_color);
   border: none;
-  padding: var(--padding) 12px; /* 📏 Padding global con ajuste lateral */
-  border-radius: var(--border-radius); /* 📏 Bordes redondeados globales */
-  cursor: pointer;
-  font-size: var(--font-size-text); /* 🖋️ Tamaño de fuente global */
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 .searchButton:hover {
-  background-color: var(--primary-hover); /* 🎨 Color de hover global */
+  background-color: var(--primary-hover);
+}
+
+/* 📱 Pantallas pequeñas (modo expandible) */
+.iconButton {
+  border: none;
+  background-color: var(--primary-color);
+  margin: 0;
+  color: var(--button_font_color);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.iconButton:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Input expandible en móviles */
+.searchInputMobile {
+  position: absolute; /* o relative, según dónde quieras que aparezca */
+  left: 90px; /* Ajusta la distancia desde la izquierda */
+  width: 80%; /* Ajusta el ancho según tu preferencia */
+  padding: 10px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño del texto */
+  border: 2px solid var(--secondary-color); /* Borde con color global */
+  border-radius: var(--border-radius); /* Bordes redondeados globales */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  z-index: var(--z-index-title); /* Asegúrate de que esté encima */
+  background-color: white; /* Fondo blanco */
+}
+
+/* Contenedor expandido */
+.expanded {
+  /* background-color: rgba(255, 255, 255, 0.95); */
+  padding: 8px;
+  border-radius: var(--border-radius);
 }
