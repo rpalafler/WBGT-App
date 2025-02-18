@@ -129,6 +129,24 @@ const MapView = () => {
       getFillColor: [0, 0, 255, 200], // Azul con opacidad
       pickable: false,
     });
+  // _______________________________________________________________________________
+  // LAYER TEMPORAL
+  const imageLayer = new BitmapLayer({
+    id: "heatmap-layer",
+    image: "/heatmap.jpg", // Ruta relativa (asumiendo desde public/)
+    bounds: [
+      -116.83160400390625, 32.56388473510742, -115.09870910644531,
+      34.11175537109375,
+    ],
+    opacity: 0.3,
+    desaturate: 0,
+    visible: true,
+    pickable: false,
+    parameters: {
+      depthTest: false,
+    },
+  });
+  // _______________________________________________________________________________
 
   return (
     <div className={styles.mapContainer}>
@@ -156,7 +174,10 @@ const MapView = () => {
         viewState={viewState}
         controller={true}
         onViewStateChange={({ viewState }) => setViewState(viewState)}
-        layers={[tileLayer, userLocationLayer].filter(Boolean)} // 📍 Agregamos el marcador al mapa
+        // _______________________________________________________________________________
+        // AÑADO LA IMAGEN TEMPORALMENTE
+        layers={[tileLayer, userLocationLayer, imageLayer].filter(Boolean)} // 📍 Agregamos el marcador al mapa
+        // _______________________________________________________________________________
         getTooltip={({ coordinate }) =>
           coordinate &&
           `Latitude: ${coordinate[1].toFixed(
