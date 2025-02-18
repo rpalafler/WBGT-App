@@ -9,3 +9,5 @@
 # /frontend/node_modules/
 # /backend/node_modules/
 mockups
+/backend/venv
+/backend/combined_wbgt.nc
