@@ -17,6 +17,9 @@ const MapView = () => {
 
   const [userLocation, setUserLocation] = useState(null); // 📍 Estado para guardar la ubicación del usuario
 
+  // Este estado controlará si los demás botones están visibles o no:
+  const { isCollapsed } = useContext(AppContext);
+
   // 📌 Actualiza windowWidth dinámicamente al cambiar el tamaño
   useEffect(() => {
     const handleResize = () => {
@@ -36,15 +39,15 @@ const MapView = () => {
   const basemaps = {
     OpenStreetMap: {
       url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-      label: windowWidth < 768 ? "OSM" : "OpenStreetMap",
+      label: windowWidth < 768 ? "Open Street Map" : "Open Street Map",
     },
     GoogleXYZ: {
       url: "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
-      label: windowWidth < 768 ? "GGL" : "GoogleXYZ",
+      label: windowWidth < 768 ? "Google XYZ" : "Google XYZ",
     },
     GoogleTopography: {
       url: "http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}",
-      label: windowWidth < 768 ? "Topo" : "GoogleTopography",
+      label: windowWidth < 768 ? "Google Topography" : "Google Topography",
     },
   };
 
@@ -131,6 +134,8 @@ const MapView = () => {
     });
   // _______________________________________________________________________________
   // LAYER TEMPORAL
+  const [showHeatmap, setShowHeatmap] = useState(true);
+
   const imageLayer = new BitmapLayer({
     id: "heatmap-layer",
     image: "/heatmap.jpg", // Ruta relativa (asumiendo desde public/)
@@ -140,7 +145,7 @@ const MapView = () => {
     ],
     opacity: 0.3,
     desaturate: 0,
-    visible: true,
+    visible: showHeatmap,
     pickable: false,
     parameters: {
       depthTest: false,
@@ -157,18 +162,35 @@ const MapView = () => {
         <h1 className={styles.title}>RHI Alarm</h1>
         <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2>
       </div>
-      <div className={styles.controlPanel}>
+      <div
+        className={`${styles.controlPanel} ${
+          isCollapsed ? styles.collapsed : ""
+        }`}
+      >
         <BasemapSwitcher
           className={styles.panelButton}
           basemaps={basemaps}
           onBasemapChange={setBasemapUrl}
         />
-        <SearchButton
-          className={styles.panelButton}
-          onLocationSelect={handleLocationSelect}
-        />
-        <LocateButton className={styles.panelButton} onLocate={handleLocate} />
-        <MoreInfoButton className={styles.panelButton} to="/about" />
+        {!isCollapsed && (
+          <>
+            <SearchButton
+              className={styles.panelButton}
+              onLocationSelect={handleLocationSelect}
+            />
+            <LocateButton
+              className={styles.panelButton}
+              onLocate={handleLocate}
+            />
+            <MoreInfoButton className={styles.panelButton} to="/about" />
+            <button
+              onClick={() => setShowHeatmap(!showHeatmap)}
+              className={styles.panelButton}
+            >
+              {showHeatmap ? "Hide" : "Show"}
+            </button>
+          </>
+        )}
       </div>
       <DeckGL
         viewState={viewState}

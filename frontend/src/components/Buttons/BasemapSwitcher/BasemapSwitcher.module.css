@@ -106,18 +106,19 @@
   .dropdown {
     position: absolute;
     border: 0px solid #4a5568;
-    left: 125%;
-    top: -7px;
+    left: 145%;
+    top: 0px;
     display: flex;
+    flex-direction: column;
     gap: 10px;
     background-color: transparent;
   }
 
   .option {
-    width: auto;
+    width: 130px;
     height: auto;
-    border-radius: 50%;
-    background-color: var(--primary-color);
+    border-radius: 0%;
+    background-color: var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center;

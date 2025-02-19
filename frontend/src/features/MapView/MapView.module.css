@@ -64,6 +64,8 @@
   }
   /* 🟠 Estilo Compacto de los Botones */
   .panelButton {
+    border: none;
+
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -85,6 +87,13 @@
   }
   .subtitle {
     display: none;
+  }
+
+  .collapsed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* O ajusta según necesites */
   }
 }
 

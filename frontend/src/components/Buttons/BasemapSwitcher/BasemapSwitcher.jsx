@@ -1,11 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import styles from "./BasemapSwitcher.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
+import { AppContext } from "../../../Context"; // Importamos el Context
 
 const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { isCollapsed, setIsCollapsed } = useContext(AppContext);
+  const { windowWidth } = useContext(AppContext);
 
   // Cierra el menú si haces clic fuera del contenedor
   useEffect(() => {
@@ -29,7 +32,12 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
       {/* Botón principal */}
       <button
         className={styles.button}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          if (windowWidth < 768) {
+            setIsCollapsed(!isCollapsed); // Solo oculta botones si la pantalla es pequeña
+          }
+        }}
       >
         <FontAwesomeIcon icon={faLayerGroup} className={styles.icon} />
         <span className={styles.buttonText}>Basemap Options</span>

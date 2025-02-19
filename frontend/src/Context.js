@@ -16,10 +16,18 @@ export const AppProvider = ({ children }) => {
     bearing: 0,
   });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  // Este estado controlará si los demás botones están visibles o no:
+  const [isCollapsed, setIsCollapsed] = useState(false);
   return (
     <AppContext.Provider
-      value={{ viewState, setViewState, windowWidth, setWindowWidth }}
+      value={{
+        viewState,
+        setViewState,
+        windowWidth,
+        setWindowWidth,
+        isCollapsed,
+        setIsCollapsed,
+      }}
     >
       {children}
     </AppContext.Provider>

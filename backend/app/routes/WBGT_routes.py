@@ -5,8 +5,8 @@ from fastapi import APIRouter
 router = APIRouter()
 
 # ✅ Endpoint para devolver la muestra del archivo NetCDF
-@router.post("/wbgt/sample")
-async def get_wbgt_sample(month:int):
+@router.get("/wbgt/sample")
+async def get_wbgt_sample():
     result = read_wbgt_file() 
 
     return result
