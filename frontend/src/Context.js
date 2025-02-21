@@ -9,8 +9,8 @@ export const AppContext = createContext();
 // globales que estamos definiendo aqui
 export const AppProvider = ({ children }) => {
   const [viewState, setViewState] = useState({
-    longitude: -115.4,
-    latitude: 33.1,
+    longitude: -115.92,
+    latitude: 33.38,
     zoom: 8.8,
     pitch: 0,
     bearing: 0,
