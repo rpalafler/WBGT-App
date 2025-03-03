@@ -1,0 +1,54 @@
+.liveButton {
+  position: relative;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  font-size: var(--font-size-text);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.liveButton:hover {
+  background-color: darkred;
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: blink 1s infinite; /* Parpadeo cada 1s (0.5s encendido, 0.5s apagado) */
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .liveButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+  }
+  .circle {
+    display: none;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

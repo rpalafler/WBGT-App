@@ -1,0 +1,101 @@
+/* 🔹 Contenedor Principal del Slider */
+.sliderContainer {
+  background: var(--title-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(83, 82, 82, 0.3);
+  color: #ffffff;
+
+  z-index: var(--z-index-controls);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  padding: 10px 25px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🔹 Contenedor de los Controles */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Asegura que los elementos se expandan */
+  width: 100%; /* Permite ocupar todo el ancho */
+  gap: 25px;
+}
+
+/* 🔹 Estilos para el Date Picker */
+.hourSlider {
+  flex-grow: 1; /* Permite que el slider crezca dentro del espacio disponible */
+  text-align: center;
+}
+
+.datePicker label,
+.hourSlider label {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.datePicker input,
+.hourSlider input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 🔹 Estilos del Slider de Hora */
+.hourSlider input[type="range"] {
+  width: 100%; /* Aumenta la longitud del slider */
+  max-width: 1000px; /* Evita que se haga demasiado grande en pantallas grandes */
+  accent-color: #ff4d4d; /* Color del slider */
+  cursor: pointer;
+}
+
+/* 🔹 Botón Submit */
+.submitButton {
+  background-color: #ff4d4d; /* Rojo llamativo */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.submitButton:hover {
+  background-color: #e60000; /* Rojo más intenso al pasar el mouse */
+}
+
+/* 🔹 Adaptación para Móviles */
+@media (max-width: 768px) {
+  .sliderContainer {
+    width: 100%;
+    flex-direction: row;
+    padding: 15px 10px;
+  }
+
+  .controls {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .datePicker {
+    padding-left: 20px; /* Agrega espacio a la izquierda en móviles */
+  }
+
+  .hourSlider input[type="range"] {
+    width: 80%; /* En móviles ocupa todo el ancho */
+  }
+  .submitButton {
+    margin-right: 20px;
+  }
+}

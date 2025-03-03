@@ -1,0 +1,50 @@
+.container {
+  position: absolute;
+  top: 60%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 8px;
+  border-radius: var(--border-radius); /* Misma variable usada en ScaleBar */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  z-index: var(--z-index-controls);
+}
+
+/* Escala de colores (heatmap) */
+.scale {
+  flex: 1;
+  width: 100%;
+  background: linear-gradient(
+    to top,
+    rgb(31, 31, 254),
+    rgb(51, 248, 51),
+    yellow,
+    orange,
+    red,
+    rgb(158, 0, 0)
+  );
+  border-radius: 5px; /* Redondeo de bordes */
+}
+
+/* Etiquetas de temperatura */
+.labelTop,
+.labelBottom {
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+/* Posicionamiento de las etiquetas */
+.labelTop {
+  margin-bottom: 5px;
+}
+
+.labelBottom {
+  margin-top: 5px;
+}

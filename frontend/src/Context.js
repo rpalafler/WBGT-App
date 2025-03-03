@@ -18,6 +18,13 @@ export const AppProvider = ({ children }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   // Este estado controlará si los demás botones están visibles o no:
   const [isCollapsed, setIsCollapsed] = useState(false);
+  // Las siguientes variables son las que uso para que el usuario pueda seleccionar la fecha y hora de los datos a mostrar
+  const now = new Date();
+  const initialDate = now.toLocaleDateString("en-CA"); // Formato YYYY-MM-DD en la zona horaria local
+  const initialHour = now.getHours(); // Hora en la zona del usuario
+
+  const [selectedDate, setSelectedDate] = useState(initialDate);
+  const [selectedHour, setSelectedHour] = useState(initialHour);
   return (
     <AppContext.Provider
       value={{
@@ -27,6 +34,10 @@ export const AppProvider = ({ children }) => {
         setWindowWidth,
         isCollapsed,
         setIsCollapsed,
+        selectedDate,
+        setSelectedDate,
+        selectedHour,
+        setSelectedHour,
       }}
     >
       {children}

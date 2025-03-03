@@ -10,6 +10,10 @@ import styles from "./MapView.module.css";
 import HamburgerMenu from "../../components/Buttons/HamburgerMenu/HamburgerMenu";
 import { AppContext } from "../../Context"; // Importamos el Context
 import ScaleBar from "../../components/MapTools/ScaleBar/ScaleBar";
+import SliderControl from "../../components/MapTools/SliderControl/SliderControl";
+
+import TempScaleVertical from "../../components/MapTools/TempScaleVertical/TempScaleVertical";
+import LiveButton from "../../components/Buttons/LiveButton/LiveButton";
 
 const MapView = () => {
   const { viewState, setViewState } = useContext(AppContext); // Usamos el contexto
@@ -157,10 +161,16 @@ const MapView = () => {
     <div className={styles.mapContainer}>
       {/* Menú Hamburguesa */}
       <HamburgerMenu />
+      {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
+      <SliderControl />
       {/* 📍 Título visible en la parte superior */}
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>RHI Alarm</h1>
         <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2>
+      </div>
+      {/* Incluimos aquí la escala de la variable leida*/}
+      <div>
+        <TempScaleVertical />
       </div>
       <div
         className={`${styles.controlPanel} ${
@@ -189,6 +199,7 @@ const MapView = () => {
             >
               {showHeatmap ? "Hide" : "Show"}
             </button>
+            <LiveButton></LiveButton>
           </>
         )}
       </div>

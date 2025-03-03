@@ -111,3 +111,20 @@
     transform: translateX(-50%);
   }
 }
+
+/* borrar despues de la presentacion */
+button {
+  background-color: var(--primary-color);
+  color: var(--button_font_color);
+  padding: var(--padding) 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-text);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
