@@ -15,6 +15,8 @@ import SliderControl from "../../components/MapTools/SliderControl/SliderControl
 import TempScaleVertical from "../../components/MapTools/TempScaleVertical/TempScaleVertical";
 import LiveButton from "../../components/Buttons/LiveButton/LiveButton";
 
+import GaugeView from "../../components/MapTools/GaugeView/GaugeView";
+
 const MapView = () => {
   const { viewState, setViewState } = useContext(AppContext); // Usamos el contexto
   const { windowWidth, setWindowWidth } = useContext(AppContext); // Usamos el contexto
@@ -156,13 +158,44 @@ const MapView = () => {
     },
   });
   // _______________________________________________________________________________
+  // _______________________________________________________________________________
+  // Aqui estamos definiendo la funcion que vamos a usar para detectar tics en el mapa para mostrar o no mostrar el
+  // gauge component
+  const { isGaugeActive, setIsGaugeActive } = useContext(AppContext); // Usamos el contexto
 
+  const handleMapClick = () => {
+    setIsGaugeActive((prev) => !prev); // Si está activo, se desactiva y viceversa
+    // console.log(isGaugeActive);
+  };
+
+  // Para telefonos tengo que hacer una logica manual, ya que no existe onDoubleTouch o algo asi
+
+  const [lastTap, setLastTap] = useState(0);
+
+  const handleTouchStart = () => {
+    const now = Date.now();
+    const TAP_DELAY = 300; // Máximo tiempo entre dos toques para considerarlo doble toque
+
+    if (now - lastTap < TAP_DELAY) {
+      setIsGaugeActive((prev) => !prev); // Activa/desactiva el Gauge
+    }
+
+    setLastTap(now); // Guarda el tiempo del último toque
+  };
+
+  // _______________________________________________________________________________
   return (
-    <div className={styles.mapContainer}>
+    <div
+      className={styles.mapContainer}
+      onDoubleClick={handleMapClick} // Para ordenadores
+      onTouchStart={handleTouchStart} // ✅ Funciona en móviles
+    >
+      {/*  */}
+      {isGaugeActive && <GaugeView />}
       {/* Menú Hamburguesa */}
       <HamburgerMenu />
       {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
-      <SliderControl />
+      {!isGaugeActive && <SliderControl />}
       {/* 📍 Título visible en la parte superior */}
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>RHI Alarm</h1>
@@ -194,8 +227,11 @@ const MapView = () => {
             />
             <MoreInfoButton className={styles.panelButton} to="/about" />
             <button
-              onClick={() => setShowHeatmap(!showHeatmap)}
-              className={styles.panelButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowHeatmap(!showHeatmap);
+              }}
+              className={styles.HideButton}
             >
               {showHeatmap ? "Hide" : "Show"}
             </button>
@@ -205,7 +241,14 @@ const MapView = () => {
       </div>
       <DeckGL
         viewState={viewState}
-        controller={true}
+        controller={{
+          dragPan: true,
+          scrollZoom: true,
+          doubleClickZoom: false, // 🔹 Desactiva el zoom con doble clic
+          touchZoom: true,
+          touchRotate: true,
+          keyboard: true,
+        }}
         onViewStateChange={({ viewState }) => setViewState(viewState)}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE
@@ -218,7 +261,9 @@ const MapView = () => {
           )}, Longitude: ${coordinate[0].toFixed(2)}`
         }
       />
-      <ScaleBar /> {/* Añadimos la barra de escala */}
+      {/* Añadimos la barra de escala, de manera que solo se mostrará en caso de que la pantalla sea mas grande
+      que la de un movil y no está activo el gauge chart */}
+      {!(windowWidth < 768 && isGaugeActive) && <ScaleBar />}
     </div>
   );
 };

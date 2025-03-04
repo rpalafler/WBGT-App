@@ -8,7 +8,13 @@ const LocateButton = ({ onLocate }) => {
   const { windowWidth } = useContext(AppContext);
 
   return (
-    <button className={styles.locateButton} onClick={onLocate}>
+    <button
+      className={styles.locateButton}
+      onClick={(e) => {
+        e.stopPropagation(); // Detiene la propagación del evento al mapa
+        onLocate();
+      }}
+    >
       {windowWidth < 768 ? (
         <FontAwesomeIcon icon={faLocationArrow} />
       ) : (

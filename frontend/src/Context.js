@@ -16,15 +16,18 @@ export const AppProvider = ({ children }) => {
     bearing: 0,
   });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // Este estado controlará si los demás botones están visibles o no:
+  // Este estado controlará si los demás botones están visibles o no dentro del panel de control:
   const [isCollapsed, setIsCollapsed] = useState(false);
   // Las siguientes variables son las que uso para que el usuario pueda seleccionar la fecha y hora de los datos a mostrar
   const now = new Date();
   const initialDate = now.toLocaleDateString("en-CA"); // Formato YYYY-MM-DD en la zona horaria local
   const initialHour = now.getHours(); // Hora en la zona del usuario
-
   const [selectedDate, setSelectedDate] = useState(initialDate);
   const [selectedHour, setSelectedHour] = useState(initialHour);
+
+  // Ahora vamos a definir las variables necesarias para el gauge component
+  const [isGaugeActive, setIsGaugeActive] = useState(false);
+
   return (
     <AppContext.Provider
       value={{
@@ -38,6 +41,8 @@ export const AppProvider = ({ children }) => {
         setSelectedDate,
         selectedHour,
         setSelectedHour,
+        isGaugeActive,
+        setIsGaugeActive,
       }}
     >
       {children}

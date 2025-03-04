@@ -32,7 +32,8 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
       {/* Botón principal */}
       <button
         className={styles.button}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           setIsOpen(!isOpen);
           if (windowWidth < 768) {
             setIsCollapsed(!isCollapsed); // Solo oculta botones si la pantalla es pequeña
@@ -50,7 +51,8 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
             <div
               key={key}
               className={styles.option}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 onBasemapChange(basemaps[key].url); // Cambia el basemap
                 setIsOpen(false); // Cierra el menú
               }}

@@ -48,3 +48,9 @@
 .labelBottom {
   margin-top: 5px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    top: 50%;
+  }
+}

@@ -12,7 +12,13 @@ const LiveButton = () => {
   };
 
   return (
-    <button className={styles.liveButton} onClick={handleLiveClick}>
+    <button
+      className={styles.liveButton}
+      onClick={(e) => {
+        e.stopPropagation(); // Detiene la propagación del evento al mapa
+        handleLiveClick();
+      }}
+    >
       <span className={styles.circle}></span>
       LIVE
     </button>

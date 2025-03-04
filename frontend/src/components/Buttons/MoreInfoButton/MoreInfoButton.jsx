@@ -18,7 +18,10 @@ const MoreInfoButton = ({ label, to }) => {
       className={`${styles.button} ${
         windowWidth < 768 ? styles.iconButton : ""
       }`}
-      onClick={handleClick}
+      onClick={(e) => {
+        e.stopPropagation(); // Detiene la propagación del evento al mapa
+        handleClick();
+      }}
     >
       {windowWidth < 768 ? (
         <>

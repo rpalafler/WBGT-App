@@ -20,7 +20,13 @@ const HamburgerMenu = () => {
   return (
     <div className={styles.menuContainer}>
       {/* Botón de Hamburguesa */}
-      <button className={styles.hamburgerButton} onClick={toggleMenu}>
+      <button
+        className={styles.hamburgerButton}
+        onClick={(e) => {
+          e.stopPropagation(); // Detiene la propagación del evento al mapa
+          toggleMenu();
+        }}
+      >
         <FontAwesomeIcon icon={faBars} className={styles.hamburgerIcon} />
         <span className={styles.menuText}>Menu</span>
       </button>
@@ -50,14 +56,20 @@ const HamburgerMenu = () => {
           <button
             className={styles.menuItem}
             title="Home"
-            onClick={() => navigate("/")}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate("/");
+            }}
           >
             <FontAwesomeIcon icon={faHouse} />
           </button>
           <button
             className={styles.menuItem}
             title="About"
-            onClick={() => navigate("/about")}
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate("/about");
+            }}
           >
             <FontAwesomeIcon icon={faCircleInfo} />
           </button>

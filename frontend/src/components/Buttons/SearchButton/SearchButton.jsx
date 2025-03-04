@@ -36,7 +36,10 @@ const SearchButton = ({ onLocationSelect }) => {
         <>
           <button
             className={styles.iconButton}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={(e) => {
+              e.stopPropagation(); // Detiene la propagación del evento al mapa
+              setIsExpanded(!isExpanded);
+            }}
             aria-label="Search"
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -46,6 +49,7 @@ const SearchButton = ({ onLocationSelect }) => {
               type="text"
               placeholder="Search..."
               value={query}
+              onClick={(e) => e.stopPropagation()} // Evita que el clic se propague al mapa
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyPress}
               className={styles.searchInputMobile}
@@ -59,11 +63,18 @@ const SearchButton = ({ onLocationSelect }) => {
             type="text"
             placeholder="Enter a location..."
             value={query}
+            onClick={(e) => e.stopPropagation()} // Evita que el clic se propague al mapa
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyPress}
             className={styles.searchInput}
           />
-          <button onClick={handleSearch} className={styles.searchButton}>
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // Detiene la propagación del evento al mapa
+              handleSearch();
+            }}
+            className={styles.searchButton}
+          >
             <FontAwesomeIcon icon={faMagnifyingGlass} /> Search
           </button>
         </>

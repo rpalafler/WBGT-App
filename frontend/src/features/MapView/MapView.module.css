@@ -44,6 +44,29 @@
   margin: 5px 0 0 0; /* Espacio entre el título y el subtítulo */
 }
 
+/*____________________________________________________________________________*/
+/* Boton Hide y Show para mostrar o no mostrar el heatmap */
+.HideButton {
+  background-color: var(--primary-color);
+  color: var(--button_font_color);
+  padding: var(--padding) 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.HideButton:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  border-radius: var(--border-radius-button);
+}
+/*____________________________________________________________________________*/
+
 /* 🌍 📌 RESPONSIVE DESIGN */
 /* 🎯 📱 Para pantallas pequeñas (< 768px) */
 @media (max-width: 768px) {
@@ -82,6 +105,27 @@
   .panelButton:hover {
     background-color: var(--primary-hover);
   }
+  .HideButton {
+    border: none;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+
+    color: white;
+    transition: background-color 0.3s ease;
+    background-color: var(--primary-color);
+  }
+
+  .HideButton:hover {
+    background-color: var(--primary-hover);
+  }
   .titleContainer {
     left: 15px;
   }
@@ -110,21 +154,4 @@
     left: 50%;
     transform: translateX(-50%);
   }
-}
-
-/* borrar despues de la presentacion */
-button {
-  background-color: var(--primary-color);
-  color: var(--button_font_color);
-  padding: var(--padding) 20px;
-  border: none;
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-text);
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

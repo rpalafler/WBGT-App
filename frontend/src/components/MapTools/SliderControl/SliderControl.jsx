@@ -36,7 +36,14 @@ const SliderControl = () => {
         {/* Selector de Fecha */}
         <div className={styles.datePicker}>
           <label>📅 Select Date:</label>
-          <input type="date" value={selectedDate} onChange={handleDateChange} />
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={handleDateChange}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          />
         </div>
 
         {/* Slider de Hora */}
@@ -48,11 +55,20 @@ const SliderControl = () => {
             max="23"
             value={selectedHour}
             onChange={handleHourChange}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           />
         </div>
 
         {/* Botón Submit */}
-        <button className={styles.submitButton} onClick={handleSubmit}>
+        <button
+          className={styles.submitButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSubmit();
+          }}
+        >
           Submit
         </button>
       </div>
