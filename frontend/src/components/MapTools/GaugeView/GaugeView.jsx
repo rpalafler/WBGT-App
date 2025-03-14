@@ -61,7 +61,7 @@ const GaugeView = () => {
         ✖
       </button>
 
-      <h2>Gauge Data</h2>
+      {/* <h2>Gauge Data</h2> */}
 
       {/* 📌 Contenedor en dos columnas */}
       <div className={styles.contentWrapper}>
@@ -87,21 +87,21 @@ const GaugeView = () => {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Temperature</th>
+                <th>Temp</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>10 Jan 2025</td>
-                <td>31°C</td>
+                <td>95°F</td>
               </tr>
               <tr>
                 <td>19 Jan 2025</td>
-                <td>39°C</td>
+                <td>102°F</td>
               </tr>
               <tr>
                 <td>2 Feb 2025</td>
-                <td>32°C</td>
+                <td>102°F</td>
               </tr>
             </tbody>
           </table>

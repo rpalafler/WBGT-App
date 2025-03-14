@@ -20,7 +20,9 @@ const LiveButton = () => {
       }}
     >
       <span className={styles.circle}></span>
-      LIVE
+      {/* LIVE */}
+      {/* Cambiamos LIVE por Current Time */}
+      Current Time
     </button>
   );
 };

@@ -7,7 +7,7 @@
 
 .controlPanel {
   position: absolute;
-  top: 140px;
+  top: 120px;
   left: 10px;
   z-index: var(--z-index-controls);
   display: flex;
@@ -151,7 +151,8 @@
     border-radius: var(--border-radius);
   }
   .titleContainer {
-    left: 50%;
-    transform: translateX(-50%);
+    /* left: 50%; */
+    left: 15px;
+    /* transform: translateX(-50%); */
   }
 }

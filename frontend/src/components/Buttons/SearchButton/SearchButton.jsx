@@ -61,7 +61,7 @@ const SearchButton = ({ onLocationSelect }) => {
         <>
           <input
             type="text"
-            placeholder="Enter a location..."
+            placeholder="Location..."
             value={query}
             onClick={(e) => e.stopPropagation()} // Evita que el clic se propague al mapa
             onChange={(e) => setQuery(e.target.value)}
