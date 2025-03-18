@@ -41,7 +41,7 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
         }}
       >
         <FontAwesomeIcon icon={faLayerGroup} className={styles.icon} />
-        <span className={styles.buttonText}>Change Map</span>
+        <span className={styles.buttonText}>Layers</span>
       </button>
 
       {/* Menú desplegable */}

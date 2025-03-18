@@ -5,7 +5,7 @@ import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers"; // 📍 Importa
 import BasemapSwitcher from "../../components/Buttons/BasemapSwitcher/BasemapSwitcher";
 import SearchButton from "../../components/Buttons/SearchButton/SearchButton";
 import LocateButton from "../../components/Buttons/LocateButton/LocateButton";
-import MoreInfoButton from "../../components/Buttons/MoreInfoButton/MoreInfoButton";
+// import MoreInfoButton from "../../components/Buttons/MoreInfoButton/MoreInfoButton";
 import styles from "./MapView.module.css";
 import HamburgerMenu from "../../components/Buttons/HamburgerMenu/HamburgerMenu";
 import { AppContext } from "../../Context"; // Importamos el Context
@@ -225,7 +225,7 @@ const MapView = () => {
               className={styles.panelButton}
               onLocate={handleLocate}
             />
-            <MoreInfoButton className={styles.panelButton} to="/about" />
+            {/* <MoreInfoButton className={styles.panelButton} to="/about" /> */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -248,6 +248,8 @@ const MapView = () => {
           touchZoom: true,
           touchRotate: true,
           keyboard: true,
+          minZoom: 7.8,
+          maxZoom: 20,
         }}
         onViewStateChange={({ viewState }) => setViewState(viewState)}
         // _______________________________________________________________________________
@@ -256,9 +258,11 @@ const MapView = () => {
         // _______________________________________________________________________________
         getTooltip={({ coordinate }) =>
           coordinate &&
-          `Latitude: ${coordinate[1].toFixed(
-            2
-          )}, Longitude: ${coordinate[0].toFixed(2)}`
+          `Lat: ${Math.abs(coordinate[1]).toFixed(2)}° ${
+            coordinate[1] >= 0 ? "N" : "S"
+          }\nLon: ${Math.abs(coordinate[0]).toFixed(2)}° ${
+            coordinate[0] >= 0 ? "E" : "W"
+          }`
         }
       />
       {/* Añadimos la barra de escala, de manera que solo se mostrará en caso de que la pantalla sea mas grande

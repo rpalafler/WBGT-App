@@ -79,6 +79,78 @@
 // ___________________________________________________________________________________________________
 // El codigo que viene a continuación elimina los kilometros de la escala, dejando unicamente las millas en la escala
 // ___________________________________________________________________________________________________
+// import React, { useContext, useEffect, useState } from "react";
+// import styles from "./ScaleBar.module.css";
+// import { AppContext } from "../../../Context"; // Importamos el contexto para obtener zoom y latitud
+
+// const ScaleBar = () => {
+//   const { viewState } = useContext(AppContext); // Obtenemos zoom y latitud del mapa
+//   const [scaleText, setScaleText] = useState("5 mi");
+//   const [barWidth, setBarWidth] = useState(100);
+
+//   useEffect(() => {
+//     const calculateScale = () => {
+//       const { zoom, latitude } = viewState;
+//       const screenWidth = window.innerWidth;
+//       const metersPerPixelAtEquator = 156412;
+
+//       // 🔹 1. Calculamos metros por píxel considerando zoom y latitud
+//       const metersPerPixel =
+//         (metersPerPixelAtEquator * Math.cos((latitude * Math.PI) / 180)) /
+//         Math.pow(2, zoom);
+
+//       // 🔹 2. Valores de referencia para la escala (solo en millas)
+//       const referenceMiles = [1, 2, 5, 10, 20, 30, 50, 100, 150];
+//       const referenceScales = referenceMiles.map((mile) => mile * 1609); // Convertimos a metros
+//       let selectedScale = referenceScales[0];
+
+//       // 🔹 3. Buscamos el valor más adecuado basado en el tamaño de la pantalla
+//       for (let i = 0; i < referenceScales.length; i++) {
+//         const testScale = referenceScales[i];
+//         const testBarWidth = testScale / metersPerPixel;
+
+//         if (
+//           testBarWidth > screenWidth * 0.05 &&
+//           testBarWidth < screenWidth * 0.3
+//         ) {
+//           selectedScale = testScale;
+//           break;
+//         }
+//       }
+
+//       // 🔹 4. Convertimos a millas para mostrarlo en el texto
+//       const miles = (selectedScale / 1609).toFixed(0); // Convertimos de metros a millas sin decimales
+
+//       setScaleText(`${miles} mi`);
+//       setBarWidth(selectedScale / metersPerPixel);
+//     };
+
+//     calculateScale();
+//     window.addEventListener("resize", calculateScale);
+//     return () => window.removeEventListener("resize", calculateScale);
+//   }, [viewState]);
+
+//   return (
+//     <div className={styles.scaleBar}>
+//       <div className={styles.scaleTextContainer}>
+//         <span className={styles.scaleText}>{scaleText}</span>
+//       </div>
+//       <div className={styles.scaleLineContainer}>
+//         <div className={styles.scaleEndLine}></div>
+//         <div
+//           className={styles.scaleLine}
+//           style={{ width: `${barWidth}px` }}
+//         ></div>
+//         <div className={styles.scaleEndLine}></div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ScaleBar;
+// ___________________________________________________________________________________________________
+// El codigo que viene a continuación incluye feet en la escala
+// ___________________________________________________________________________________________________
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./ScaleBar.module.css";
 import { AppContext } from "../../../Context"; // Importamos el contexto para obtener zoom y latitud
@@ -99,14 +171,20 @@ const ScaleBar = () => {
         (metersPerPixelAtEquator * Math.cos((latitude * Math.PI) / 180)) /
         Math.pow(2, zoom);
 
-      // 🔹 2. Valores de referencia para la escala (solo en millas)
-      const referenceMiles = [1, 2, 5, 10, 20, 30, 50, 100, 150];
-      const referenceScales = referenceMiles.map((mile) => mile * 1609); // Convertimos a metros
-      let selectedScale = referenceScales[0];
+      // 🔹 2. Definimos las escalas con valores **redondeados**
+      const referenceFeet = [100, 200, 500, 1000, 2500, 5000]; // en pies
+      const referenceMiles = [1, 2, 5, 10, 20, 30, 50, 100, 150]; // en millas
+
+      const referenceScalesMeters = [
+        ...referenceFeet.map((ft) => ft / 3.28084), // Convertimos pies a metros
+        ...referenceMiles.map((mile) => mile * 1609), // Convertimos millas a metros
+      ];
+
+      let selectedScale = referenceScalesMeters[0];
 
       // 🔹 3. Buscamos el valor más adecuado basado en el tamaño de la pantalla
-      for (let i = 0; i < referenceScales.length; i++) {
-        const testScale = referenceScales[i];
+      for (let i = 0; i < referenceScalesMeters.length; i++) {
+        const testScale = referenceScalesMeters[i];
         const testBarWidth = testScale / metersPerPixel;
 
         if (
@@ -118,10 +196,19 @@ const ScaleBar = () => {
         }
       }
 
-      // 🔹 4. Convertimos a millas para mostrarlo en el texto
-      const miles = (selectedScale / 1609).toFixed(0); // Convertimos de metros a millas sin decimales
+      // 🔹 4. Convertimos a millas o pies según la distancia
+      let displayScale;
+      if (selectedScale < 1609) {
+        // Si es menor a 1 milla, mostrar en pies
+        const feet = Math.round(selectedScale * 3.28084); // Convertimos metros a pies
+        displayScale = `${feet} ft`;
+      } else {
+        // Si es mayor a 1 milla, mostrar en millas con 1 decimal
+        const miles = (selectedScale / 1609).toFixed(1);
+        displayScale = `${miles} mi`;
+      }
 
-      setScaleText(`${miles} mi`);
+      setScaleText(displayScale);
       setBarWidth(selectedScale / metersPerPixel);
     };
 
