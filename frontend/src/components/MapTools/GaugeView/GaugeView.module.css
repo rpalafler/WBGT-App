@@ -10,14 +10,20 @@
   left: 1%;
   /* transform: translateX(-50%); */
   width: 730px;
-  height: 20%;
+  height: 30vh;
   background: rgba(0, 0, 0, 0.8);
   color: white;
   border-radius: 10px;
-  padding-right: 35px;
-  padding-top: 20px;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-bottom: 20px;
 
   text-align: center;
+}
+.gaugeWrapper {
+  width: 100%;
+  height: 100%;
 }
 
 .closeButton {
@@ -45,10 +51,11 @@
 
 /* 🔹 Sección Gauge */
 .gaugeSection {
-  flex: 1; /* Toma la mitad del espacio */
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%; /* ✅ necesario para que el hijo tenga espacio */
 }
 
 /* 🔹 Sección Tabla */

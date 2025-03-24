@@ -138,10 +138,6 @@ const MapView = () => {
       getFillColor: [0, 0, 255, 200], // Azul con opacidad
       pickable: false,
     });
-  // _______________________________________________________________________________
-  // LAYER TEMPORAL
-  const [showHeatmap, setShowHeatmap] = useState(true);
-
   const imageLayer = new BitmapLayer({
     id: "heatmap-layer",
     image: "/heatmap.jpg", // Ruta relativa (asumiendo desde public/)
@@ -151,7 +147,6 @@ const MapView = () => {
     ],
     opacity: 0.3,
     desaturate: 0,
-    visible: showHeatmap,
     pickable: false,
     parameters: {
       depthTest: false,
@@ -225,16 +220,6 @@ const MapView = () => {
               className={styles.panelButton}
               onLocate={handleLocate}
             />
-            {/* <MoreInfoButton className={styles.panelButton} to="/about" /> */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowHeatmap(!showHeatmap);
-              }}
-              className={styles.HideButton}
-            >
-              {showHeatmap ? "Hide" : "Show"}
-            </button>
             <LiveButton></LiveButton>
           </>
         )}
