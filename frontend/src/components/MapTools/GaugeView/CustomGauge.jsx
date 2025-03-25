@@ -10,10 +10,8 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
     el.selectAll("*").remove();
 
     const margin = { top: 20, right: 30, bottom: 60, left: 60 };
-    const width =
-      svgRef.current.parentElement.clientWidth - margin.left - margin.right;
-    const containerHeight = svgRef.current.clientHeight;
-    const height = containerHeight - margin.top - margin.bottom;
+    const width = 280; // puedes probar con 280, 320, etc.
+    const height = 180; // suficiente para que el SVG se vea
     const radius = Math.min(width, height) / 1.2;
 
     const percToRad = (perc) => (perc * 180 * Math.PI) / 180;

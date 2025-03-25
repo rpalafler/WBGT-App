@@ -17,8 +17,8 @@
   --padding: 10px;
   --gap: 12px;
 
-  --z-index-title: 1000;
-  --z-index-controls: 1000;
+  --z-index-title: 100;
+  --z-index-controls: 100;
   /* Algunas propiedades de los botones */
   --button_font_color: white;
 }

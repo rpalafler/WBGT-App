@@ -1,7 +1,5 @@
 .gaugeContainer {
   z-index: var(--z-index-controls);
-  display: flex;
-
   flex-direction: column;
   align-items: center;
 
@@ -9,7 +7,7 @@
   bottom: 0%;
   left: 1%;
   /* transform: translateX(-50%); */
-  width: 730px;
+  width: 430px;
   height: 30vh;
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -33,10 +31,10 @@
   background: red;
   color: white;
   border: none;
-  padding: 5px 5px;
+  padding: 5px 8px;
   cursor: pointer;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 /* 🔹 Contenedor en DOS COLUMNAS */
@@ -55,7 +53,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* ✅ necesario para que el hijo tenga espacio */
+  /* height: 120%; ✅ necesario para que el hijo tenga espacio */
 }
 
 /* 🔹 Sección Tabla */
@@ -80,19 +78,80 @@ td {
   color: white;
 }
 
+.historyButton {
+  position: absolute;
+  top: 10px; /* justo debajo del botón de cerrar */
+  /* left: 10px; */
+  right: 50px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.historyPanel {
+  position: absolute;
+  top: 0%;
+  left: 101%;
+  transform: translate(0%, 0%);
+  background: rgba(0, 0, 0, 0.8);
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  z-index: 100;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  width: 90%;
+  max-width: 350px;
+}
+
+.closeHistoryButton {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.historyPanel table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+}
+
+.historyPanel th,
+.historyPanel td {
+  padding: 8px;
+  border-bottom: 1px solid white;
+  text-align: left;
+  font-size: 13px; /* o el tamaño que quieras */
+}
+
 @media (max-width: 768px) {
   .gaugeContainer {
     width: 100%;
+    min-height: 200px;
+
     height: 27%;
   }
   .closeButton {
     position: absolute;
     top: 10px;
-    right: 6%;
+    right: 11%;
+
     background: red;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 4px 8px;
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
@@ -105,5 +164,36 @@ td {
   .tableSection {
     /* width: 100%; Ocupa el ancho total */
     display: none;
+  }
+  .historyPanel {
+    position: absolute;
+    bottom: 0; /* ✅ Pegado abajo */
+    left: 0;
+    width: 100vw; /* Viewport width */
+    height: 25vh; /* Viewport height */
+    transform: translateX(0%);
+    background: rgba(0, 0, 0, 1);
+    padding: 20px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 0;
+  }
+
+  .closeHistoryButton {
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+  }
+
+  .historyPanel table {
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .historyButton {
+    right: 90px;
   }
 }

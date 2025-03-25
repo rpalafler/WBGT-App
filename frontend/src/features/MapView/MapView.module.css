@@ -2,6 +2,8 @@
   width: 100%; /* Se adapta mejor a la pantalla */
   min-height: 100vh; /* Permite crecimiento dinámico sin problemas en móviles */
   overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   position: relative;
 }
 
@@ -21,7 +23,7 @@
 }
 .titleContainer {
   position: absolute; /* Solo el contenedor se posiciona en la parte superior */
-  top: 20px;
+  top: 0px;
   text-align: center; /* Centra el contenido horizontalmente */
   background: var(--title-background);
   padding: var(--padding);

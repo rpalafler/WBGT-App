@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./GaugeView.module.css";
 import { AppContext } from "../../../Context";
 // Riley Gauge
@@ -6,6 +6,7 @@ import GaugeChart2 from "./CustomGauge";
 
 const GaugeView = () => {
   const { setIsGaugeActive } = useContext(AppContext);
+  const [showHistory, setShowHistory] = useState(false); // ⬅️ estado para alternar tabla
 
   return (
     <div className={styles.gaugeContainer}>
@@ -20,17 +21,32 @@ const GaugeView = () => {
         ✖
       </button>
 
-      {/* <h2>Gauge Data</h2> */}
+      {/* ✅ Botón debajo de la 'X' */}
+      <button
+        className={styles.historyButton}
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowHistory(true);
+        }}
+      >
+        Alert History
+      </button>
 
-      {/* 📌 Contenedor en dos columnas */}
       <div className={styles.contentWrapper}>
-        {/* Gauge Chart */}
         <div className={styles.gaugeSection}>
-          <GaugeChart2></GaugeChart2>
+          <GaugeChart2 />
         </div>
+      </div>
 
-        {/* 📌 Tabla de datos (placeholder) */}
-        <div className={styles.tableSection}>
+      {/* ✅ Panel flotante si showHistory === true */}
+      {showHistory && (
+        <div className={styles.historyPanel}>
+          <button
+            className={styles.closeHistoryButton}
+            onClick={() => setShowHistory(false)}
+          >
+            ✖
+          </button>
           <table>
             <thead>
               <tr>
@@ -51,10 +67,18 @@ const GaugeView = () => {
                 <td>2 Feb 2025</td>
                 <td>102°F</td>
               </tr>
+              <tr>
+                <td>8 Feb 2025</td>
+                <td>101°F</td>
+              </tr>
+              <tr>
+                <td>15 Feb 2025</td>
+                <td>100°F</td>
+              </tr>
             </tbody>
           </table>
         </div>
-      </div>
+      )}
     </div>
   );
 };
