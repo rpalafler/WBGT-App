@@ -5,11 +5,22 @@ import { AppContext } from "../../../Context";
 import GaugeChart2 from "./CustomGauge";
 
 const GaugeView = () => {
-  const { setIsGaugeActive } = useContext(AppContext);
+  const { setIsGaugeActive, pinCoords } = useContext(AppContext);
   const [showHistory, setShowHistory] = useState(false); // ⬅️ estado para alternar tabla
 
   return (
     <div className={styles.gaugeContainer}>
+      {pinCoords && (
+        <div className={styles.coordsDisplay}>
+          <p>
+            <strong>Lat:</strong> {pinCoords.latitude.toFixed(4)}°
+          </p>
+          <p>
+            <strong>Lon:</strong> {pinCoords.longitude.toFixed(4)}°
+          </p>
+        </div>
+      )}
+
       {/* Botón de cierre */}
       <button
         className={styles.closeButton}

@@ -197,3 +197,13 @@ td {
     right: 90px;
   }
 }
+.coordsDisplay {
+  position: absolute;
+  top: 35px; /* justo debajo del botón cerrar */
+  right: 10px;
+  font-size: 11px;
+  color: #ccc;
+  text-align: right;
+  line-height: 1.3;
+  z-index: 10;
+}

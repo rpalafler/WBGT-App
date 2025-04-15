@@ -1,0 +1,86 @@
+/* ===== CHAT WIDGET MAIN COMPONENTS ===== */
+/* Header styling */
+.rcw-conversation-container > .rcw-header {
+  background-color: rgb(15, 63, 140);
+}
+
+/* Launcher button styling */
+.rcw-launcher {
+  background-color: rgb(15, 63, 140) !important;
+}
+
+/* Add robot emoji before title */
+.rcw-title::before {
+  content: "🤖";
+  margin-right: 8px;
+}
+
+/* Hide emoji picker button */
+.rcw-picker-btn {
+  display: none !important;
+}
+
+/* Widget container positioning */
+.rcw-widget-container {
+  bottom: 18px !important;
+  right: -15px !important;
+  z-index:1000;
+}
+
+/* ===== CUSTOM LAUNCHER BUTTON ===== */
+/* Base styling for custom launcher */
+.custom-launcher-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 80px;
+  width: 60px;
+  height: 60px;
+  background-color: #35bd52;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for custom launcher */
+.custom-launcher-btn:hover {
+  background-color: #357ABD;
+}
+
+/* ===== SCREENSHOT BUTTON ===== */
+/* Container for screenshot button */
+.screenshot-button-container {
+  position: fixed;
+  bottom: 40px;
+  right: 80px;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+/* Screenshot button styling */
+.screenshot-button {
+  width: 60px;
+  height: 60px;
+  background-color: #35bd52;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for screenshot button */
+.screenshot-button:hover {
+  background-color: #2a9e42;
+}
+
+.screenshot-button-disabled {
+  background-color: #a0a0a0 !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}

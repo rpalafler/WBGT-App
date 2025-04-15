@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import DeckGL from "@deck.gl/react";
 import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers"; // 📍 Importamos ScatterplotLayer
@@ -11,6 +11,7 @@ import HamburgerMenu from "../../components/Buttons/HamburgerMenu/HamburgerMenu"
 import { AppContext } from "../../Context"; // Importamos el Context
 import ScaleBar from "../../components/MapTools/ScaleBar/ScaleBar";
 import SliderControl from "../../components/MapTools/SliderControl/SliderControl";
+import AIChat from "../../components/MapTools/Chatbox/Chatbox"; // Import the SimpleChat component
 
 import TempScaleVertical from "../../components/MapTools/TempScaleVertical/TempScaleVertical";
 import LiveButton from "../../components/Buttons/LiveButton/LiveButton";
@@ -18,13 +19,18 @@ import LiveButton from "../../components/Buttons/LiveButton/LiveButton";
 import GaugeView from "../../components/MapTools/GaugeView/GaugeView";
 
 const MapView = () => {
+  const mapContainerRef = useRef(null); // Reference for the map container for screenshots
+
   const { viewState, setViewState } = useContext(AppContext); // Usamos el contexto
   const { windowWidth, setWindowWidth } = useContext(AppContext); // Usamos el contexto
+  const { pinCoords, setPinCoords } = useContext(AppContext); // Usamos el contexto
 
   const [userLocation, setUserLocation] = useState(null); // 📍 Estado para guardar la ubicación del usuario
 
   // Este estado controlará si los demás botones están visibles o no:
   const { isCollapsed } = useContext(AppContext);
+  // Esto es para ver si se ha producido un doble click para mostrar el pin y las coordendas del gauge chart
+  const [lastClickTime, setLastClickTime] = useState(0);
 
   // 📌 Actualiza windowWidth dinámicamente al cambiar el tamaño
   useEffect(() => {
@@ -138,6 +144,17 @@ const MapView = () => {
       getFillColor: [0, 0, 255, 200], // Azul con opacidad
       pickable: false,
     });
+  const pinLayer =
+    pinCoords &&
+    new ScatterplotLayer({
+      id: "manual-pin",
+      data: [{ position: [pinCoords.longitude, pinCoords.latitude] }],
+      getPosition: (d) => d.position,
+      getRadius: 1000,
+      getFillColor: [255, 0, 0, 200],
+      pickable: false,
+    });
+
   const imageLayer = new BitmapLayer({
     id: "heatmap-layer",
     image: "/heatmap.jpg", // Ruta relativa (asumiendo desde public/)
@@ -182,15 +199,15 @@ const MapView = () => {
   return (
     <div
       className={styles.mapContainer}
+      ref={mapContainerRef}
       onDoubleClick={handleMapClick} // Para ordenadores
       onTouchStart={handleTouchStart} // ✅ Funciona en móviles
     >
       {/*  */}
       {isGaugeActive && <GaugeView />}
       {/* Menú Hamburguesa */}
-      <HamburgerMenu />
-      {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
-      {!isGaugeActive && <SliderControl />}
+      {<HamburgerMenu />}
+
       {/* 📍 Título visible en la parte superior */}
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>RHI Alarm</h1>
@@ -224,6 +241,8 @@ const MapView = () => {
           </>
         )}
       </div>
+      {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
+      {!isGaugeActive && <SliderControl />}
       <DeckGL
         viewState={viewState}
         controller={{
@@ -237,9 +256,23 @@ const MapView = () => {
           maxZoom: 20,
         }}
         onViewStateChange={({ viewState }) => setViewState(viewState)}
+        onClick={(info) => {
+          const now = Date.now();
+          const DOUBLE_CLICK_DELAY = 300;
+
+          if (now - lastClickTime < DOUBLE_CLICK_DELAY && info.coordinate) {
+            const [longitude, latitude] = info.coordinate;
+            setPinCoords({ latitude, longitude });
+            console.log("📍 Doble clic manual detectado:", latitude, longitude);
+          }
+
+          setLastClickTime(now);
+        }}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE
-        layers={[tileLayer, userLocationLayer, imageLayer].filter(Boolean)} // 📍 Agregamos el marcador al mapa
+        layers={[tileLayer, userLocationLayer, imageLayer, pinLayer].filter(
+          Boolean
+        )} // 📍 Agregamos el marcador al mapa
         // _______________________________________________________________________________
         getTooltip={({ coordinate }) =>
           coordinate &&
@@ -253,6 +286,9 @@ const MapView = () => {
       {/* Añadimos la barra de escala, de manera que solo se mostrará en caso de que la pantalla sea mas grande
       que la de un movil y no está activo el gauge chart */}
       {!(windowWidth < 768 && isGaugeActive) && <ScaleBar />}
+
+      {/* Add the SimpleChat component */}
+      <AIChat applicationRef={mapContainerRef} />
     </div>
   );
 };

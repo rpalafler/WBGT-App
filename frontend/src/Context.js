@@ -27,6 +27,7 @@ export const AppProvider = ({ children }) => {
 
   // Ahora vamos a definir las variables necesarias para el gauge component
   const [isGaugeActive, setIsGaugeActive] = useState(false);
+  const [pinCoords, setPinCoords] = useState(null); // { latitude, longitude }
 
   return (
     <AppContext.Provider
@@ -43,6 +44,8 @@ export const AppProvider = ({ children }) => {
         setSelectedHour,
         isGaugeActive,
         setIsGaugeActive,
+        pinCoords,
+        setPinCoords,
       }}
     >
       {children}
