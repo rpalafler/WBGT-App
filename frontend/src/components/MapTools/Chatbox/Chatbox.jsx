@@ -13,7 +13,7 @@ import OpenAI from "openai";
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey:
-    "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",
+    "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",
   dangerouslyAllowBrowser: true, // <-- añade esto
 
   defaultHeaders: {
