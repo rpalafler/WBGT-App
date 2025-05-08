@@ -10,10 +10,13 @@ import "./Chatbox.css";
 
 import OpenAI from "openai";
 
+// change this later to get acutal WBGT point value from app context
+const wbgtValue = 72;
+
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey:
-    "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",
+    "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",
   dangerouslyAllowBrowser: true, // <-- añade esto
 
   defaultHeaders: {
@@ -29,8 +32,13 @@ const AIChat = ({ applicationRef }) => {
 
   const VISION_MODEL = "meta-llama/llama-3.2-11b-vision-instruct:free";
 
-  const visionPrompt = `Here is a screenshot of a weather heatmap representing temperature patterns. 
-  Please analyze the heatmap and explain the patterns you find in 1 or 2 paragraphs.
+  const visionPrompt = `
+  This is a heatmap visualization of WBGT data forecast in the Imperial Valley. 
+  The date and time of the data is shown at the left of the screen. 
+  The WBGT value for a selected location is ${wbgtValue} F.
+  The WBGT category is shown on the gauge chart at the bottom left of the screen.
+  Please give a recomendation on outside activity based on the WBGT category provided to you.
+  Keep response to a few sentences.
   `;
 
   useEffect(() => {
@@ -63,9 +71,15 @@ const AIChat = ({ applicationRef }) => {
        Essentially, WBGT provides a more comprehensive picture of how hot it feels to be outside in the sun, especially during hot weather. 
 
       Coverage: Imperial Valley
-      Resolution: ~2.5 km (varies)
+      Resolution: ~2.5 km
       Temporal frequency: hourly
-      
+
+      WBGT Values are broken down into categories and give recomendations on outside activity:
+      - Safe (green): Below 75.9 F, normal activities, monitor fluids
+      - Caution (yellow): 75.9 F to 78.7 F, normal activites, monitor fluids
+      - Warning (orange): 78.8 F to 83.7, plan intense or prolonged excercise with discretion
+      - Danger (red): 83.8 F to 87.6 F, Limit intense exercise and total daily exposure to heat
+      - Extreme (black): 87.6 F and above, cancel exercise
 
       When answering:
       - Do not make up facts or exaggerate details. If you're unsure, say so.
