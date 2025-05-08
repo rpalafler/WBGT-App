@@ -207,3 +207,15 @@ td {
   line-height: 1.3;
   z-index: 10;
 }
+.locationName {
+  position: absolute;
+  top: 70px; /* adjust as needed based on your layout */
+  right: 10px;
+  font-size: 11px;
+  color: #ccc;
+  text-align: right;
+  line-height: 1.3;
+  z-index: 10;
+  max-width: 50%; /* optional: prevent long text from stretching container */
+  word-break: break-word; /* allow line wrapping if needed */
+}

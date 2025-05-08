@@ -157,10 +157,10 @@ const MapView = () => {
 
   const imageLayer = new BitmapLayer({
     id: "heatmap-layer",
-    image: "/heatmap.jpg", // Ruta relativa (asumiendo desde public/)
+    image: "/wbgt_webmerc.png", // Ruta relativa (asumiendo desde public/)
     bounds: [
-      -116.83160400390625, 32.56388473510742, -115.09870910644531,
-      34.11175537109375,
+      -116.29945144970092, 32.59684073527491, -114.70146896356283,
+      34.300416499863104,
     ],
     opacity: 0.3,
     desaturate: 0,

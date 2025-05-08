@@ -1,24 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./GaugeView.module.css";
 import { AppContext } from "../../../Context";
 // Riley Gauge
 import GaugeChart2 from "./CustomGauge";
+import { reverseGeocode } from "../../../services/geocodingService";
 
 const GaugeView = () => {
   const { setIsGaugeActive, pinCoords } = useContext(AppContext);
   const [showHistory, setShowHistory] = useState(false); // ⬅️ estado para alternar tabla
+  const [locationName, setLocationName] = useState("");
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      if (pinCoords) {
+        const name = await reverseGeocode(
+          pinCoords.latitude,
+          pinCoords.longitude
+        );
+        setLocationName(name || "Unknown location");
+      }
+    };
+    fetchLocation();
+  }, [pinCoords]);
 
   return (
     <div className={styles.gaugeContainer}>
       {pinCoords && (
-        <div className={styles.coordsDisplay}>
-          <p>
-            <strong>Lat:</strong> {pinCoords.latitude.toFixed(4)}°
-          </p>
-          <p>
-            <strong>Lon:</strong> {pinCoords.longitude.toFixed(4)}°
-          </p>
-        </div>
+        <>
+          <div className={styles.coordsDisplay}>
+            <p>
+              <strong>Lat:</strong> {pinCoords.latitude.toFixed(4)}°
+            </p>
+            <p>
+              <strong>Lon:</strong> {pinCoords.longitude.toFixed(4)}°
+            </p>
+          </div>
+
+          {locationName && (
+            <p className={styles.locationName}>
+              <strong>Location:</strong>
+              <br />
+              {locationName.split("\n").map((line, i) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </p>
+          )}
+        </>
       )}
 
       {/* Botón de cierre */}
