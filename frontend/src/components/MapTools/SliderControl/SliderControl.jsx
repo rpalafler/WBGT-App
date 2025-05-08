@@ -121,29 +121,27 @@ const SliderControl = () => {
   const handleSubmit = () => {
     const utcTime = convertToUTC(selectedDate, selectedHour);
     console.log("📤 Enviando al backend:", utcTime);
+    // fetch(…)
+  };
+
+  // Función común para reiniciar temporizador y enviar después de 3 segundos
+  const triggerAutoSubmit = () => {
+    if (timer) clearTimeout(timer);
+    const newTimer = setTimeout(() => {
+      handleSubmit();
+    }, 3000); // 3 segundos
+    setTimer(newTimer);
   };
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
-    if (isMobile) {
-      if (timer) clearTimeout(timer);
-      const newTimer = setTimeout(() => {
-        handleSubmit();
-      }, 2000);
-      setTimer(newTimer);
-    }
+    triggerAutoSubmit();
   };
 
   const handleHourChange = (event) => {
     const newHour = parseInt(event.target.value);
     setSelectedHour(newHour);
-    if (isMobile) {
-      if (timer) clearTimeout(timer);
-      const newTimer = setTimeout(() => {
-        handleSubmit();
-      }, 2000);
-      setTimer(newTimer);
-    }
+    triggerAutoSubmit();
   };
 
   return (
@@ -181,18 +179,6 @@ const SliderControl = () => {
             </p>
           )}
         </div>
-
-        {!isMobile && (
-          <button
-            className={styles.submitButton}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleSubmit();
-            }}
-          >
-            Submit
-          </button>
-        )}
       </div>
     </div>
   );

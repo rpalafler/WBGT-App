@@ -80,9 +80,8 @@ td {
 
 .historyButton {
   position: absolute;
-  top: 10px; /* justo debajo del botón de cerrar */
-  /* left: 10px; */
-  right: 50px;
+  top: 10px;
+  right: 10px;
   background-color: var(--primary-color);
   color: white;
   border: none;

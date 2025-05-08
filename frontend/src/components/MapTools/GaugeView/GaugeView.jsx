@@ -39,17 +39,6 @@ const GaugeView = () => {
         </div>
       )}
 
-      {/* Botón de cierre */}
-      <button
-        className={styles.closeButton}
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsGaugeActive(false);
-        }}
-      >
-        ✖
-      </button>
-
       {/* ✅ Botón debajo de la 'X' */}
       <button
         className={styles.historyButton}

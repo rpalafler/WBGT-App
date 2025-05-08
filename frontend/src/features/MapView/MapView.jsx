@@ -204,7 +204,7 @@ const MapView = () => {
       onTouchStart={handleTouchStart} // ✅ Funciona en móviles
     >
       {/*  */}
-      {isGaugeActive && <GaugeView />}
+      <GaugeView />
       {/* Menú Hamburguesa */}
       {<HamburgerMenu />}
 
@@ -242,7 +242,7 @@ const MapView = () => {
         )}
       </div>
       {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
-      {!isGaugeActive && <SliderControl />}
+      <SliderControl />
       <DeckGL
         viewState={viewState}
         controller={{

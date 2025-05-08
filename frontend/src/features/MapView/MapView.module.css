@@ -9,7 +9,7 @@
 
 .controlPanel {
   position: absolute;
-  top: 120px;
+  top: 100px;
   left: 10px;
   z-index: var(--z-index-controls);
   display: flex;
