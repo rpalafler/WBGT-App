@@ -9,10 +9,18 @@
   background-color: rgb(15, 63, 140) !important;
 }
 
-/* Add robot emoji before title */
+/* Replace robot emoji with PNG icon */
 .rcw-title::before {
-  content: "🤖";
-  margin-right: 8px;
+  content: "";
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  margin-right: 20px;
+  background-image: url('./sol2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
 }
 
 /* Hide emoji picker button */
