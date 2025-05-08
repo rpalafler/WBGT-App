@@ -28,10 +28,10 @@ const GaugeView = () => {
       {pinCoords && (
         <div className={styles.coordsDisplay}>
           <p>
-            <strong>Lat:</strong> {pinCoords.latitude.toFixed(4)}°
+            <strong>Lat:</strong> {pinCoords.latitude.toFixed(3)} N
           </p>
           <p>
-            <strong>Lon:</strong> {pinCoords.longitude.toFixed(4)}°
+            <strong>Lon:</strong> {-pinCoords.longitude.toFixed(3)} W
           </p>
           <p>
             <strong>Location:</strong> {locationName}

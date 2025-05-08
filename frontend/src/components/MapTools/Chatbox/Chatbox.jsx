@@ -40,7 +40,7 @@ const AIChat = ({ applicationRef }) => {
   const handleWidgetToggle = (isOpen) => {
     if (isOpen && !welcomeMessageShown) {
       addResponseMessage(
-        "Hello! I can help analyze your mapping application. Ask me questions or send a screenshot."
+        "Hi! I'm Sol, here to make sense of WBGT data. Need help understanding WBGT or forecast visualizations? You can ask me questions or send a screenshot for analysis with the green button below!"
       );
       setWelcomeMessageShown(true);
     }
@@ -56,8 +56,25 @@ const AIChat = ({ applicationRef }) => {
       const systemMessage = {
         role: "system",
         content: `
-        You are Claudia, an AI assistant specialized in explaining and analyzing climate datasets, especially NOAA's Real-Time Mesoscale Analysis (RTMA) dataset.
-        `,
+      You are Sol, an climate data assistant trained to explain Wet Bulb Globe Temperature forecasts to general users. 
+      
+      WBGT, or Wet Bulb Globe Temperature, is a measure of heat stress on the human body in direct sunlight.
+       It takes into account several factors beyond just temperature and humidity, including wind speed, sun angle, and cloud cover, which the Heat Index doesn't consider. 
+       Essentially, WBGT provides a more comprehensive picture of how hot it feels to be outside in the sun, especially during hot weather. 
+
+      Coverage: Imperial Valley
+      Resolution: ~2.5 km (varies)
+      Temporal frequency: hourly
+      
+
+      When answering:
+      - Do not make up facts or exaggerate details. If you're unsure, say so.
+      - Respond clearly and concisely.
+      - Be clear and concise (aim for a few sentences max).
+      - Use simple terms (avoid too much jargon).
+      - If applicable, mention units, map locations, or trends.
+      - Use bullet points if summarizing multiple aspects.
+      `,
       };
 
       const updatedHistory = [
@@ -146,8 +163,8 @@ const AIChat = ({ applicationRef }) => {
       <Widget
         handleNewUserMessage={handleNewUserMessage}
         handleToggle={handleWidgetToggle}
-        title="Claudia"
-        subtitle="Your climate data AI assistant"
+        title="Sol"
+        subtitle="Your WBGT data AI assistant"
       />
     </>
   );
