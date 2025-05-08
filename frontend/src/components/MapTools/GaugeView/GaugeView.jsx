@@ -26,29 +26,17 @@ const GaugeView = () => {
   return (
     <div className={styles.gaugeContainer}>
       {pinCoords && (
-        <>
-          <div className={styles.coordsDisplay}>
-            <p>
-              <strong>Lat:</strong> {pinCoords.latitude.toFixed(4)}°
-            </p>
-            <p>
-              <strong>Lon:</strong> {pinCoords.longitude.toFixed(4)}°
-            </p>
-          </div>
-
-          {locationName && (
-            <p className={styles.locationName}>
-              <strong>Location:</strong>
-              <br />
-              {locationName.split("\n").map((line, i) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-            </p>
-          )}
-        </>
+        <div className={styles.coordsDisplay}>
+          <p>
+            <strong>Lat:</strong> {pinCoords.latitude.toFixed(4)}°
+          </p>
+          <p>
+            <strong>Lon:</strong> {pinCoords.longitude.toFixed(4)}°
+          </p>
+          <p>
+            <strong>Location:</strong> {locationName}
+          </p>
+        </div>
       )}
 
       {/* Botón de cierre */}
