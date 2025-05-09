@@ -161,24 +161,23 @@ const SliderControl = () => {
           />
         </div>
 
-        <div className={styles.hourSlider}>
-          <label>
-            ⏰ Hour{isMobile ? `: ${formatHourAMPM(selectedHour)}` : ""}
-          </label>
-          <input
-            type="range"
-            min="0"
-            max="23"
-            value={selectedHour}
-            onChange={handleHourChange}
-            onClick={(e) => e.stopPropagation()}
-          />
+        <div className={styles.hourLabelRow}>
+          <label>⏰ Hour:</label>
           {!isMobile && (
-            <p className={styles.selectedHour}>
-              Selected: {formatHourAMPM(selectedHour)}
-            </p>
+            <span className={styles.selectedHourInline}>
+              {formatHourAMPM(selectedHour)}
+            </span>
           )}
         </div>
+
+        <input
+          type="range"
+          min="0"
+          max="23"
+          value={selectedHour}
+          onChange={handleHourChange}
+          onClick={(e) => e.stopPropagation()}
+        />
       </div>
     </div>
   );

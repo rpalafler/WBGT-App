@@ -1,24 +1,23 @@
 .gaugeContainer {
   z-index: var(--z-index-controls);
+  display: flex;
   flex-direction: column;
   align-items: center;
+  height: auto; /* si no está, agrégalo */
 
   position: absolute;
   bottom: 0%;
-  left: 1%;
-  /* transform: translateX(-50%); */
-  width: 430px;
-  height: 30vh;
-  background: rgba(0, 0, 0, 0.8);
+  left: 10px;
+  width: 300px; /* más estrecho */
+  background: rgba(0, 0, 0, 0.85);
   color: white;
   border-radius: 10px;
-  padding-right: 25px;
-  padding-top: 5px;
-  padding-left: 15px;
-  padding-bottom: 20px;
-
+  padding: 10px 10px;
   text-align: center;
+  gap: 5px;
+  padding-bottom: 8px; /* → prueba con 10px o menos */
 }
+
 .gaugeWrapper {
   width: 100%;
   height: 100%;
@@ -41,7 +40,6 @@
 .contentWrapper {
   display: flex;
   width: 100%;
-  height: 100%;
   justify-content: space-between; /* Separa Gauge y Tabla */
   align-items: center;
   gap: 5px;
@@ -49,11 +47,11 @@
 
 /* 🔹 Sección Gauge */
 .gaugeSection {
-  flex: 1;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 120%; ✅ necesario para que el hijo tenga espacio */
+  zoom: 0.85; /* ✅ Cambia esto */
 }
 
 /* 🔹 Sección Tabla */
@@ -80,7 +78,7 @@ td {
 .locationHeader {
   width: 100%;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 4px; /* antes estaba en 10px */
   color: #ffffff;
 }
 
@@ -88,18 +86,17 @@ td {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
-  color: white;
+  color: var(--primary-color);
 }
 
 .locationHeader p {
-  margin: 4px 0 0 0;
+  margin: 2px 0 0 0; /* antes eran 4px */
   font-size: 0.85rem;
   color: #ccc;
 }
-
 .historyButton {
   position: absolute;
-  top: 10px;
+  bottom: 20px;
   right: 10px;
   background-color: var(--primary-color);
   color: white;
@@ -108,6 +105,7 @@ td {
   border-radius: 5px;
   cursor: pointer;
   font-size: 12px;
+  z-index: 10;
 }
 
 .historyPanel {
@@ -157,10 +155,10 @@ td {
 @media (max-width: 768px) {
   .gaugeContainer {
     width: 100%;
-    min-height: 200px;
-
-    height: 27%;
+    height: auto;
+    min-height: unset;
   }
+
   .closeButton {
     position: absolute;
     top: 10px;
