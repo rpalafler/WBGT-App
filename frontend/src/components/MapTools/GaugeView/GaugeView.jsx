@@ -45,7 +45,7 @@ const GaugeView = () => {
           setShowHistory(true);
         }}
       >
-        Alert History
+        {t("Alert History")}
       </button>
 
       <div className={styles.contentWrapper}>

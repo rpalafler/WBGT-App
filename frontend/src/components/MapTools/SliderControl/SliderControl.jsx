@@ -164,7 +164,7 @@ const SliderControl = () => {
         </div>
 
         <div className={styles.hourLabelRow}>
-          <label>⏰ Hour:</label>
+          <label>⏰ {t("Hour")}:</label>
           {!isMobile && (
             <span className={styles.selectedHourInline}>
               {formatHourAMPM(selectedHour)}
