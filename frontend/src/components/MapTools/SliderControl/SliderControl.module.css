@@ -2,22 +2,23 @@
   position: absolute;
   /* _______________________ */
   /* Left */
-  bottom: 40%;
+  bottom: 290px;
   left: 10px;
   /* _______________________ */
 
   width: 300px;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 8px;
-  padding: 15px 10px;
+  padding: 5px 10px;
   z-index: var(--z-index-controls);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   color: white;
 }
 .hourLabelRow {
+  font-size: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -74,7 +75,7 @@
 .hourSlider input {
   width: 100%;
   padding: 4px;
-  font-size: 12px;
+  font-size: 10px;
   border-radius: 4px;
   border: none;
 }
@@ -84,7 +85,7 @@
 }
 
 .selectedHour {
-  font-size: 12px;
+  font-size: 10px;
   color: #ccc;
   text-align: center;
   margin-top: 3px;
