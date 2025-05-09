@@ -15,6 +15,7 @@ import AIChat from "../../components/MapTools/Chatbox/Chatbox"; // Import the Si
 
 import TempScaleVertical from "../../components/MapTools/TempScaleVertical/TempScaleVertical";
 import LiveButton from "../../components/Buttons/LiveButton/LiveButton";
+import TranslateButton from "../../components/Buttons/TranslateButton/TranslateButton";
 
 import GaugeView from "../../components/MapTools/GaugeView/GaugeView";
 
@@ -238,6 +239,7 @@ const MapView = () => {
               onLocate={handleLocate}
             />
             <LiveButton></LiveButton>
+            <TranslateButton />
           </>
         )}
       </div>

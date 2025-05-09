@@ -1,9 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import styles from "./GaugeView.module.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n"; // adjust the path if needed
 
 const GaugeChart2 = ({ wbgt = 72 }) => {
   const svgRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const el = d3.select(svgRef.current);
@@ -30,11 +33,11 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
       );
 
     const sections = [
-      { limit: 72, color: "green", label: "Safe" },
-      { limit: 76, color: "yellow", label: "Caution" },
-      { limit: 80, color: "orange", label: "Warning" },
-      { limit: 84, color: "red", label: "Danger" },
-      { limit: Infinity, color: "gray", label: "Extreme" },
+      { limit: 72, color: "green", label: t("Safe") },
+      { limit: 76, color: "yellow", label: t("Caution") },
+      { limit: 80, color: "orange", label: t("Warning") },
+      { limit: 84, color: "red", label: t("Danger") },
+      { limit: Infinity, color: "gray", label: t("Extreme") },
     ];
 
     const numSections = sections.length;
@@ -157,7 +160,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
     const needle = new Needle(radius * 0.8, 8);
     needle.drawOn(chart, 0);
     needle.animateOn(chart, normalizedPercent);
-  }, [wbgt]);
+  }, [wbgt, i18n.language]);
 
   return <div ref={svgRef} className={styles.gaugeWrapper}></div>;
 };

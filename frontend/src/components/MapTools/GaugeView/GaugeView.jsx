@@ -4,11 +4,13 @@ import { AppContext } from "../../../Context";
 // Riley Gauge
 import GaugeChart2 from "./CustomGauge";
 import { reverseGeocode } from "../../../services/geocodingService";
+import { useTranslation } from "react-i18next";
 
 const GaugeView = () => {
   const { setIsGaugeActive, pinCoords } = useContext(AppContext);
   const [showHistory, setShowHistory] = useState(false); // ⬅️ estado para alternar tabla
   const [locationName, setLocationName] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -34,7 +36,7 @@ const GaugeView = () => {
             <strong>Lon:</strong> {-pinCoords.longitude.toFixed(3)} W
           </p>
           <p>
-            <strong>Location:</strong> {locationName}
+            <strong>{t("location")}:</strong> {locationName}
           </p>
         </div>
       )}

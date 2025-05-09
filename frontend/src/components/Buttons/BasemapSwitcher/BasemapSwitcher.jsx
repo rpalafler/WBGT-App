@@ -3,12 +3,14 @@ import styles from "./BasemapSwitcher.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "../../../Context"; // Importamos el Context
+import { useTranslation } from "react-i18next";
 
 const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { isCollapsed, setIsCollapsed } = useContext(AppContext);
   const { windowWidth } = useContext(AppContext);
+  const { t } = useTranslation();
 
   // Cierra el menú si haces clic fuera del contenedor
   useEffect(() => {
@@ -41,7 +43,7 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
         }}
       >
         <FontAwesomeIcon icon={faLayerGroup} className={styles.icon} />
-        <span className={styles.buttonText}>Layers</span>
+        <span className={styles.buttonText}> {t("layers")}</span>
       </button>
 
       {/* Menú desplegable */}

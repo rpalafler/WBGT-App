@@ -4,11 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "../../../Context";
 import styles from "./SearchButton.module.css";
+import { useTranslation } from "react-i18next";
 
 const SearchButton = ({ onLocationSelect }) => {
   const [query, setQuery] = useState("");
   const [isExpanded, setIsExpanded] = useState(false); // Nuevo estado para expandir
   const { windowWidth } = useContext(AppContext);
+  const { t } = useTranslation();
 
   const handleSearch = async () => {
     if (!query.trim()) return;
@@ -40,7 +42,7 @@ const SearchButton = ({ onLocationSelect }) => {
               e.stopPropagation(); // Detiene la propagación del evento al mapa
               setIsExpanded(!isExpanded);
             }}
-            aria-label="Search"
+            aria-label={t("search")}
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
@@ -61,7 +63,7 @@ const SearchButton = ({ onLocationSelect }) => {
         <>
           <input
             type="text"
-            placeholder="Location..."
+            placeholder={t("location")}
             value={query}
             onClick={(e) => e.stopPropagation()} // Evita que el clic se propague al mapa
             onChange={(e) => setQuery(e.target.value)}
@@ -75,7 +77,7 @@ const SearchButton = ({ onLocationSelect }) => {
             }}
             className={styles.searchButton}
           >
-            <FontAwesomeIcon icon={faMagnifyingGlass} /> Search
+            <FontAwesomeIcon icon={faMagnifyingGlass} /> {t("search")}
           </button>
         </>
       )}

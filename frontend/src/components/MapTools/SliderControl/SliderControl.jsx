@@ -90,6 +90,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "./SliderControl.module.css";
 import { AppContext } from "../../../Context";
+import { useTranslation } from "react-i18next";
 
 const SliderControl = () => {
   const { selectedDate, setSelectedDate, selectedHour, setSelectedHour } =
@@ -97,6 +98,7 @@ const SliderControl = () => {
 
   const [timer, setTimer] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -154,7 +156,7 @@ const SliderControl = () => {
     >
       <div className={styles.controls}>
         <div className={styles.datePicker}>
-          <label>📅 Date</label>
+          <label>📅 {t("Date")}</label>
           <input
             type="date"
             value={selectedDate}
@@ -165,7 +167,8 @@ const SliderControl = () => {
 
         <div className={styles.hourSlider}>
           <label>
-            ⏰ Hour{isMobile ? `: ${formatHourAMPM(selectedHour)}` : ""}
+            ⏰ {t("Hour")}
+            {isMobile ? `: ${formatHourAMPM(selectedHour)}` : ""}
           </label>
           <input
             type="range"
@@ -177,7 +180,7 @@ const SliderControl = () => {
           />
           {!isMobile && (
             <p className={styles.selectedHour}>
-              Selected: {formatHourAMPM(selectedHour)}
+              {t("Selected")}: {formatHourAMPM(selectedHour)}
             </p>
           )}
         </div>
@@ -190,7 +193,7 @@ const SliderControl = () => {
               handleSubmit();
             }}
           >
-            Submit
+            {t("Submit")}
           </button>
         )}
       </div>

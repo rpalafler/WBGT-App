@@ -8,10 +8,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom"; // Mantiene la navegación
 import styles from "./HamburgerMenu.module.css";
+import { useTranslation } from "react-i18next";
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -28,7 +30,7 @@ const HamburgerMenu = () => {
         }}
       >
         <FontAwesomeIcon icon={faBars} className={styles.hamburgerIcon} />
-        <span className={styles.menuText}>Menu</span>
+        <span className={styles.menuText}>{t("Menu")}</span>
       </button>
 
       {/* Menú Desplegable */}
@@ -37,17 +39,17 @@ const HamburgerMenu = () => {
         <ul className={styles.desktopMenu}>
           <li>
             <Link to="/">
-              <FontAwesomeIcon icon={faHouse} /> &nbsp;Home
+              <FontAwesomeIcon icon={faHouse} /> &nbsp;{t("Home")}
             </Link>
           </li>
           <li>
             <Link to="/about">
               <FontAwesomeIcon icon={faCircleInfo} />
-              &nbsp; About
+              &nbsp; {t("About")}
             </Link>
           </li>
           <li>
-            <FontAwesomeIcon icon={faGear} /> &nbsp;&nbsp;Settings
+            <FontAwesomeIcon icon={faGear} /> &nbsp;&nbsp;{t("Settings")}
           </li>
         </ul>
 
