@@ -27,7 +27,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 100%;
+  /* width: 100%; */
+  width: 250px;
   background-color: var(--primary-color);
   color: var(--button_font_color);
   padding: var(--padding) 20px;

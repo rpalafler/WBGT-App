@@ -34,14 +34,23 @@ export const reverseGeocode = async (lat, lon) => {
     if (data && data.display_name) {
       const fullName = data.display_name;
 
-      // Find the index of "County" and slice the string after it
+      // Si contiene "County", cortamos ahí
       const countyIndex = fullName.indexOf("County");
       if (countyIndex !== -1) {
-        return fullName.slice(0, countyIndex + "County".length).trim();
+        const shortName = fullName
+          .slice(0, countyIndex + "County".length)
+          .trim();
+        return shortName;
       }
 
-      // fallback: return full string if "County" not found
-      return fullName;
+      // Si no hay "County", cortamos después de los dos primeros componentes
+      const parts = fullName.split(",");
+      const trimmedParts = parts.slice(0, 2).join(",").trim();
+
+      // Limita a 50 caracteres por si acaso
+      return trimmedParts.length > 50
+        ? trimmedParts.slice(0, 47) + "..."
+        : trimmedParts;
     } else {
       throw new Error("Location name not found");
     }

@@ -26,15 +26,11 @@ const GaugeView = () => {
   return (
     <div className={styles.gaugeContainer}>
       {pinCoords && (
-        <div className={styles.coordsDisplay}>
+        <div className={styles.locationHeader}>
+          <h3>{locationName}</h3>
           <p>
-            <strong>Lat:</strong> {pinCoords.latitude.toFixed(3)} N
-          </p>
-          <p>
-            <strong>Lon:</strong> {-pinCoords.longitude.toFixed(3)} W
-          </p>
-          <p>
-            <strong>Location:</strong> {locationName}
+            {pinCoords.latitude.toFixed(3)}° N,{" "}
+            {-pinCoords.longitude.toFixed(3)}° W
           </p>
         </div>
       )}
