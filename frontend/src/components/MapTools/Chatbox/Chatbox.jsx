@@ -14,11 +14,10 @@ import i18n from "../../../i18n";
 
 // change this later to get acutal WBGT point value from app context
 const wbgtValue = 72;
-const apiKey = process.env.OPENROUTER_API_KEY;
 
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
-  apiKey: apiKey,
+  apiKey: process.env.REACT_APP_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true, // <-- añade esto
 
   defaultHeaders: {
