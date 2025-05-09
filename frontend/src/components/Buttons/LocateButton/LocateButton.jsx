@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "../../../Context";
 import styles from "./LocateButton.module.css";
+import { useTranslation } from "react-i18next";
 
 const LocateButton = ({ onLocate }) => {
   const { windowWidth } = useContext(AppContext);
+  const { t } = useTranslation();
 
   return (
     <button
@@ -20,7 +22,7 @@ const LocateButton = ({ onLocate }) => {
       ) : (
         <>
           <FontAwesomeIcon icon={faLocationArrow} />
-          &nbsp;&nbsp;Locate Me
+          &nbsp;&nbsp;{t("Locate Me")}
         </>
       )}
     </button>

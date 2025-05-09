@@ -9,6 +9,8 @@ import ScreenshotButton from "./Screenshot";
 import "./Chatbox.css";
 
 import OpenAI from "openai";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18n";
 
 // change this later to get acutal WBGT point value from app context
 const wbgtValue = 72;
@@ -16,7 +18,7 @@ const wbgtValue = 72;
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey:
-    "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",
+    "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",
   dangerouslyAllowBrowser: true, // <-- añade esto
 
   defaultHeaders: {
@@ -30,26 +32,40 @@ const AIChat = ({ applicationRef }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
 
+  const { t } = useTranslation();
+
   const VISION_MODEL = "meta-llama/llama-3.2-11b-vision-instruct:free";
 
   const visionPrompt = `
+  Keep response to a few sentences.
   This is a heatmap visualization of WBGT data forecast in the Imperial Valley. 
   The date and time of the data is shown at the left of the screen. 
   The WBGT value for a selected location is ${wbgtValue} F.
   The WBGT category is shown on the gauge chart at the bottom left of the screen.
   Please give a recomendation on outside activity based on the WBGT category provided to you.
-  Keep response to a few sentences.
   `;
 
   useEffect(() => {
     console.log("AIChat component mounted");
   }, []);
 
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      if (welcomeMessageShown) {
+        addResponseMessage(t("Welcome Message"));
+      }
+    };
+
+    i18n.on("languageChanged", handleLanguageChange);
+
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
+  }, [t, welcomeMessageShown]);
+
   const handleWidgetToggle = (isOpen) => {
     if (isOpen && !welcomeMessageShown) {
-      addResponseMessage(
-        "Hi! I'm Sol, here to make sense of WBGT data. Need help understanding WBGT or forecast visualizations? You can ask me questions or send a screenshot for analysis with the green button below!"
-      );
+      addResponseMessage(t("Welcome Message"));
       setWelcomeMessageShown(true);
     }
   };
@@ -84,9 +100,7 @@ const AIChat = ({ applicationRef }) => {
       When answering:
       - Do not make up facts or exaggerate details. If you're unsure, say so.
       - Respond clearly and concisely.
-      - Be clear and concise (aim for a few sentences max).
       - Use simple terms (avoid too much jargon).
-      - If applicable, mention units, map locations, or trends.
       - Use bullet points if summarizing multiple aspects.
       `,
       };
@@ -178,7 +192,7 @@ const AIChat = ({ applicationRef }) => {
         handleNewUserMessage={handleNewUserMessage}
         handleToggle={handleWidgetToggle}
         title="Sol"
-        subtitle="Your WBGT data AI assistant"
+        subtitle={t("Your WBGT data AI assistant")}
       />
     </>
   );

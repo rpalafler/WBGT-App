@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import styles from "./LiveButton.module.css";
 import { AppContext } from "../../../Context";
+import { useTranslation } from "react-i18next";
 
 const LiveButton = () => {
   const { setSelectedDate, setSelectedHour } = useContext(AppContext);
+  const { t } = useTranslation();
 
   const handleLiveClick = () => {
     const now = new Date();
@@ -22,7 +24,7 @@ const LiveButton = () => {
       <span className={styles.circle}></span>
       {/* LIVE */}
       {/* Cambiamos LIVE por Current Time */}
-      Current Time
+      {t("current time")}
     </button>
   );
 };

@@ -90,6 +90,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "./SliderControl.module.css";
 import { AppContext } from "../../../Context";
+import { useTranslation } from "react-i18next";
 
 const SliderControl = () => {
   const { selectedDate, setSelectedDate, selectedHour, setSelectedHour } =
@@ -97,6 +98,7 @@ const SliderControl = () => {
 
   const [timer, setTimer] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -152,7 +154,7 @@ const SliderControl = () => {
     >
       <div className={styles.controls}>
         <div className={styles.datePicker}>
-          <label>📅 Date</label>
+          <label>📅 {t("Date")}</label>
           <input
             type="date"
             value={selectedDate}
