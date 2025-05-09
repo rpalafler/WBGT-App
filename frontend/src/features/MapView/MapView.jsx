@@ -204,8 +204,6 @@ const MapView = () => {
       onDoubleClick={handleMapClick} // Para ordenadores
       onTouchStart={handleTouchStart} // ✅ Funciona en móviles
     >
-      {/*  */}
-      <GaugeView />
       {/* Menú Hamburguesa */}
       {<HamburgerMenu />}
 
@@ -245,7 +243,8 @@ const MapView = () => {
         )}
       </div>
       {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
-      {!isBasemapOpen && <SliderControl />}
+      <GaugeView />
+      {(windowWidth < 768 || !isBasemapOpen) && <SliderControl />}
 
       <DeckGL
         viewState={viewState}

@@ -38,7 +38,7 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange, onToggle }) => {
           const newState = !isOpen;
           setIsOpen(newState);
           if (onToggle) onToggle(newState); // ✅ Notifica al padre
-          if (windowWidth < 768) {
+          if (windowWidth >= 768) {
             setIsCollapsed(!isCollapsed);
           }
         }}

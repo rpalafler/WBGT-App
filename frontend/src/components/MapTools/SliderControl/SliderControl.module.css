@@ -31,9 +31,8 @@
 }
 
 .sliderContainerMobile {
-  background: var(--title-background);
+  background: rgba(0, 0, 0, 0.85);
   border-radius: var(--border-radius);
-  box-shadow: 0 4px 6px rgba(83, 82, 82, 0.3);
   color: #ffffff;
   z-index: var(--z-index-controls);
   position: absolute;
@@ -122,5 +121,15 @@
 
   .submitButton {
     display: none;
+  }
+  .datePicker {
+    width: 30%;
+  }
+
+  .hourSlider {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }

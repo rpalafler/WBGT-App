@@ -16,7 +16,7 @@
   width: 70px;
   height: 70px;
   margin-right: 20px;
-  background-image: url('./sol2.png');
+  background-image: url("./sol2.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -91,4 +91,19 @@
   background-color: #a0a0a0 !important;
   cursor: not-allowed;
   opacity: 0.6;
+}
+@media (max-width: 768px) {
+  .screenshot-button-container {
+    bottom: 360px; /* ⬆️ Igual, o un poco más para separarlos */
+    left: 5px;
+  }
+  .rcw-launcher {
+    bottom: 340px !important;
+    left: 55px;
+  }
+
+  .rcw-widget-container {
+    bottom: 110px !important;
+    left: 10px;
+  }
 }

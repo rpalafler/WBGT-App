@@ -155,8 +155,16 @@ td {
 @media (max-width: 768px) {
   .gaugeContainer {
     width: 100%;
-    height: auto;
-    min-height: unset;
+    position: absolute;
+    left: 0;
+    bottom: 57px;
+    border-radius: 0;
+    margin-bottom: 10px; /* espacio entre Gauge y el siguiente elemento */
+  }
+
+  .historyButton {
+    right: 30px;
+    bottom: 225px;
   }
 
   .closeButton {
@@ -208,9 +216,6 @@ td {
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
-  }
-  .historyButton {
-    right: 90px;
   }
 }
 .coordsDisplay {
