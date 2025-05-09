@@ -20,6 +20,7 @@ import GaugeView from "../../components/MapTools/GaugeView/GaugeView";
 
 const MapView = () => {
   const mapContainerRef = useRef(null); // Reference for the map container for screenshots
+  const [isBasemapOpen, setIsBasemapOpen] = useState(false);
 
   const { viewState, setViewState } = useContext(AppContext); // Usamos el contexto
   const { windowWidth, setWindowWidth } = useContext(AppContext); // Usamos el contexto
@@ -226,7 +227,9 @@ const MapView = () => {
           className={styles.panelButton}
           basemaps={basemaps}
           onBasemapChange={setBasemapUrl}
+          onToggle={(isOpen) => setIsBasemapOpen(isOpen)} // NUEVO
         />
+
         {!isCollapsed && (
           <>
             <SearchButton
@@ -242,7 +245,8 @@ const MapView = () => {
         )}
       </div>
       {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
-      <SliderControl />
+      {!isBasemapOpen && <SliderControl />}
+
       <DeckGL
         viewState={viewState}
         controller={{

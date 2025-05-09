@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLayerGroup } from "@fortawesome/free-solid-svg-icons";
 import { AppContext } from "../../../Context"; // Importamos el Context
 
-const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
+const BasemapSwitcher = ({ basemaps, onBasemapChange, onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { isCollapsed, setIsCollapsed } = useContext(AppContext);
@@ -15,6 +15,7 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
+        if (onToggle) onToggle(false); // ✅ Notifica al padre que se ha cerrado
       }
     };
 
@@ -34,9 +35,11 @@ const BasemapSwitcher = ({ basemaps, onBasemapChange }) => {
         className={styles.button}
         onClick={(e) => {
           e.stopPropagation();
-          setIsOpen(!isOpen);
+          const newState = !isOpen;
+          setIsOpen(newState);
+          if (onToggle) onToggle(newState); // ✅ Notifica al padre
           if (windowWidth < 768) {
-            setIsCollapsed(!isCollapsed); // Solo oculta botones si la pantalla es pequeña
+            setIsCollapsed(!isCollapsed);
           }
         }}
       >
