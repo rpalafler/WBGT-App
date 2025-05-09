@@ -1,0 +1,36 @@
+[33m7538019[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m Merge branch 'rileys_branch'
+[33m417ae63[m[33m ([m[1;31morigin/rileys_branch[m[33m, [m[1;32mrileys_branch[m[33m)[m Added translate features
+[33m5d18b9c[m[33m ([m[1;31morigin/main[m[33m)[m changed some style on the left panels
+[33m8a4554f[m final changes for today made
+[33m5dc0450[m more changes made, only missing responsiveness
+[33ma089e4a[m some changes made
+[33m89ec322[m some changes made
+[33m3cebd48[m Merge branch 'rileys_branch'
+[33medddcdb[m WIP: cambios locales antes de hacer pull
+[33mb4c9479[m Updated prompt engineering for WBGT analysis
+[33m7ceca31[m Several updates
+[33m7886b8f[m updated css
+[33m1520605[m Added reverse geocoding
+[33m8a555e9[m added a new api key
+[33m461b82b[m added chatbot, changed slider control and added pin to place
+[33md8dece7[m new dial, alert history table button, some stylish changes
+[33m936c8f4[m added rileys gauge chart and made some more changes
+[33me344324[m some changes to the map
+[33m60753b0[m aesthetic changes
+[33m6ea4a1d[m added gauge chart, changed some responsiveness and added the date selector
+[33m5413569[m date and time component added to the app
+[33m893232b[m changed scale bar and saved the previous one for Ryan and iCharm
+[33m9f35e17[m changed some responsiveness and style
+[33m49c10d1[m image added, api works, etc...
+[33m0cc02a1[m backend with venv added
+[33mda34e90[m Many changes in responsiveness have been made
+[33m35ded1b[m responsiveness added to title and hamburguer sign
+[33mfa75458[m scalebar, title, hamburguer and menu components included
+[33m5d32f48[m title style change
+[33me3ff4df[m added an extra global style variable
+[33mdf79446[m added title, and created App.css to start using global variables
+[33mcc8c352[m adding context and some comments
+[33mf8510c7[m adding find my location button and search for location button
+[33me8666cc[m Changed some Styles and the About section
+[33m45d99a8[m Basemap switcher, info button
+[33m580cc3b[m Initial commit
