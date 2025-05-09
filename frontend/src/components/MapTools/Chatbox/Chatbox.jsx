@@ -16,8 +16,8 @@ import i18n from "../../../i18n";
 const wbgtValue = 72;
 
 const openai = new OpenAI({
-  baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.REACT_APP_OPENAI_API_KEY,
+  baseURL: "https://openrouter.ai/api/v1",
   dangerouslyAllowBrowser: true, // <-- añade esto
 
   defaultHeaders: {
