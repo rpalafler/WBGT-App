@@ -18,7 +18,7 @@ const wbgtValue = 72;
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey:
-    "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",
+    "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",
   dangerouslyAllowBrowser: true, // <-- añade esto
 
   defaultHeaders: {
