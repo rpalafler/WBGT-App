@@ -24,6 +24,8 @@ export const AppProvider = ({ children }) => {
   const initialHour = now.getHours(); // Hora en la zona del usuario
   const [selectedDate, setSelectedDate] = useState(initialDate);
   const [selectedHour, setSelectedHour] = useState(initialHour);
+  const [wbgtData, setWBGTData] = useState(null);
+  const [selectedWBGTValue, setSelectedWBGTValue] = useState(null);
 
   // Ahora vamos a definir las variables necesarias para el gauge component
   const [isGaugeActive, setIsGaugeActive] = useState(true);
@@ -35,6 +37,10 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        selectedWBGTValue,
+        setSelectedWBGTValue,
+        wbgtData,
+        setWBGTData,
         viewState,
         setViewState,
         windowWidth,

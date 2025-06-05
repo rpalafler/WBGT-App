@@ -23,9 +23,10 @@ const MapView = () => {
   const mapContainerRef = useRef(null); // Reference for the map container for screenshots
   const [isBasemapOpen, setIsBasemapOpen] = useState(false);
 
-  const { viewState, setViewState } = useContext(AppContext); // Usamos el contexto
+  const { wbgtData, viewState, setViewState } = useContext(AppContext); // Usamos el contexto
   const { windowWidth, setWindowWidth } = useContext(AppContext); // Usamos el contexto
-  const { pinCoords, setPinCoords } = useContext(AppContext); // Usamos el contexto
+  const { pinCoords, setPinCoords, setSelectedWBGTValue } =
+    useContext(AppContext); // Usamos el contexto
 
   const [userLocation, setUserLocation] = useState(null); // 📍 Estado para guardar la ubicación del usuario
 
@@ -64,6 +65,21 @@ const MapView = () => {
       label: windowWidth < 768 ? "Google Topography" : "Google Topography",
     },
   };
+  const wbgtLayer =
+    wbgtData &&
+    wbgtData.image_base64 &&
+    new BitmapLayer({
+      id: "wbgt-layer",
+      image: `data:image/png;base64,${wbgtData.image_base64}`,
+      bounds: [
+        wbgtData.lon_min,
+        wbgtData.lat_min,
+        wbgtData.lon_max,
+        wbgtData.lat_max,
+      ],
+      opacity: 0.4,
+      pickable: true,
+    });
 
   const tileLayer = new TileLayer({
     id: "TileLayer",
@@ -196,6 +212,23 @@ const MapView = () => {
 
     setLastTap(now); // Guarda el tiempo del último toque
   };
+  const getWBGTAtCoordinates = (lng, lat) => {
+    if (!wbgtData || !wbgtData.values || !wbgtData.shape) return null;
+
+    const [height, width] = wbgtData.shape;
+    const [minX, minY, maxX, maxY] = [
+      wbgtData.lon_min,
+      wbgtData.lat_min,
+      wbgtData.lon_max,
+      wbgtData.lat_max,
+    ];
+
+    const x = Math.floor(((lng - minX) / (maxX - minX)) * width);
+    const y = Math.floor(((lat - minY) / (maxY - minY)) * height);
+    const flippedY = height - 1 - y;
+
+    return wbgtData.values[flippedY]?.[x] ?? null;
+  };
 
   // _______________________________________________________________________________
   return (
@@ -264,6 +297,11 @@ const MapView = () => {
         onClick={(info) => {
           const now = Date.now();
           const DOUBLE_CLICK_DELAY = 300;
+          if (info.coordinate && wbgtData) {
+            const [lng, lat] = info.coordinate;
+            const value = getWBGTAtCoordinates(lng, lat);
+            setSelectedWBGTValue(value);
+          }
 
           if (now - lastClickTime < DOUBLE_CLICK_DELAY && info.coordinate) {
             const [longitude, latitude] = info.coordinate;
@@ -275,18 +313,25 @@ const MapView = () => {
         }}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE
-        layers={[tileLayer, userLocationLayer, imageLayer, pinLayer].filter(
+        layers={[tileLayer, wbgtLayer, userLocationLayer, pinLayer].filter(
           Boolean
         )} // 📍 Agregamos el marcador al mapa
         // _______________________________________________________________________________
-        getTooltip={({ coordinate }) =>
-          coordinate &&
-          `Lat: ${Math.abs(coordinate[1]).toFixed(2)}° ${
-            coordinate[1] >= 0 ? "N" : "S"
-          }\nLon: ${Math.abs(coordinate[0]).toFixed(2)}° ${
-            coordinate[0] >= 0 ? "E" : "W"
-          }`
-        }
+
+        getTooltip={({ coordinate, layer }) => {
+          if (!coordinate || layer?.id !== "wbgt-layer") return null;
+
+          const [lng, lat] = coordinate;
+          const value = getWBGTAtCoordinates(lng, lat);
+
+          if (value === null || isNaN(value)) return null;
+
+          const wbgtFahrenheit = ((value - 273.15) * 9) / 5 + 32;
+
+          return `WBGT: ${wbgtFahrenheit.toFixed(1)} °F\nLat: ${lat.toFixed(
+            2
+          )}°, Lon: ${lng.toFixed(2)}°`;
+        }}
       />
       {/* Añadimos la barra de escala, de manera que solo se mostrará en caso de que la pantalla sea mas grande
       que la de un movil y no está activo el gauge chart */}

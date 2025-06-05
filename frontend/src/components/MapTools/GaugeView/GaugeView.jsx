@@ -7,10 +7,16 @@ import { reverseGeocode } from "../../../services/geocodingService";
 import { useTranslation } from "react-i18next";
 
 const GaugeView = () => {
-  const { setIsGaugeActive, pinCoords } = useContext(AppContext);
+  const { setIsGaugeActive, pinCoords, selectedWBGTValue } =
+    useContext(AppContext);
   const [showHistory, setShowHistory] = useState(false); // ⬅️ estado para alternar tabla
   const [locationName, setLocationName] = useState("");
   const { t } = useTranslation();
+
+  const wbgtFahrenheit =
+    selectedWBGTValue !== null
+      ? ((selectedWBGTValue - 273.15) * 9) / 5 + 32
+      : null;
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -24,6 +30,7 @@ const GaugeView = () => {
     };
     fetchLocation();
   }, [pinCoords]);
+  const displayValue = wbgtFahrenheit !== null ? wbgtFahrenheit : 72;
 
   return (
     <div className={styles.gaugeContainer}>
@@ -50,7 +57,7 @@ const GaugeView = () => {
 
       <div className={styles.contentWrapper}>
         <div className={styles.gaugeSection}>
-          <GaugeChart2 />
+          <GaugeChart2 wbgt={displayValue} />
         </div>
       </div>
 
