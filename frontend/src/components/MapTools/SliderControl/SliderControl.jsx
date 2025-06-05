@@ -6,8 +6,8 @@ import { fetchWBGTData } from "../../../services/WBGTDataService";
 
 const SliderControl = () => {
   const { setWBGTData } = useContext(AppContext);
-  const [forecastHour, setForecastHour] = useState(1); // Por defecto 1h
-  const [modelDate, setModelDate] = useState(null); // Guardamos como objeto Date
+  const [forecastHour, setForecastHour] = useState(1);
+  const [modelDate, setModelDate] = useState(null);
   const [timer, setTimer] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { t } = useTranslation();
@@ -20,7 +20,7 @@ const SliderControl = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const formatDateFancy = (date) => {
+  const formatDateFancy = (date, timeZone = "America/Los_Angeles") => {
     return date
       .toLocaleString("en-US", {
         year: "numeric",
@@ -28,19 +28,19 @@ const SliderControl = () => {
         day: "2-digit",
         hour: "2-digit",
         hour12: false,
-        timeZone: "UTC",
+        minute: undefined, // 👈 No mostramos minutos
+        timeZone,
       })
       .replace(",", "")
-      .replace("00:", "")
-      .replace(":00", "");
+      .replace("at", "at");
   };
 
   const handleSubmit = async () => {
     const now = new Date();
-    now.setHours(now.getHours() - 2); // Modelo de hace una hora
+    now.setHours(now.getHours() - 2);
     const formattedDate = now.toISOString().slice(0, 13).replace("T", "_");
 
-    setModelDate(now); // Guardamos el objeto Date para mostrar
+    setModelDate(now);
 
     console.log(
       "📤 Enviando al backend:",
@@ -100,13 +100,10 @@ const SliderControl = () => {
 
         {modelDate && (
           <div className={styles.modelInfo}>
-            📦 Model from: {formatDateFancy(modelDate)} UTC
-            <br />
             🕓 Data for:{" "}
             {formatDateFancy(
               new Date(modelDate.getTime() + forecastHour * 3600000)
             )}{" "}
-            UTC
           </div>
         )}
       </div>
