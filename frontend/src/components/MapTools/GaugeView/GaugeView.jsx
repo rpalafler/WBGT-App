@@ -30,7 +30,7 @@ const GaugeView = () => {
     };
     fetchLocation();
   }, [pinCoords]);
-  const displayValue = wbgtFahrenheit !== null ? wbgtFahrenheit : 72;
+  const displayValue = wbgtFahrenheit !== null ? wbgtFahrenheit : 82;
 
   return (
     <div className={styles.gaugeContainer}>
@@ -44,7 +44,7 @@ const GaugeView = () => {
         </div>
       )}
 
-      {/* ✅ Botón debajo de la 'X' */}
+      {/* ✅ Botón debajo de la 'X' 
       <button
         className={styles.historyButton}
         onClick={(e) => {
@@ -53,7 +53,7 @@ const GaugeView = () => {
         }}
       >
         {t("Alert History")}
-      </button>
+      </button> */}
 
       <div className={styles.contentWrapper}>
         <div className={styles.gaugeSection}>

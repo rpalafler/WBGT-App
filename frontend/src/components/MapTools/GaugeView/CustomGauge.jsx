@@ -17,7 +17,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
     const height = 180; // suficiente para que el SVG se vea
     const radius = Math.min(width, height) / 1.2;
 
-    const percToRad = (perc) => (perc * 180 * Math.PI) / 180;
+    const percToRad = (perc) => (perc * Math.PI * 180) / 180;
     let totalPercent = 0.0;
 
     const svg = el
@@ -69,6 +69,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
         .attr("x", labelX)
         .attr("y", labelY)
         .attr("text-anchor", "middle")
+        .attr("class", `gauge-label label-${index}`) // NEW
         .attr("alignment-baseline", "middle")
         .attr("transform", `rotate(${labelRotation}, ${labelX}, ${labelY})`) // Rotate text around its position
         .style("fill", "white")
@@ -117,7 +118,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
           .attr("y", 40) // Position slightly below the needle
           .attr("text-anchor", "middle")
           .attr("alignment-baseline", "middle")
-          .style("font-size", "20px")
+          .style("font-size", "30px")
           .style("fill", "white")
           .text("WBGT: " + wbgt.toFixed(1) + "°F");
       }
@@ -145,7 +146,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
       }
 
       mkCmd(perc) {
-        const thetaRad = percToRad(perc) - Math.PI / 2;
+        const thetaRad = percToRad(perc);
         const topX = -this.len * Math.cos(thetaRad);
         const topY = -this.len * Math.sin(thetaRad);
         const leftX = -this.radius * Math.cos(thetaRad - Math.PI / 2);
@@ -156,7 +157,12 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
       }
     }
 
-    const normalizedPercent = Math.min(wbgt, 90) / 90;
+    const minWBGT = 68;
+    const maxWBGT = 88;
+    const normalizedPercent = Math.max(
+      0,
+      Math.min(1, (wbgt - minWBGT) / (maxWBGT - minWBGT))
+    );
     const needle = new Needle(radius * 0.8, 8);
     needle.drawOn(chart, 0);
     needle.animateOn(chart, normalizedPercent);
