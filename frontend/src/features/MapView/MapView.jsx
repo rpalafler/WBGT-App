@@ -328,9 +328,15 @@ const MapView = () => {
 
           const wbgtFahrenheit = ((value - 273.15) * 9) / 5 + 32;
 
-          return `WBGT: ${wbgtFahrenheit.toFixed(1)} °F\nLat: ${lat.toFixed(
-            2
-          )}°, Lon: ${lng.toFixed(2)}°`;
+          const latDir = lat >= 0 ? "N" : "S";
+          const lonDir = lng >= 0 ? "E" : "W";
+
+          const latFormatted = `${Math.abs(lat).toFixed(2)}° ${latDir}`;
+          const lonFormatted = `${Math.abs(lng).toFixed(2)}° ${lonDir}`;
+
+          return `WBGT: ${wbgtFahrenheit.toFixed(
+            1
+          )} °F\n${latFormatted}, ${lonFormatted}`;
         }}
       />
       {/* Añadimos la barra de escala, de manera que solo se mostrará en caso de que la pantalla sea mas grande

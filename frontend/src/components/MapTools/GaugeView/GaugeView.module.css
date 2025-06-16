@@ -86,7 +86,7 @@ td {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: rgb(237, 237, 237);
 }
 
 .locationHeader p {

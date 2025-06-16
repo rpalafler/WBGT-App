@@ -30,7 +30,7 @@ const GaugeView = () => {
     };
     fetchLocation();
   }, [pinCoords]);
-  const displayValue = wbgtFahrenheit !== null ? wbgtFahrenheit : 82;
+  const displayValue = wbgtFahrenheit !== null ? wbgtFahrenheit : 68;
 
   return (
     <div className={styles.gaugeContainer}>

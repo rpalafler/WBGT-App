@@ -21,18 +21,20 @@ const SliderControl = () => {
   }, []);
 
   const formatDateFancy = (date, timeZone = "America/Los_Angeles") => {
-    return date
-      .toLocaleString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "2-digit",
-        hour: "2-digit",
-        hour12: false,
-        minute: undefined, // 👈 No mostramos minutos
-        timeZone,
-      })
-      .replace(",", "")
-      .replace("at", "at");
+    return (
+      date
+        .toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "2-digit",
+          hour: "2-digit",
+          hour12: true,
+          minute: undefined, // 👈 No mostramos minutos
+          timeZone,
+        })
+        //.replace(",", "")
+        .replace("at", "at")
+    );
   };
 
   const handleSubmit = async () => {
@@ -83,12 +85,6 @@ const SliderControl = () => {
       }
     >
       <div className={styles.controls}>
-        <div className={styles.hourLabelRow}>
-          <label>
-            🕒 {t("Forecast Hour")}: {forecastHour}h
-          </label>
-        </div>
-
         <input
           type="range"
           min="1"
@@ -100,7 +96,7 @@ const SliderControl = () => {
 
         {modelDate && (
           <div className={styles.modelInfo}>
-            🕓 Data for:{" "}
+            🕓{" "}
             {formatDateFancy(
               new Date(modelDate.getTime() + forecastHour * 3600000)
             )}{" "}
