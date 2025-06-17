@@ -83,11 +83,11 @@ const SliderControl = () => {
       }
     >
       <div className={styles.controls}>
-        <div className={styles.hourLabelRow}>
+        {/* <div className={styles.hourLabelRow}>
           <label>
             🕒 {t("Forecast Hour")}: {forecastHour}h
           </label>
-        </div>
+        </div> */}
 
         <input
           type="range"
@@ -100,10 +100,11 @@ const SliderControl = () => {
 
         {modelDate && (
           <div className={styles.modelInfo}>
-            🕓 Data for:{" "}
+            🕓{" "}
             {formatDateFancy(
               new Date(modelDate.getTime() + forecastHour * 3600000)
-            )}{" "}
+            )}
+            {":00"}
           </div>
         )}
       </div>
