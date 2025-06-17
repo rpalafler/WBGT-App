@@ -30,8 +30,8 @@ export const AppProvider = ({ children }) => {
   // Ahora vamos a definir las variables necesarias para el gauge component
   const [isGaugeActive, setIsGaugeActive] = useState(true);
   const [pinCoords, setPinCoords] = useState({
-    latitude: 32.792,
-    longitude: -115.5631,
+    latitude: 32.979,
+    longitude: -115.538,
   }); // { latitude, longitude }
 
   return (
