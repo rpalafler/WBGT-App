@@ -62,7 +62,7 @@ const SliderControl = () => {
   };
 
   useEffect(() => {
-    // handleSubmit();
+    handleSubmit();
   }, []);
 
   const triggerAutoSubmit = () => {
