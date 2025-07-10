@@ -100,7 +100,6 @@ const SliderControl = () => {
             {formatDateFancy(
               new Date(modelDate.getTime() + forecastHour * 3600000)
             )}
-            {":00"}
           </div>
         )}
       </div>

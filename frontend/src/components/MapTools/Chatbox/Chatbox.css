@@ -107,3 +107,19 @@
     left: 10px;
   }
 }
+
+/* Fix chatbox width */
+.rcw-conversation-container {
+  width: 320px !important;
+  max-width: 350px !important;
+  min-width: 350px !important;
+}
+
+/* Prevent message input field from stretching */
+.rcw-input {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
