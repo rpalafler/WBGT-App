@@ -322,7 +322,7 @@ const MapView = () => {
         }}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE
-        layers={[tileLayer, pinLayer, wbgtLayer, userLocationLayer].filter(
+        layers={[tileLayer, wbgtLayer, userLocationLayer, pinLayer].filter(
           Boolean
         )} // 📍 Agregamos el marcador al mapa
         // _______________________________________________________________________________
