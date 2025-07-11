@@ -179,6 +179,9 @@ const MapView = () => {
       getRadius: 2000,
       getFillColor: [0, 0, 0, 200],
       pickable: false,
+      parameters: {
+        depthTest: false, // ensures it's always drawn on top
+      },
     });
 
   const imageLayer = new BitmapLayer({
@@ -322,9 +325,9 @@ const MapView = () => {
         }}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE
-        layers={[tileLayer, pinLayer, wbgtLayer, userLocationLayer].filter(
+        layers={[tileLayer, wbgtLayer, userLocationLayer, pinLayer].filter(
           Boolean
-        )} // 📍 Agregamos el marcador al mapa
+        )}
         // _______________________________________________________________________________
 
         getTooltip={({ coordinate, layer }) => {
