@@ -176,8 +176,8 @@ const MapView = () => {
       id: "manual-pin",
       data: [{ position: [pinCoords.longitude, pinCoords.latitude] }],
       getPosition: (d) => d.position,
-      getRadius: 1000,
-      getFillColor: [255, 0, 0, 200],
+      getRadius: 2000,
+      getFillColor: [0, 0, 0, 200],
       pickable: false,
     });
 
@@ -322,7 +322,7 @@ const MapView = () => {
         }}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE
-        layers={[tileLayer, wbgtLayer, userLocationLayer, pinLayer].filter(
+        layers={[tileLayer, pinLayer, wbgtLayer, userLocationLayer].filter(
           Boolean
         )} // 📍 Agregamos el marcador al mapa
         // _______________________________________________________________________________
