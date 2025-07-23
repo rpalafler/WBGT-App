@@ -68,10 +68,6 @@ const MapView = () => {
       url: "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
       label: "Carto Light",
     },
-    CartoDark: {
-      url: "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-      label: "Carto Dark",
-    },
   };
   const wbgtLayer =
     wbgtData &&
@@ -252,8 +248,10 @@ const MapView = () => {
       {/* 📍 Título visible en la parte superior */}
       <div className={styles.titleContainer}>
         {/*<h1 className={styles.title}>RHI Alarm</h1> */}
-        <img src="/SDSU_heat_logo.png" className={styles.logo} />
-        <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2>
+        {/* <img src="/SDSU_heat_logo.png" className={styles.logo} /> */}
+        <img src="/logo.png" className={styles.logo} />
+
+        {/* <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2> */}
       </div>
       {/* Incluimos aquí la escala de la variable leida*/}
       <div>

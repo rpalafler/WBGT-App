@@ -1,6 +1,6 @@
 .logo {
-  height: 60px;       /* adjust as needed */
-  margin-bottom: 0;   /* or add spacing if needed */
+  height: 80px; /* adjust as needed */
+  margin-bottom: 0; /* or add spacing if needed */
   object-fit: contain;
 }
 
@@ -31,11 +31,11 @@
   position: absolute; /* Solo el contenedor se posiciona en la parte superior */
   top: 0px;
   text-align: center; /* Centra el contenido horizontalmente */
-  background: var(--title-background);
+  /* background: var(--title-background); */
   padding: var(--padding);
   border-radius: var(--border-radius);
   z-index: var(--z-index-title);
-  box-shadow: 0 4px 6px rgba(83, 82, 82, 0.3);
+  /* box-shadow: 0 4px 6px rgba(83, 82, 82, 0.3); */
 }
 
 /* 🎨 Título Principal */

@@ -1,7 +1,12 @@
 /* 🎨 Variables Globales */
 :root {
-  --primary-color: #007bff;
-  --primary-hover: #0056b3;
+  /* --primary-color: #007bff;
+  --primary-hover: #0056b3; */
+  /* Orange primary color */
+  --primary-color: #ff4b1e;
+
+  --primary-hover: #ff6640;
+  /* ___________________________ */
   --secondary-color: #6c757d;
   --background-color: #f8f9fa;
   --text-color: #212529;
