@@ -1,7 +1,7 @@
 import pako from "pako";
 
-const API_URL = "http://127.0.0.1:8000/api";
-
+// const API_URL = "http://127.0.0.1:8000/api"; // my localhost
+const API_URL = "https://4dvdrhi.sdsu.edu/";
 export async function fetchWBGTData(datetimeStr, forecastHour) {
   const url = `${API_URL}/wbgt/${datetimeStr}/${forecastHour}`;
 
