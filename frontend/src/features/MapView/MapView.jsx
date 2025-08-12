@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import DeckGL from "@deck.gl/react";
+
 import { TileLayer } from "@deck.gl/geo-layers";
-import { BitmapLayer, ScatterplotLayer } from "@deck.gl/layers"; // 📍 Importamos ScatterplotLayer
+import { BitmapLayer, ScatterplotLayer, IconLayer } from "@deck.gl/layers"; // 📍 Importamos ScatterplotLayer
 import BasemapSwitcher from "../../components/Buttons/BasemapSwitcher/BasemapSwitcher";
 import SearchButton from "../../components/Buttons/SearchButton/SearchButton";
 import LocateButton from "../../components/Buttons/LocateButton/LocateButton";
@@ -18,6 +19,13 @@ import LiveButton from "../../components/Buttons/LiveButton/LiveButton";
 import TranslateButton from "../../components/Buttons/TranslateButton/TranslateButton";
 
 import GaugeView from "../../components/MapTools/GaugeView/GaugeView";
+// Put this above your component (or in a constants file)
+export const PIN_ATLAS = `data:image/svg+xml;utf8,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+     <path fill="white"
+       d="M32 2c-11 0-20 9-20 20c0 14 20 40 20 40s20-26 20-40c0-11-9-20-20-20zm0 28a8 8 0 1 1 0-16a8 8 0 0 1 0 16z"/>
+   </svg>`
+)}`;
 
 const MapView = () => {
   const mapContainerRef = useRef(null); // Reference for the map container for screenshots
@@ -48,7 +56,7 @@ const MapView = () => {
   });
 
   const [basemapUrl, setBasemapUrl] = useState(
-    "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+    "http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}"
   );
 
   const basemaps = {
@@ -167,13 +175,34 @@ const MapView = () => {
       pickable: false,
     });
   const pinLayer =
+    // pinCoords &&
+    // new ScatterplotLayer({
+    //   id: "manual-pin",
+    //   data: [{ position: [pinCoords.longitude, pinCoords.latitude] }],
+    //   getPosition: (d) => d.position,
+    //   getRadius: 2000,
+    //   getFillColor: [0, 0, 0, 200],
+    //   pickable: false,
+    // });
+
     pinCoords &&
-    new ScatterplotLayer({
+    new IconLayer({
       id: "manual-pin",
-      data: [{ position: [pinCoords.longitude, pinCoords.latitude] }],
-      getPosition: (d) => d.position,
-      getRadius: 2000,
-      getFillColor: [0, 0, 0, 200],
+      data: [{ latitude: pinCoords.latitude, longitude: pinCoords.longitude }],
+      getPosition: (d) => [d.longitude, d.latitude],
+      // Return an inline icon definition using your data URL
+      getIcon: () => ({
+        url: PIN_ATLAS,
+        width: 64,
+        height: 64,
+        // Make the *tip* of the pin sit on the coordinate
+        anchorX: 32,
+        anchorY: 64,
+      }),
+      sizeUnits: "pixels",
+      getSize: () => 32, // overall size on screen
+      sizeScale: 1, // you can tweak this if you want
+      getColor: () => [0, 0, 0, 255], // tint; white SVG will take the tint well
       pickable: false,
     });
 
