@@ -21,6 +21,7 @@
 .searchButton {
   padding: var(--padding) 15px;
   font-size: var(--font-size-text);
+  font-weight:700;
   border-radius: var(--border-radius);
   background-color: var(--primary-color);
   color: var(--button_font_color);
