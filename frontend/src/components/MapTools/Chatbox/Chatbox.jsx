@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from "../../../Context";
+
 import {
   Widget,
   addResponseMessage,
@@ -13,7 +15,6 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../../i18n";
 
 // change this later to get acutal WBGT point value from app context
-const wbgtValue = 72;
 
 const openai = new OpenAI({
   apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -27,13 +28,20 @@ const openai = new OpenAI({
 });
 
 const AIChat = ({ applicationRef }) => {
+  const { selectedWBGTValue } = useContext(AppContext);
+  const wbgtValue =
+    Math.round(
+      (((selectedWBGTValue - 273.15) * 9) / 5 + 32 + Number.EPSILON) * 100
+    ) / 100;
   const [welcomeMessageShown, setWelcomeMessageShown] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
 
   const { t } = useTranslation();
 
-  const VISION_MODEL = "meta-llama/llama-3.2-11b-vision-instruct:free";
+  // const VISION_MODEL = "meta-llama/llama-3.2-11b-vision-instruct:free";
+
+  const VISION_MODEL = "meta-llama/llama-4-maverick:free";
 
   const visionPrompt = `
   Keep response to a few sentences.
