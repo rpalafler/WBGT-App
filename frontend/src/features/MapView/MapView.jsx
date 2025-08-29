@@ -41,7 +41,7 @@ const MapView = () => {
   // Este estado controlará si los demás botones están visibles o no:
   const { isCollapsed } = useContext(AppContext);
   // Esto es para ver si se ha producido un doble click para mostrar el pin y las coordendas del gauge chart
-  const [lastClickTime, setLastClickTime] = useState(0);
+  //const [lastClickTime, setLastClickTime] = useState(0);
 
   // 📌 Actualiza windowWidth dinámicamente al cambiar el tamaño
   useEffect(() => {
@@ -56,7 +56,7 @@ const MapView = () => {
   });
 
   const [basemapUrl, setBasemapUrl] = useState(
-    "http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}"
+    "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
   );
 
   const basemaps = {
@@ -331,21 +331,18 @@ const MapView = () => {
         }}
         onViewStateChange={({ viewState }) => setViewState(viewState)}
         onClick={(info) => {
-          const now = Date.now();
-          const DOUBLE_CLICK_DELAY = 300;
-          if (info.coordinate && wbgtData) {
-            const [lng, lat] = info.coordinate;
+          if (!info.coordinate) return;
+
+          const [lng, lat] = info.coordinate;
+
+          // place/move the pin on single click
+          setPinCoords({ latitude: lat, longitude: lng });
+
+          // update WBGT readout if you have data
+          if (wbgtData) {
             const value = getWBGTAtCoordinates(lng, lat);
             setSelectedWBGTValue(value);
           }
-
-          if (now - lastClickTime < DOUBLE_CLICK_DELAY && info.coordinate) {
-            const [longitude, latitude] = info.coordinate;
-            setPinCoords({ latitude, longitude });
-            console.log("📍 Doble clic manual detectado:", latitude, longitude);
-          }
-
-          setLastClickTime(now);
         }}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE

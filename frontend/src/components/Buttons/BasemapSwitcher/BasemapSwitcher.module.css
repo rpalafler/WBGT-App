@@ -35,7 +35,7 @@
   border: none;
   border-radius: var(--border-radius);
   font-size: var(--font-size-text);
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
