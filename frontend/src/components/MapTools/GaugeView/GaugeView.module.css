@@ -157,7 +157,7 @@ td {
     width: 100%;
     position: absolute;
     left: 0;
-    bottom: 57px;
+    bottom: 0px;
     border-radius: 0;
     margin-bottom: 10px; /* espacio entre Gauge y el siguiente elemento */
   }
