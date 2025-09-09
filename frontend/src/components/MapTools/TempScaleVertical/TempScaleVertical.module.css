@@ -51,6 +51,6 @@
 
 @media (max-width: 768px) {
   .container {
-    top: 25%;
+    top: 30svh;
   }
 }

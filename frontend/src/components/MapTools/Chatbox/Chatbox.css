@@ -94,11 +94,11 @@
 }
 @media (max-width: 768px) {
   .screenshot-button-container {
-    bottom: 360px; /* ⬆️ Igual, o un poco más para separarlos */
+    bottom: 31svh;
     left: 5px;
   }
   .rcw-launcher {
-    bottom: 340px !important;
+    bottom: 28.7svh;
     left: 55px;
   }
 
@@ -122,4 +122,3 @@
   box-sizing: border-box;
   word-break: break-word;
 }
-

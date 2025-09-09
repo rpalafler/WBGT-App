@@ -326,7 +326,7 @@ const MapView = () => {
           touchZoom: true,
           touchRotate: true,
           keyboard: true,
-          minZoom: 7.8,
+          minZoom: 6,
           maxZoom: 20,
         }}
         onViewStateChange={({ viewState }) => setViewState(viewState)}

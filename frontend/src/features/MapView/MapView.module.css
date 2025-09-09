@@ -87,7 +87,7 @@
 /* 🎯 📱 Para pantallas pequeñas (< 768px) */
 @media (max-width: 768px) {
   .logo {
-    height: 70px; /* adjust as needed */
+    height: 7.5svh; /* adjust as needed */
   }
   .controlPanel {
     position: fixed;
@@ -146,7 +146,7 @@
     background-color: var(--primary-hover);
   }
   .titleContainer {
-    left: 15px;
+    left: 1svh;
   }
   .subtitle {
     display: none;

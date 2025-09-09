@@ -20,21 +20,30 @@ const SliderControl = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const formatDateFancy = (date, timeZone = "America/Los_Angeles") => {
-    return (
-      date
-        .toLocaleString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "2-digit",
-          hour: "2-digit",
-          hour12: true,
-          minute: undefined, // 👈 No mostramos minutos
-          timeZone,
-        })
-        //.replace(",", "")
-        .replace("at", "at")
-    );
+  // 👇 reemplaza tu formatDateFancy por este
+  const formatDateFancy = (
+    date,
+    { mobile = false, timeZone = "America/Los_Angeles" } = {}
+  ) => {
+    // en-US devuelve "Sep", "Oct", "Jan" (abreviado). Si quieres "sept", usa es-ES.
+    const locale = "en-US"; // o "es-ES" si prefieres "sept", "oct", "ene"
+    const mobileOpts = {
+      month: "short", // Sep / Oct / Jan
+      day: "numeric", // 9
+      hour: "2-digit", // 03 PM
+      hour12: true,
+      timeZone,
+    };
+    const desktopOpts = {
+      year: "numeric", // 2025
+      month: "long", // September
+      day: "2-digit", // 09
+      hour: "2-digit", // 03 PM
+      hour12: true,
+      timeZone,
+    };
+
+    return date.toLocaleString(locale, mobile ? mobileOpts : desktopOpts);
   };
 
   const handleSubmit = async () => {
@@ -92,13 +101,15 @@ const SliderControl = () => {
           value={forecastHour}
           onChange={handleForecastChange}
           onClick={(e) => e.stopPropagation()}
+          className={styles.slider} // 👈 añadida
         />
 
         {modelDate && (
           <div className={styles.modelInfo}>
             🕓{" "}
             {formatDateFancy(
-              new Date(modelDate.getTime() + forecastHour * 3600000)
+              new Date(modelDate.getTime() + forecastHour * 3600000),
+              { mobile: isMobile } // 👈 aquí activas el modo abreviado
             )}
           </div>
         )}

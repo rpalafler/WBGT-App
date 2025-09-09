@@ -33,18 +33,13 @@
 
 .sliderContainerMobile {
   background: rgba(0, 0, 0, 0.85);
-  border-radius: var(--border-radius);
   color: #ffffff;
   z-index: var(--z-index-controls);
   position: absolute;
   bottom: 0;
-  left: 1%;
   width: 100%; /* ✅ Ahora ocupa todo el ancho */
-  left: 0;
-  right: 0;
-  padding: 10px 25px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  /* padding: 10px 25px; */
+  block-size: 5svh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,6 +106,12 @@
 
 /* Móvil */
 @media (max-width: 768px) {
+  .slider {
+    width: 50%; /* que ocupe todo el ancho de su contenedor */
+    accent-color: var(--primary-color); /* color de la barrita (moderno) */
+    margin-left: 5%; /* lo empujas a la derecha */
+  }
+
   .controls {
     flex-direction: row;
     gap: 20px;

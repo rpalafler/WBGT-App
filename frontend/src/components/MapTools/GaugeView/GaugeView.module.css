@@ -153,13 +153,18 @@ td {
 }
 
 @media (max-width: 768px) {
+  .gaugeSection {
+    zoom: 0.5; /* ✅ Cambia esto */
+  }
   .gaugeContainer {
+    border-radius: 0px;
+    block-size: 22svh;
+
     width: 100%;
     position: absolute;
     left: 0;
-    bottom: 0px;
-    border-radius: 0;
-    margin-bottom: 10px; /* espacio entre Gauge y el siguiente elemento */
+    bottom: 5%;
+    margin-bottom: 0px; /* espacio entre Gauge y el siguiente elemento */
   }
 
   .historyButton {
