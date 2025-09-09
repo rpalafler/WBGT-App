@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [viewState, setViewState] = useState({
-    longitude: window.innerWidth <= 768 ? -115.72 : -115.92,
+    longitude: window.innerWidth <= 768 ? -115.72 : -115.75,
     latitude: window.innerWidth <= 768 ? 33 : 33.38,
     zoom: window.innerWidth <= 768 ? 7.5 : 8.8,
     pitch: 0,
