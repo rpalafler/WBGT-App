@@ -5,17 +5,19 @@
 }
 
 .mapContainer {
-  min-height: 100vh; /* fallback universal */
-  min-height: 100dvh; /* dinámico en navegadores modernos */
-  overflow: hidden; /* quitas scroll global del contenedor */
-  overflow-x: hidden;
-  overflow-y: hidden;
-  position: relative; /* importante para hijos posicionados */
+  min-height: 100vh; /* fallback */
+  min-height: 100dvh; /* dinámico cuando se oculta la barra */
+  position: relative;
+  overflow: hidden;
+
+  /* corrige notch / barra inferior */
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: env(safe-area-inset-top);
 }
 
 @supports (height: 100svh) {
   .mapContainer {
-    min-height: 100svh; /* en navegadores que soportan svh → evita scroll fantasma */
+    min-height: 100svh; /* seguro: siempre ocupa toda la pantalla visible */
   }
 }
 
