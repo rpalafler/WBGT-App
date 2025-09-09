@@ -31,21 +31,6 @@
   color: #fff;
 }
 
-.sliderContainerMobile {
-  background: rgba(0, 0, 0, 0.85);
-  color: #ffffff;
-  z-index: var(--z-index-controls);
-  position: absolute;
-  bottom: 0;
-  width: 100%; /* ✅ Ahora ocupa todo el ancho */
-  /* padding: 10px 25px; */
-  block-size: 6svh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s ease-in-out;
-}
-
 .controls {
   display: flex;
   flex-direction: column;
@@ -133,5 +118,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .sliderContainerMobile {
+    background: rgba(0, 0, 0, 0.85);
+    color: #ffffff;
+    z-index: var(--z-index-controls);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    block-size: var(--block-size-sliderContainerMobile);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 👇 animación y obedecer la variable */
+    transform: translateY(var(--panel-shift, 0%));
+    transition: transform 0.5s ease;
   }
 }

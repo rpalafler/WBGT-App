@@ -151,20 +151,34 @@ td {
   text-align: left;
   font-size: 13px; /* o el tamaño que quieras */
 }
-
+.coordsDisplay {
+  position: absolute;
+  top: 35px; /* justo debajo del botón cerrar */
+  right: 10px;
+  font-size: 11px;
+  color: #ccc;
+  text-align: right;
+  line-height: 1.3;
+  z-index: 10;
+}
 @media (max-width: 768px) {
+  .gaugeSection {
+    zoom: 0.5;
+  }
+
   .gaugeSection {
     zoom: 0.5; /* ✅ Cambia esto */
   }
   .gaugeContainer {
     border-radius: 0px;
-    block-size: 27svh;
-
+    block-size: var(--block-size-gaugeContainer);
     width: 100%;
     position: absolute;
     left: 0;
     bottom: 5%;
     margin-bottom: 0px; /* espacio entre Gauge y el siguiente elemento */
+    transform: translateY(var(--panel-shift, 0%));
+    transition: transform 0.5s ease;
   }
 
   .historyButton {
@@ -222,14 +236,4 @@ td {
     max-height: 80vh;
     overflow-y: auto;
   }
-}
-.coordsDisplay {
-  position: absolute;
-  top: 35px; /* justo debajo del botón cerrar */
-  right: 10px;
-  font-size: 11px;
-  color: #ccc;
-  text-align: right;
-  line-height: 1.3;
-  z-index: 10;
 }

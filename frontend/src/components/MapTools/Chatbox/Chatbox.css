@@ -131,9 +131,7 @@
     pointer-events: auto !important;
   }
 
-  /* botones colocados respecto a lo ocupado (5svh + 22svh) */
   :root {
-    --occupied-bottom: 34svh;
     --gap: 8px;
     --safe: env(safe-area-inset-bottom, 0);
   }
@@ -159,4 +157,8 @@
     ) !important;
     z-index: 10010 !important;
   }
+}
+.screenshot-button-container,
+.rcw-launcher {
+  transition: bottom 0.5s ease, transform 0.5s ease;
 }

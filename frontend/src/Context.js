@@ -9,6 +9,8 @@ export const AppContext = createContext();
 // globales que estamos definiendo aqui
 
 export const AppProvider = ({ children }) => {
+  const [isBottomPanelOpen, setIsBottomPanelOpen] = useState(true);
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [viewState, setViewState] = useState({
@@ -57,6 +59,8 @@ export const AppProvider = ({ children }) => {
         setIsGaugeActive,
         pinCoords,
         setPinCoords,
+        isBottomPanelOpen,
+        setIsBottomPanelOpen,
       }}
     >
       {children}

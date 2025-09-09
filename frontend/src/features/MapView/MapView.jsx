@@ -30,6 +30,7 @@ export const PIN_ATLAS = `data:image/svg+xml;utf8,${encodeURIComponent(
 const MapView = () => {
   const mapContainerRef = useRef(null); // Reference for the map container for screenshots
   const [isBasemapOpen, setIsBasemapOpen] = useState(false);
+  const { isBottomPanelOpen, setIsBottomPanelOpen } = useContext(AppContext);
 
   const { wbgtData, viewState, setViewState } = useContext(AppContext); // Usamos el contexto
   const { windowWidth, setWindowWidth } = useContext(AppContext); // Usamos el contexto
@@ -266,7 +267,9 @@ const MapView = () => {
   // _______________________________________________________________________________
   return (
     <div
-      className={styles.mapContainer}
+      className={`${styles.mapContainer} ${
+        isBottomPanelOpen ? styles.panelOpen : styles.panelCollapsed
+      }`}
       ref={mapContainerRef}
       onDoubleClick={handleMapClick} // Para ordenadores
       onTouchStart={handleTouchStart} // ✅ Funciona en móviles
@@ -314,6 +317,17 @@ const MapView = () => {
         )}
       </div>
       {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
+      {/* Tirador solo en móvil */}
+      <button
+        className={styles.toggleBottom}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsBottomPanelOpen((v) => !v);
+        }}
+        aria-label={isBottomPanelOpen ? "Ocultar panel" : "Mostrar panel"}
+      >
+        {isBottomPanelOpen ? "▾" : "▴"}
+      </button>
       <GaugeView />
       {(windowWidth < 768 || !isBasemapOpen) && <SliderControl />}
 
