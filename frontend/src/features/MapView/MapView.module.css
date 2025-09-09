@@ -5,12 +5,18 @@
 }
 
 .mapContainer {
-  width: 100%; /* Se adapta mejor a la pantalla */
-  min-height: 100vh; /* Permite crecimiento dinámico sin problemas en móviles */
-  overflow: hidden;
+  min-height: 100vh; /* fallback universal */
+  min-height: 100dvh; /* dinámico en navegadores modernos */
+  overflow: hidden; /* quitas scroll global del contenedor */
   overflow-x: hidden;
   overflow-y: hidden;
-  position: relative;
+  position: relative; /* importante para hijos posicionados */
+}
+
+@supports (height: 100svh) {
+  .mapContainer {
+    min-height: 100svh; /* en navegadores que soportan svh → evita scroll fantasma */
+  }
 }
 
 .controlPanel {
