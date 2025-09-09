@@ -21,7 +21,7 @@
 .searchButton {
   padding: var(--padding) 15px;
   font-size: var(--font-size-text);
-  font-weight:700;
+  font-weight: 700;
   border-radius: var(--border-radius);
   background-color: var(--primary-color);
   color: var(--button_font_color);
@@ -38,8 +38,8 @@
   border: none;
   background-color: var(--primary-color);
   color: var(--button_font_color);
-  width: 50px;
-  height: 50px;
+  width: var(--buttons-mobile);
+  height: var(--buttons-mobile);
   border-radius: 50%;
   font-size: 1.5rem;
   display: flex;

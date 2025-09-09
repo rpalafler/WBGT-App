@@ -39,7 +39,7 @@
   bottom: 0;
   width: 100%; /* ✅ Ahora ocupa todo el ancho */
   /* padding: 10px 25px; */
-  block-size: 5svh;
+  block-size: 6svh;
   display: flex;
   justify-content: center;
   align-items: center;

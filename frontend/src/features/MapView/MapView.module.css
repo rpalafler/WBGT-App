@@ -92,9 +92,8 @@
   .controlPanel {
     position: fixed;
     left: 10px;
-    top: 100px;
-    /* bottom: 100px; */
-    width: 75px;
+    top: 11svh;
+    width: 7svh;
     height: auto;
     flex-direction: column; /* Vertical */
     gap: 15px;
@@ -171,7 +170,7 @@
   }
   .titleContainer {
     /* left: 50%; */
-    left: 15px;
+    left: 1svh;
     /* transform: translateX(-50%); */
   }
 }

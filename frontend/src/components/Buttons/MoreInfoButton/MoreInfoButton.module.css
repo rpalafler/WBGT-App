@@ -28,8 +28,8 @@
 
 /* ✅ Estilo para Pantallas Pequeñas: Botón Circular */
 .iconButton {
-  width: 50px;
-  height: 50px;
+  width: var(--buttons-mobile);
+  height: var(--buttons-mobile);
   border-radius: 50%;
   padding: 0;
   font-size: 1.5rem;

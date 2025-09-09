@@ -22,8 +22,8 @@
 /* 📌 RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .locateButton {
-    width: 50px;
-    height: 50px;
+    width: var(--buttons-mobile);
+    height: var(--buttons-mobile);
     border-radius: 50%; /* Botón redondo */
     font-size: 1.2rem;
     padding: 0;

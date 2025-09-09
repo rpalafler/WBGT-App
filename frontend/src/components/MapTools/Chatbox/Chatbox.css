@@ -94,11 +94,11 @@
 }
 @media (max-width: 768px) {
   .screenshot-button-container {
-    bottom: 31svh;
+    bottom: 35svh;
     left: 5px;
   }
   .rcw-launcher {
-    bottom: 28.7svh;
+    bottom: 32.5svh;
     left: 55px;
   }
 

@@ -272,7 +272,7 @@ const MapView = () => {
       onTouchStart={handleTouchStart} // ✅ Funciona en móviles
     >
       {/* Menú Hamburguesa */}
-      {<HamburgerMenu />}
+      {/* {<HamburgerMenu />} */}
 
       {/* 📍 Título visible en la parte superior */}
       <div className={styles.titleContainer}>
