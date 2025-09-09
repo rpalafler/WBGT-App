@@ -24,8 +24,13 @@ const TranslateButton = () => {
       }}
     >
       <span className={styles.iconText}>
-        {" "}
-        {i18n.language === "en" ? "Español" : "English"}
+        {i18n.language === "en"
+          ? windowWidth < 768
+            ? "SP"
+            : "Español"
+          : windowWidth < 768
+          ? "EN"
+          : "English"}
       </span>
     </button>
   );

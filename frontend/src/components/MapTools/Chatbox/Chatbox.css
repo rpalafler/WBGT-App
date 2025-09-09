@@ -92,22 +92,6 @@
   cursor: not-allowed;
   opacity: 0.6;
 }
-@media (max-width: 768px) {
-  .screenshot-button-container {
-    bottom: 35svh;
-    left: 5px;
-  }
-  .rcw-launcher {
-    bottom: 32.5svh;
-    left: 55px;
-  }
-
-  .rcw-widget-container {
-    bottom: 110px !important;
-    left: 10px;
-  }
-}
-
 /* Fix chatbox width */
 .rcw-conversation-container {
   width: 320px !important;
@@ -121,4 +105,25 @@
   width: 100%;
   box-sizing: border-box;
   word-break: break-word;
+}
+@media (max-width: 768px) {
+  .screenshot-button-container {
+    bottom: 35svh;
+    left: 5px;
+  }
+  .rcw-launcher {
+    bottom: 32.5svh;
+    left: 55px;
+  }
+
+  .rcw-widget-container {
+    bottom: 0svh !important;
+    left: 0svh;
+  }
+  .rcw-conversation-container {
+    width: 100vw !important; /* ocupa el ancho de la pantalla */
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    border-radius: 0 !important; /* opcional: sin bordes redondeados */
+  }
 }

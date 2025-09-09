@@ -194,13 +194,14 @@ const AIChat = ({ applicationRef }) => {
           onCapture={handleScreenshotCaptured}
           isProcessing={isProcessing}
         />
+
+        <Widget
+          handleNewUserMessage={handleNewUserMessage}
+          handleToggle={handleWidgetToggle}
+          title="Sol"
+          subtitle={t("Your WBGT data AI assistant")}
+        />
       </div>
-      <Widget
-        handleNewUserMessage={handleNewUserMessage}
-        handleToggle={handleWidgetToggle}
-        title="Sol"
-        subtitle={t("Your WBGT data AI assistant")}
-      />
     </>
   );
 };
