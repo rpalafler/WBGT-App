@@ -7,15 +7,17 @@ export const AppContext = createContext();
 // de manera que podamos alimentar a nuestros hijos con las variables que declaremos aqui, por lo que 'AppProvider' podria
 // cambiarse por cualquier otro nombre, y el importante es AppContext, que es el que actua como el 'Provider' de las variables
 // globales que estamos definiendo aqui
+
 export const AppProvider = ({ children }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   const [viewState, setViewState] = useState({
-    longitude: -115.92,
-    latitude: 33.38,
-    zoom: 8.8,
+    longitude: window.innerWidth <= 768 ? -115.72 : -115.92,
+    latitude: window.innerWidth <= 768 ? 33 : 33.38,
+    zoom: window.innerWidth <= 768 ? 7.5 : 8.8,
     pitch: 0,
     bearing: 0,
   });
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   // Este estado controlará si los demás botones están visibles o no dentro del panel de control:
   const [isCollapsed, setIsCollapsed] = useState(false);
   // Las siguientes variables son las que uso para que el usuario pueda seleccionar la fecha y hora de los datos a mostrar
