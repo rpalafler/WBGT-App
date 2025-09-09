@@ -121,9 +121,10 @@
     left: 0svh;
   }
   .rcw-conversation-container {
-    width: 100vw !important; /* ocupa el ancho de la pantalla */
+    width: 100vw !important; /* ancho completo */
+    height: 100svh !important; /* alto completo seguro en móviles */
     max-width: 100vw !important;
     min-width: 100vw !important;
-    border-radius: 0 !important; /* opcional: sin bordes redondeados */
+    border-radius: 0 !important; /* sin bordes en pantalla completa */
   }
 }
