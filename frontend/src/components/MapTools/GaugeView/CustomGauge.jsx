@@ -73,7 +73,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
         .attr("alignment-baseline", "middle")
         .attr("transform", `rotate(${labelRotation}, ${labelX}, ${labelY})`) // Rotate text around its position
         .style("fill", "white")
-        .style("font-size", "14px")
+        .style("font-size", "18px")
 
         .text(section.label);
 
@@ -88,7 +88,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
         .attr("text-anchor", "middle")
         .attr("alignment-baseline", "middle")
         .style("fill", "white")
-        .style("font-size", "12px")
+        .style("font-size", "18px")
         .text(section.limit === Infinity ? "" : section.limit);
     });
 

@@ -5,9 +5,15 @@ import { useTranslation } from "react-i18next";
 import { fetchWBGTData } from "../../../services/WBGTDataService";
 
 const SliderControl = () => {
+  // placeholder date
+  const placeholderDate = new Date(Date.UTC(2025, 9, 1, 0)); // Sept 1, 2025 00Z
+  const placeholderForecastHour = 3;
+
   const { setWBGTData } = useContext(AppContext);
-  const [forecastHour, setForecastHour] = useState(1);
-  const [modelDate, setModelDate] = useState(null);
+
+  const [forecastHour, setForecastHour] = useState(placeholderForecastHour);
+  const [modelDate, setModelDate] = useState(placeholderDate);
+
   const [timer, setTimer] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { t } = useTranslation();
@@ -51,8 +57,6 @@ const SliderControl = () => {
     now.setHours(now.getHours() - 2);
     const formattedDate = now.toISOString().slice(0, 13).replace("T", "_");
 
-    setModelDate(now);
-
     console.log(
       "📤 Enviando al backend:",
       formattedDate,
@@ -64,6 +68,7 @@ const SliderControl = () => {
 
     if (result) {
       setWBGTData(result);
+      setModelDate(now);
       console.log("✅ WBGT recibido:", result);
     } else {
       console.error("❌ No se pudo cargar WBGT.");

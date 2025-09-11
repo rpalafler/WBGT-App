@@ -15,7 +15,6 @@ import SliderControl from "../../components/MapTools/SliderControl/SliderControl
 import AIChat from "../../components/MapTools/Chatbox/Chatbox"; // Import the SimpleChat component
 
 import TempScaleVertical from "../../components/MapTools/TempScaleVertical/TempScaleVertical";
-import LiveButton from "../../components/Buttons/LiveButton/LiveButton";
 import TranslateButton from "../../components/Buttons/TranslateButton/TranslateButton";
 
 import GaugeView from "../../components/MapTools/GaugeView/GaugeView";
@@ -207,6 +206,14 @@ const MapView = () => {
       pickable: false,
     });
 
+  const placeholderLayer = new BitmapLayer({
+    id: "wbgt-placeholder",
+    image: "/placeholder.png", // static file in /public
+    bounds: [-116.3, 32.6, -114.7, 34.3], // same crop bounds you used in backend
+    opacity: 0.3,
+    pickable: false,
+  });
+
   const imageLayer = new BitmapLayer({
     id: "heatmap-layer",
     image: "/wbgt_webmerc.png", // Ruta relativa (asumiendo desde public/)
@@ -360,9 +367,12 @@ const MapView = () => {
         }}
         // _______________________________________________________________________________
         // AÑADO LA IMAGEN TEMPORALMENTE
-        layers={[tileLayer, wbgtLayer, userLocationLayer, pinLayer].filter(
-          Boolean
-        )} // 📍 Agregamos el marcador al mapa
+        layers={[
+          tileLayer,
+          wbgtLayer || placeholderLayer,
+          userLocationLayer,
+          pinLayer,
+        ].filter(Boolean)} // 📍 Agregamos el marcador al mapa
         // _______________________________________________________________________________
 
         getTooltip={({ coordinate, layer }) => {
