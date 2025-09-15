@@ -5,14 +5,17 @@ import { useTranslation } from "react-i18next";
 import { fetchWBGTData } from "../../../services/WBGTDataService";
 
 const SliderControl = () => {
-  // placeholder date
-  const placeholderDate = new Date(Date.UTC(2025, 9, 1, 0)); // Sept 1, 2025 00Z
-  const placeholderForecastHour = 1;
-
   const { setWBGTData } = useContext(AppContext);
 
-  const [forecastHour, setForecastHour] = useState(placeholderForecastHour);
-  const [modelDate, setModelDate] = useState(placeholderDate);
+  // Inicializar con fecha actual (menos 2 horas como en handleSubmit)
+  const getCurrentModelDate = () => {
+    const now = new Date();
+    now.setHours(now.getHours() - 2);
+    return now;
+  };
+
+  const [forecastHour, setForecastHour] = useState(1);
+  const [modelDate, setModelDate] = useState(getCurrentModelDate);
 
   const [timer, setTimer] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
