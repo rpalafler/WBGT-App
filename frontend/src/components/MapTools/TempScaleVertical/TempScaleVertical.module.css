@@ -52,6 +52,30 @@
 @media (max-width: 768px) {
   .container {
     transform: translateY(-50%);
-    top: 25svh;
+    top: 15dvh; /* Usar dvh para mejor adaptación */
+    right: 10px; /* Reducir margen derecho */
+    width: 35px; /* Ligeramente más delgado */
+    height: 25dvh; /* 25% de la altura de la pantalla como pediste */
+    padding: 6px; /* Reducir padding para móvil */
+  }
+
+  /* Ajustar tamaño de fuente para móvil */
+  .labelTop,
+  .labelBottom {
+    font-size: 12px; /* Fuente más pequeña para móvil */
+  }
+}
+
+/* Para pantallas muy pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+  .container {
+    width: 30px; /* Aún más delgado */
+    height: 22dvh; /* Ligeramente más corto */
+    padding: 4px;
+  }
+
+  .labelTop,
+  .labelBottom {
+    font-size: 10px; /* Fuente aún más pequeña */
   }
 }
