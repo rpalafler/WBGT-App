@@ -12,3 +12,5 @@ mockups
 /backend/venv
 /backend/combined_wbgt.nc
 /frontend/.env
+
+frontend/src/components/MapTools/SliderControl/SliderControl_specific_time.jsx
