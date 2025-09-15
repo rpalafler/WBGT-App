@@ -8,7 +8,7 @@ import SearchButton from "../../components/Buttons/SearchButton/SearchButton";
 import LocateButton from "../../components/Buttons/LocateButton/LocateButton";
 // import MoreInfoButton from "../../components/Buttons/MoreInfoButton/MoreInfoButton";
 import styles from "./MapView.module.css";
-import HamburgerMenu from "../../components/Buttons/HamburgerMenu/HamburgerMenu";
+// import HamburgerMenu from "../../components/Buttons/HamburgerMenu/HamburgerMenu";
 import { AppContext } from "../../Context"; // Importamos el Context
 import ScaleBar from "../../components/MapTools/ScaleBar/ScaleBar";
 import SliderControl from "../../components/MapTools/SliderControl/SliderControl";
@@ -30,6 +30,7 @@ const MapView = () => {
   const mapContainerRef = useRef(null); // Reference for the map container for screenshots
   const [isBasemapOpen, setIsBasemapOpen] = useState(false);
   const { isBottomPanelOpen, setIsBottomPanelOpen } = useContext(AppContext);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const { wbgtData, viewState, setViewState } = useContext(AppContext); // Usamos el contexto
   const { windowWidth, setWindowWidth } = useContext(AppContext); // Usamos el contexto
@@ -214,20 +215,20 @@ const MapView = () => {
     pickable: false,
   });
 
-  const imageLayer = new BitmapLayer({
-    id: "heatmap-layer",
-    image: "/wbgt_webmerc.png", // Ruta relativa (asumiendo desde public/)
-    bounds: [
-      -116.29945144970092, 32.59684073527491, -114.70146896356283,
-      34.300416499863104,
-    ],
-    opacity: 0.3,
-    desaturate: 0,
-    pickable: false,
-    parameters: {
-      depthTest: false,
-    },
-  });
+  // const imageLayer = new BitmapLayer({
+  //   id: "heatmap-layer",
+  //   image: "/wbgt_webmerc.png", // Ruta relativa (asumiendo desde public/)
+  //   bounds: [
+  //     -116.29945144970092, 32.59684073527491, -114.70146896356283,
+  //     34.300416499863104,
+  //   ],
+  //   opacity: 0.3,
+  //   desaturate: 0,
+  //   pickable: false,
+  //   parameters: {
+  //     depthTest: false,
+  //   },
+  // });
   // _______________________________________________________________________________
   // _______________________________________________________________________________
   // Aqui estamos definiendo la funcion que vamos a usar para detectar tics en el mapa para mostrar o no mostrar el
@@ -288,7 +289,7 @@ const MapView = () => {
       <div className={styles.titleContainer}>
         {/*<h1 className={styles.title}>RHI Alarm</h1> */}
         {/* <img src="/SDSU_heat_logo.png" className={styles.logo} /> */}
-        <img src="/logo.png" className={styles.logo} />
+        <img src="/logo.png" className={styles.logo} alt="App logo" />
 
         {/* <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2> */}
       </div>
@@ -324,17 +325,19 @@ const MapView = () => {
         )}
       </div>
       {/* Slider para seleccionar fecha y hora de los datos a mostrar */}
-      {/* Tirador solo en móvil */}
-      <button
-        className={styles.toggleBottom}
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsBottomPanelOpen((v) => !v);
-        }}
-        aria-label={isBottomPanelOpen ? "Ocultar panel" : "Mostrar panel"}
-      >
-        {isBottomPanelOpen ? "▾" : "▴"}
-      </button>
+      {/* Tirador solo en móvil; se oculta si el chat está abierto en móvil */}
+      {!(windowWidth < 768 && isChatOpen) && (
+        <button
+          className={styles.toggleBottom}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsBottomPanelOpen((v) => !v);
+          }}
+          aria-label={isBottomPanelOpen ? "Ocultar panel" : "Mostrar panel"}
+        >
+          {isBottomPanelOpen ? "▾" : "▴"}
+        </button>
+      )}
       <GaugeView />
       {(windowWidth < 768 || !isBasemapOpen) && <SliderControl />}
 
@@ -401,7 +404,7 @@ const MapView = () => {
       {!(windowWidth < 768 && isGaugeActive) && <ScaleBar />}
 
       {/* Add the SimpleChat component */}
-      <AIChat applicationRef={mapContainerRef} />
+      <AIChat applicationRef={mapContainerRef} onOpenChange={setIsChatOpen} />
     </div>
   );
 };

@@ -27,13 +27,14 @@ const openai = new OpenAI({
   },
 });
 
-const AIChat = ({ applicationRef }) => {
+const AIChat = ({ applicationRef, onOpenChange }) => {
   const { selectedWBGTValue } = useContext(AppContext);
   const wbgtValue =
-    Math.round(
-      (((selectedWBGTValue - 273.15) * 9) / 5 + 32 + Number.EPSILON) * 100
-    ) / 100;
+    selectedWBGTValue !== null
+      ? ((selectedWBGTValue - 273.15) * 9) / 5 + 32
+      : null;
   const [welcomeMessageShown, setWelcomeMessageShown] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
 
@@ -43,13 +44,55 @@ const AIChat = ({ applicationRef }) => {
 
   const VISION_MODEL = "meta-llama/llama-4-maverick:free";
 
+  const determineCategory = (valueF) => {
+    if (valueF === null || valueF === undefined) return null;
+    if (valueF < 72) return "Safe";
+    if (valueF < 76) return "Caution";
+    if (valueF < 80) return "Warning";
+    if (valueF < 84) return "Danger";
+    return "Extreme";
+  };
+
+  const formattedWBGT =
+    wbgtValue === null ? "unknown" : `${wbgtValue.toFixed(1)} °F`;
+  const category = determineCategory(wbgtValue);
+
+  // Randomized style/topic hints to diversify responses
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+  const styleHints = [
+    "use a friendly tone and vary sentence starts",
+    "be crisp and energetic; avoid repeating the same verbs",
+    "use encouraging tone with varied verbs; avoid repetition",
+    "write in plain, conversational Spanish if user writes in Spanish",
+    "mix one concise sentence plus 2 short bullets",
+    "use 3 compact sentences without bullets",
+  ];
+
+  const angleHints = [
+    "mention wind or shade if relevant",
+    "suggest a cooling strategy (hat, light clothing, misting)",
+    "add a pacing cue (work:rest ratio like 15:5 min for harder activity)",
+    "suggest checking vulnerable groups (kids, mayores, trabajadores al sol)",
+    "suggest optimal time window (e.g., before 10 am / after 6 pm)",
+    "if Safe, suggest staying hydrated but enjoying outdoor time",
+  ];
+
+  const chosenStyle = pick(styleHints);
+  const chosenAngle = pick(angleHints);
+
   const visionPrompt = `
-  Keep response to a few sentences.
-  This is a heatmap visualization of WBGT data forecast in the Imperial Valley. 
-  The date and time of the data is shown at the left of the screen. 
-  The WBGT value for a selected location is ${wbgtValue} F.
-  The WBGT category is shown on the gauge chart at the bottom left of the screen.
-  Please give a recomendation on outside activity based on the WBGT category provided to you.
+  Use Fahrenheit only. Be helpful but concise (4–6 short sentences max).
+  WBGT at the selected point: ${formattedWBGT}. Category (gauge thresholds): ${
+    category ?? "unknown"
+  }.
+  Thresholds (F): Safe <72, Caution 72–<76, Warning 76–<80, Danger 80–<84, Extreme ≥84.
+  Briefly interpret the heatmap you see: mention overall intensity (cool/moderate/hot), any hotspots vs cooler areas nearby, and whether the selected point looks higher/lower than surroundings.
+  Then give practical guidance for outdoor activity for this category (hydration, shade/rest pacing, time-of-day tips, vulnerable groups). Avoid extra background.
+  Style guidance: ${chosenStyle}. Also ${chosenAngle}.
+  Output format:
+  - First sentence: WBGT and category.
+  - Then 2–3 short bullets with varied wording.
   `;
 
   useEffect(() => {
@@ -71,11 +114,32 @@ const AIChat = ({ applicationRef }) => {
   }, [t, welcomeMessageShown]);
 
   const handleWidgetToggle = (isOpen) => {
+    if (typeof onOpenChange === "function") {
+      onOpenChange(isOpen);
+    }
+    setIsChatOpen(isOpen);
+
+    // Toggle a body class so mobile CSS can react when chat is open
+    const body = document?.body;
+    if (body) {
+      if (isOpen) {
+        body.classList.add("chat-open");
+      } else {
+        body.classList.remove("chat-open");
+      }
+    }
     if (isOpen && !welcomeMessageShown) {
       addResponseMessage(t("Welcome Message"));
       setWelcomeMessageShown(true);
     }
   };
+
+  // Ensure body class is removed on unmount
+  useEffect(() => {
+    return () => {
+      document?.body?.classList?.remove("chat-open");
+    };
+  }, []);
 
   const handleNewUserMessage = async (newMessage) => {
     if (isProcessing) return;
@@ -87,28 +151,12 @@ const AIChat = ({ applicationRef }) => {
       const systemMessage = {
         role: "system",
         content: `
-      You are Sol, an climate data assistant trained to explain Wet Bulb Globe Temperature forecasts to general users. 
-      
-      WBGT, or Wet Bulb Globe Temperature, is a measure of heat stress on the human body in direct sunlight.
-       It takes into account several factors beyond just temperature and humidity, including wind speed, sun angle, and cloud cover, which the Heat Index doesn't consider. 
-       Essentially, WBGT provides a more comprehensive picture of how hot it feels to be outside in the sun, especially during hot weather. 
-
-      Coverage: Imperial Valley
-      Resolution: ~2.5 km
-      Temporal frequency: hourly
-
-      WBGT Values are broken down into categories and give recomendations on outside activity:
-      - Safe (green): Below 75.9 F, normal activities, monitor fluids
-      - Caution (yellow): 75.9 F to 78.7 F, normal activites, monitor fluids
-      - Warning (orange): 78.8 F to 83.7, plan intense or prolonged excercise with discretion
-      - Danger (red): 83.8 F to 87.6 F, Limit intense exercise and total daily exposure to heat
-      - Extreme (black): 87.6 F and above, cancel exercise
-
-      When answering:
-      - Do not make up facts or exaggerate details. If you're unsure, say so.
-      - Respond clearly and concisely.
-      - Use simple terms (avoid too much jargon).
-      - Use bullet points if summarizing multiple aspects.
+      You are Sol, a climate data assistant. Be clear and practical while varying your wording.
+      Use Fahrenheit only. The user's current WBGT is ${formattedWBGT} and falls in the ${
+          category ?? "unknown"
+        } section according to thresholds (F): Safe <72, Caution 72–<76, Warning 76–<80, Danger 80–<84, Extreme ≥84.
+      In one opening line, define WBGT very briefly (heat stress in sun), state the value and category. Then provide concise, actionable recommendations with varied phrasing. Avoid repeating the same tips every time; rotate focus between hydration, shade/rest cadence, clothing, timing, intensity, and vulnerable groups. ${chosenStyle}. Also ${chosenAngle}.
+      Respond in 3–6 short sentences or 1 sentence plus 2–4 bullets. Do not exceed 900 characters.
       `,
       };
 
@@ -123,6 +171,10 @@ const AIChat = ({ applicationRef }) => {
       const completion = await openai.chat.completions.create({
         model: VISION_MODEL,
         messages: updatedHistory,
+        temperature: 0.9,
+        top_p: 0.9,
+        presence_penalty: 0.4,
+        frequency_penalty: 0.4,
       });
 
       const reply = completion?.choices?.[0]?.message?.content;
@@ -169,6 +221,10 @@ const AIChat = ({ applicationRef }) => {
       const completion = await openai.chat.completions.create({
         model: VISION_MODEL,
         messages: [imageContent],
+        temperature: 0.9,
+        top_p: 0.9,
+        presence_penalty: 0.4,
+        frequency_penalty: 0.4,
       });
 
       const reply = completion?.choices?.[0]?.message?.content;
@@ -188,18 +244,18 @@ const AIChat = ({ applicationRef }) => {
 
   return (
     <>
+      <Widget
+        handleNewUserMessage={handleNewUserMessage}
+        handleToggle={handleWidgetToggle}
+        title="Sol"
+        subtitle={t("Your WBGT data AI assistant")}
+      />
+
       <div className="screenshot-button-container">
         <ScreenshotButton
           applicationRef={applicationRef}
           onCapture={handleScreenshotCaptured}
           isProcessing={isProcessing}
-        />
-
-        <Widget
-          handleNewUserMessage={handleNewUserMessage}
-          handleToggle={handleWidgetToggle}
-          title="Sol"
-          subtitle={t("Your WBGT data AI assistant")}
         />
       </div>
     </>

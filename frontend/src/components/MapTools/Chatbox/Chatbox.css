@@ -19,6 +19,21 @@
   display: none !important;
 }
 
+/* Tighter spacing for bullets inside messages */
+.rcw-message-text ul,
+.rcw-message-text ol {
+  margin: -10px 0 !important; /* tighten space above/below list */
+  padding-left: 16px !important; /* compact indent */
+}
+.rcw-message-text li {
+  margin: -4px 0 !important; /* minimal space between bullets */
+  line-height: 0.9 !important; /* compact line height within items */
+}
+.rcw-message-text p {
+  margin: 0px 0 !important; /* reduce space before/after paragraphs */
+  line-height: 1 !important;
+}
+
 /* ===== DESKTOP (flotante) ===== */
 @media (min-width: 769px) {
   .rcw-widget-container {
@@ -44,7 +59,7 @@
   position: fixed;
   bottom: 60px;
   right: 80px;
-  z-index: 9999;
+  z-index: 10020; /* above chat widget */
   pointer-events: auto;
 }
 .screenshot-button {
@@ -58,6 +73,8 @@
   background: #35bd52;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  position: relative;
+  z-index: 10021; /* ensure button itself is on top */
 }
 .screenshot-button:hover {
   background: #2a9e42;
@@ -147,6 +164,18 @@
   }
   .screenshot-button-container > * {
     pointer-events: auto;
+  }
+
+  /* When chat is open on mobile, push screenshot button behind and disable it */
+  body.chat-open .screenshot-button-container {
+    z-index: 9990 !important; /* lower than widget's 10000 */
+    opacity: 0 !important; /* visually hide under translucent chat */
+    visibility: hidden !important;
+    transform: translateY(10px); /* small shift to avoid paint artifacts */
+  }
+  body.chat-open .screenshot-button,
+  body.chat-open .screenshot-button-container > * {
+    pointer-events: none !important;
   }
 
   .rcw-launcher {

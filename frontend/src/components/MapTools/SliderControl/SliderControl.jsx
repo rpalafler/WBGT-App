@@ -7,7 +7,7 @@ import { fetchWBGTData } from "../../../services/WBGTDataService";
 const SliderControl = () => {
   // placeholder date
   const placeholderDate = new Date(Date.UTC(2025, 9, 1, 0)); // Sept 1, 2025 00Z
-  const placeholderForecastHour = 3;
+  const placeholderForecastHour = 1;
 
   const { setWBGTData } = useContext(AppContext);
 
