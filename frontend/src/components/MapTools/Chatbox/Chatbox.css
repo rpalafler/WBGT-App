@@ -102,6 +102,9 @@
     border-radius: 0 !important;
     transform: none !important;
     z-index: 10000 !important;
+    /* lo de abajo lo he añadido para dejar el esapcio de arriba del chatbot para que se vea el heatmap */
+    top: calc(10svh + env(safe-area-inset-top, 0)) !important;
+    height: calc(100svh - 10svh - env(safe-area-inset-top, 0)) !important;
   }
 
   /* caja interna al 100% */
@@ -153,7 +156,7 @@
     --safe: env(safe-area-inset-bottom, 0);
   }
   .screenshot-button-container {
-    left: 8px;
+    right: 8px;
     bottom: calc(var(--occupied-bottom) + max(var(--gap), var(--safe)));
     z-index: 10020;
     /* evitar “placa” grande que tape clics */
@@ -180,7 +183,7 @@
 
   .rcw-launcher {
     position: fixed;
-    left: 55px;
+    right: 55px;
     bottom: calc(
       var(--occupied-bottom) + max(var(--gap), var(--safe)) - 20px
     ) !important;

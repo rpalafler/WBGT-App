@@ -190,7 +190,7 @@
   /* Tirador (el cuadradito) */
   .toggleBottom {
     position: fixed;
-    right: 8px;
+    left: 8px;
     bottom: calc(
       var(--occupied-bottom) + max(8px, env(safe-area-inset-bottom))
     );
@@ -205,6 +205,7 @@
     font-weight: 700;
     border: none;
     cursor: pointer;
+    transition: bottom 0.5s ease, transform 0.5s ease;
   }
 
   /* Cuando está colapsado, el tirador se pega abajo del todo */

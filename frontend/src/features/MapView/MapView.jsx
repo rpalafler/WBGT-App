@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import DeckGL from "@deck.gl/react";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 import { TileLayer } from "@deck.gl/geo-layers";
 import { BitmapLayer, ScatterplotLayer, IconLayer } from "@deck.gl/layers"; // 📍 Importamos ScatterplotLayer
@@ -328,14 +329,18 @@ const MapView = () => {
       {/* Tirador solo en móvil; se oculta si el chat está abierto en móvil */}
       {!(windowWidth < 768 && isChatOpen) && (
         <button
-          className={styles.toggleBottom}
+          className={`${styles.toggleBottom} flex items-center justify-center rounded-full shadow-md bg-white p-2`}
           onClick={(e) => {
             e.stopPropagation();
             setIsBottomPanelOpen((v) => !v);
           }}
           aria-label={isBottomPanelOpen ? "Ocultar panel" : "Mostrar panel"}
         >
-          {isBottomPanelOpen ? "▾" : "▴"}
+          {isBottomPanelOpen ? (
+            <ChevronDown size={24} strokeWidth={2.5} />
+          ) : (
+            <ChevronUp size={24} strokeWidth={2.5} />
+          )}
         </button>
       )}
       <GaugeView />
