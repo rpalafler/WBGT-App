@@ -36,8 +36,8 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
       { limit: 72, color: "green", label: t("Safe") },
       { limit: 76, color: "yellow", label: t("Caution") },
       { limit: 80, color: "orange", label: t("Warning") },
-      { limit: 84, color: "red", label: t("Danger") },
-      { limit: Infinity, color: "gray", label: t("Extreme") },
+      { limit: 84, color: "#fa0808ff", label: t("Danger") },
+      { limit: Infinity, color: "#880101ff", label: t("Extreme") },
     ];
 
     const numSections = sections.length;
