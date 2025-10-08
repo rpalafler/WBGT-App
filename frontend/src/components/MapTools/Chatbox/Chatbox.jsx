@@ -40,9 +40,7 @@ const AIChat = ({ applicationRef, onOpenChange }) => {
 
   const { t } = useTranslation();
 
-  // const VISION_MODEL = "meta-llama/llama-3.2-11b-vision-instruct:free";
-
-  const VISION_MODEL = "meta-llama/llama-4-maverick:free";
+  const VISION_MODEL = "google/gemma-3-27b-it:free";
 
   const determineCategory = (valueF) => {
     if (valueF === null || valueF === undefined) return null;
