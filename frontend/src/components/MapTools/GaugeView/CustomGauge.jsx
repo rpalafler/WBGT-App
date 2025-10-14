@@ -12,7 +12,7 @@ const GaugeChart2 = ({ wbgt = 72 }) => {
     const el = d3.select(svgRef.current);
     el.selectAll("*").remove();
 
-    const margin = { top: 20, right: 30, bottom: 60, left: 60 };
+    const margin = { top: 0, right: 30, bottom: 60, left: 60 };
     const width = 280; // puedes probar con 280, 320, etc.
     const height = 180; // suficiente para que el SVG se vea
     const radius = Math.min(width, height) / 1.2;

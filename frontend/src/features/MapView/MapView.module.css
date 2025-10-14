@@ -23,7 +23,7 @@
 
 .controlPanel {
   position: absolute;
-  top: 115px;
+  top: 15svh;
   left: 10px;
   z-index: var(--z-index-controls);
   display: flex;
@@ -213,3 +213,5 @@
     bottom: max(8px, env(safe-area-inset-bottom));
   }
 }
+
+

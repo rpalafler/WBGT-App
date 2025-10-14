@@ -2,7 +2,7 @@
   position: absolute;
   /* _______________________ */
   /* Left */
-  bottom: 310px;
+  bottom: 275px;
   left: 10px;
   /* _______________________ */
 
@@ -124,7 +124,7 @@
     color: #ffffff;
     z-index: var(--z-index-controls);
     position: absolute;
-    bottom: 0;
+    bottom: 32.5vh;
     width: 100%;
     block-size: var(--block-size-sliderContainerMobile);
     display: flex;
