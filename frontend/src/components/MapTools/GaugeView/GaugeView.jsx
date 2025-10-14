@@ -79,7 +79,12 @@ const GaugeView = () => {
       </button> */}
 
       <div className={styles.contentWrapper}>
-        <div className={styles.gaugeSection}>
+        <div
+          className={styles.gaugeSection}
+          style={{
+            zoom: window.innerWidth <= 768 ? (isPWA ? 0.69 : 0.6) : undefined,
+          }}
+        >
           <GaugeChart2 wbgt={displayValue} />
         </div>
       </div>

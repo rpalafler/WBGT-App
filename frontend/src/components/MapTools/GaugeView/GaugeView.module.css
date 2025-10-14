@@ -163,7 +163,7 @@ td {
 }
 @media (max-width: 768px) {
   .gaugeSection {
-    zoom: 0.69; /* ✅ Cambia esto */
+    /* zoom se controla dinámicamente desde JavaScript solo en móviles */
   }
   .gaugeContainer {
     border-radius: 0px;
