@@ -11,7 +11,26 @@ const GaugeView = () => {
     useContext(AppContext);
   const [showHistory, setShowHistory] = useState(false); // ⬅️ estado para alternar tabla
   const [locationName, setLocationName] = useState("");
+  const [isPWA, setIsPWA] = useState(false);
   const { t } = useTranslation();
+
+  // Detectar si estamos en PWA
+  useEffect(() => {
+    const checkPWA = () => {
+      const isStandalone = window.matchMedia(
+        "(display-mode: standalone)"
+      ).matches;
+      const isInApp = window.navigator.standalone === true;
+      setIsPWA(isStandalone || isInApp);
+    };
+
+    checkPWA();
+    // Escuchar cambios en el display mode
+    const mediaQuery = window.matchMedia("(display-mode: standalone)");
+    mediaQuery.addEventListener("change", checkPWA);
+
+    return () => mediaQuery.removeEventListener("change", checkPWA);
+  }, []);
 
   const wbgtFahrenheit =
     selectedWBGTValue !== null
@@ -33,7 +52,11 @@ const GaugeView = () => {
   const displayValue = wbgtFahrenheit !== null ? wbgtFahrenheit : 68;
 
   return (
-    <div className={styles.gaugeContainer}>
+    <div
+      className={`${styles.gaugeContainer} ${
+        isPWA ? styles.pwaMode : styles.browserMode
+      }`}
+    >
       {pinCoords && (
         <div className={styles.locationHeader}>
           <h3>{locationName}</h3>

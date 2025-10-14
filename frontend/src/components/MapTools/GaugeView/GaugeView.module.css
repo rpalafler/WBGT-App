@@ -167,7 +167,7 @@ td {
   }
 
   .gaugeSection {
-    zoom: 0.5; /* ✅ Cambia esto */
+    zoom: 0.69; /* ✅ Cambia esto */
   }
   .gaugeContainer {
     border-radius: 0px;
@@ -175,10 +175,19 @@ td {
     width: 100%;
     position: absolute;
     left: 0;
-    bottom: 5%;
     margin-bottom: 0px; /* espacio entre Gauge y el siguiente elemento */
     transform: translateY(var(--panel-shift, 0%));
     transition: transform 0.5s ease;
+  }
+
+  /* Modo navegador normal */
+  .browserMode {
+    bottom: 5svh;
+  }
+
+  /* Modo PWA - más espacio para la navegación del sistema */
+  .pwaMode {
+    bottom: 12svh;
   }
 
   .historyButton {
