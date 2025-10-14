@@ -163,10 +163,6 @@ td {
 }
 @media (max-width: 768px) {
   .gaugeSection {
-    zoom: 0.5;
-  }
-
-  .gaugeSection {
     zoom: 0.69; /* ✅ Cambia esto */
   }
   .gaugeContainer {

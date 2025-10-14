@@ -196,3 +196,16 @@
 .rcw-launcher {
   transition: bottom 0.5s ease, transform 0.5s ease;
 }
+
+@media (max-width: 768px) {
+  .rcw-close-launcher,
+  .rcw-close-button {
+    background-color: rgb(15, 63, 140) !important; /* dark blue */
+    color: #fff !important; /* keep the "X" white */
+  }
+
+  .rcw-close-launcher svg,
+  .rcw-close-button svg {
+    fill: #fff !important;
+  }
+}
