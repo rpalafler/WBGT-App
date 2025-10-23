@@ -2,7 +2,6 @@
   position: absolute;
   top: 5%;
   right: 20px;
-  /* transform: translateY(-50%); */
   width: 40px;
   height: 250px;
   display: flex;
@@ -10,13 +9,14 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.6);
   padding: 8px;
-  border-radius: var(--border-radius); /* Misma variable usada en ScaleBar */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: var(--z-index-controls);
 }
 
 /* Escala de colores (heatmap) */
 .scale {
+  position: relative;
   flex: 1;
   width: 100%;
   background: linear-gradient(
@@ -28,10 +28,73 @@
     red,
     rgb(158, 0, 0)
   );
-  border-radius: 5px; /* Redondeo de bordes */
+  border-radius: 5px;
+  cursor: pointer;
+  touch-action: none;
+  overflow: hidden;
 }
 
-/* Etiquetas de temperatura */
+/* Shades outside selected range */
+.shadeTop,
+.shadeBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+.shadeTop {
+  top: 0;
+  background: rgba(0, 0, 0);
+}
+.shadeBottom {
+  bottom: 0;
+  background: rgba(255, 255, 255);
+}
+
+/* Draggable bars */
+.bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 6px;
+  box-sizing: border-box;   /* ✅ total height = 6px including the 2px border */
+  border-radius: 999px;
+  background: #0a0a0a;
+  border: 2px solid #fff;          /* ✅ white border */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  cursor: ns-resize;
+  touch-action: none;
+  z-index: 2;
+}
+
+/* Labels for draggable bars */
+.barLabelTop {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  margin-top: -4px;                /* ✅ closer to bar */
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  user-select: none;
+  z-index: 2;
+}
+.barLabelBottom {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 2px;                 /* ✅ closer to bar */
+  font-size: 11px;
+  font-weight: 700;
+  color: #000;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+  user-select: none;
+  z-index: 2;
+}
+
+/* Static labels for legend edges */
 .labelTop,
 .labelBottom {
   font-size: 14px;
@@ -40,11 +103,9 @@
   text-align: center;
 }
 
-/* Posicionamiento de las etiquetas */
 .labelTop {
   margin-bottom: 5px;
 }
-
 .labelBottom {
   margin-top: 5px;
 }
@@ -52,30 +113,38 @@
 @media (max-width: 768px) {
   .container {
     transform: translateY(-50%);
-    top: 15dvh; /* Usar dvh para mejor adaptación */
-    right: 10px; /* Reducir margen derecho */
-    width: 35px; /* Ligeramente más delgado */
-    height: 25dvh; /* 25% de la altura de la pantalla como pediste */
-    padding: 6px; /* Reducir padding para móvil */
+    top: 15dvh;
+    right: 10px;
+    width: 35px;
+    height: 25dvh;
+    padding: 6px;
   }
 
-  /* Ajustar tamaño de fuente para móvil */
   .labelTop,
   .labelBottom {
-    font-size: 12px; /* Fuente más pequeña para móvil */
+    font-size: 12px;
+  }
+
+  .barLabelTop,
+  .barLabelBottom {
+    font-size: 10px;
   }
 }
 
-/* Para pantallas muy pequeñas (menos de 480px) */
 @media (max-width: 480px) {
   .container {
-    width: 30px; /* Aún más delgado */
-    height: 22dvh; /* Ligeramente más corto */
+    width: 30px;
+    height: 22dvh;
     padding: 4px;
   }
 
   .labelTop,
   .labelBottom {
-    font-size: 10px; /* Fuente aún más pequeña */
+    font-size: 10px;
+  }
+
+  .barLabelTop,
+  .barLabelBottom {
+    font-size: 9px;
   }
 }

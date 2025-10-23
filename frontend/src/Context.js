@@ -20,6 +20,9 @@ export const AppProvider = ({ children }) => {
     [-114.7, 34.3],
   ];
 
+  // WBGT filter range (°F)
+  const [wbgtFilterRangeF, setWbgtFilterRangeF] = useState(null);
+
   // Si tienes overlays fijos (sidebar izquierda, panel inferior) que restan área visible,
   // pon aquí sus tamaños iniciales en px. Si no, déjalos en 0.
   const SIDEBAR_LEFT_PX = 0;
@@ -142,6 +145,8 @@ export const AppProvider = ({ children }) => {
         setPinCoords,
         isBottomPanelOpen,
         setIsBottomPanelOpen,
+        wbgtFilterRangeF,
+        setWbgtFilterRangeF,
       }}
     >
       {children}

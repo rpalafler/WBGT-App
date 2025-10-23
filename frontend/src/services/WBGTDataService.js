@@ -1,9 +1,28 @@
 import pako from "pako";
 
-// const API_URL = "http://127.0.0.1:8000/api"; // my localhost
+// const API_URL = "http://127.0.0.1:8000/api"; // local dev
 const API_URL = "https://4dvdrhi.sdsu.edu";
-export async function fetchWBGTData(datetimeStr, forecastHour) {
-  const url = `${API_URL}/wbgt?datetime_str=${datetimeStr}&forecast_hour=${forecastHour}`;
+
+/**
+ * Fetch WBGT data from the backend
+ * @param {string} datetimeStr - e.g. "20251023_03"
+ * @param {number} forecastHour - lead time fxx
+ * @param {Object} opts - optional filters { user_vmin_f, user_vmax_f }
+ */
+export async function fetchWBGTData(datetimeStr, forecastHour, opts = {}) {
+  const params = new URLSearchParams({
+    datetime_str: datetimeStr,
+    forecast_hour: String(forecastHour),
+  });
+
+  if (opts.user_vmin_f != null) {
+    params.set("user_vmin_f", String(opts.user_vmin_f));
+  }
+  if (opts.user_vmax_f != null) {
+    params.set("user_vmax_f", String(opts.user_vmax_f));
+  }
+
+  const url = `${API_URL}/wbgt?${params.toString()}`;
 
   try {
     const response = await fetch(url);
@@ -11,7 +30,7 @@ export async function fetchWBGTData(datetimeStr, forecastHour) {
 
     const json = await response.json();
 
-    // ✅ Si viene comprimido, lo descomprimimos
+    // ✅ decompress if needed
     if (!json.values && json.values_compressed) {
       const binaryString = atob(json.values_compressed);
       const byteArray = new Uint8Array(binaryString.length);

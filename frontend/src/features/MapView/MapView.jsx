@@ -57,6 +57,18 @@ const MapView = () => {
     return () => window.removeEventListener("resize", handleResize);
   });
 
+  // 📌 Add this new effect right after
+  useEffect(() => {
+    if (!wbgtData) return;
+
+    if (pinCoords?.latitude != null && pinCoords?.longitude != null) {
+      const v = getWBGTAtCoordinates(pinCoords.longitude, pinCoords.latitude);
+      setSelectedWBGTValue(v);
+    }
+  }, [wbgtData, pinCoords, setSelectedWBGTValue]);
+
+  // … rest of your component (layers, handlers, return JSX) …
+
   const [basemapUrl, setBasemapUrl] = useState(
     "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
   );
@@ -295,8 +307,18 @@ const MapView = () => {
         {/* <h2 className={styles.subtitle}>Wet Bulb Globe Temp Data</h2> */}
       </div>
       {/* Incluimos aquí la escala de la variable leida*/}
-      <div>
-        <TempScaleVertical />
+      <div
+        style={{
+          position: "absolute",
+          top: "5%",
+          right: 20,
+          width: 40,
+          height: 250,
+          zIndex: 1000,
+        }}
+      >
+        <TempScaleVertical />{" "}
+        {/* your existing legend (keeps its gradient & labels) */}
       </div>
       <div
         className={`${styles.controlPanel} ${

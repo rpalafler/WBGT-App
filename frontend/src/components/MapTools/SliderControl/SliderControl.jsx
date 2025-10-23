@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { fetchWBGTData } from "../../../services/WBGTDataService";
 
 const SliderControl = () => {
-  const { setWBGTData } = useContext(AppContext);
+  const { setWBGTData, wbgtFilterRangeF } = useContext(AppContext);
 
   // Inicializar con fecha actual (menos 2 horas como en handleSubmit)
   const getCurrentModelDate = () => {
