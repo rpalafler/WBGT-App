@@ -68,7 +68,8 @@ const MapView = () => {
     },
     GoogleXYZ: {
       url: "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
-      label: windowWidth < 768 ? "Google XYZ" : "Google XYZ",
+      label:
+        windowWidth < 768 ? "Google Satellite View" : "Google Satellite View",
     },
     GoogleTopography: {
       url: "http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}",
